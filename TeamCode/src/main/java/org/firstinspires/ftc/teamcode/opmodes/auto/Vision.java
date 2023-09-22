@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.auto;
+package org.firstinspires.ftc.teamcode.opmodes.auto;
 
 import org.firstinspires.ftc.teamcode.utils.classes.IndexValue;
 import org.opencv.core.Core;
@@ -14,13 +14,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Vision extends OpenCvPipeline {
-    public static double IMAGE_WIDTH = 500;
-    public static double IMAGE_HEIGHT = 400;
-    public static double MINIMUM_SIZE = 60;
-    public static double LEFT = 0.3 * IMAGE_WIDTH;
-    public static double RIGHT = 0.7 * IMAGE_WIDTH;
+    public static int IMAGE_WIDTH = 320;
+    public static int IMAGE_HEIGHT = 240;
+    public static int MINIMUM_SIZE = 60;
+    public static int LEFT = (int) 0.3 * IMAGE_WIDTH;
+    public static int RIGHT = (int) 0.7 * IMAGE_WIDTH;
 
-    public int route = -1;
+    public int ROUTE = -1;
 
     // Red
 
@@ -45,7 +45,7 @@ public class Vision extends OpenCvPipeline {
         mask = new Mat(),
         hierarchy = new Mat();
 
-    private List<MatOfPoint> contours = new ArrayList<>();
+    public List<MatOfPoint> contours = new ArrayList<>();
 
     @Override
     public Mat processFrame(Mat input) {
@@ -64,19 +64,19 @@ public class Vision extends OpenCvPipeline {
         if (contours.size() > 0){
             IndexValue maxArea = max(contours);
             if (maxArea.value < MINIMUM_SIZE) {
-                route = -1;
+                ROUTE = -1;
                 return input;
             }
             Rect rect = Imgproc.boundingRect(contours.get(maxArea.index));
             Point center = new Point(rect.x + rect.width / 2, rect.y + rect.height / 2);
             if (center.x <= LEFT) {
-                route = 0;
+                ROUTE = 0;
             }
             else if (center.x >= RIGHT) {
-                route = 2;
+                ROUTE = 2;
             }
             else {
-                route = 1;
+                ROUTE = 1;
             }
         }
         return input;
