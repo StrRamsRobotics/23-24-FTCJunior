@@ -17,10 +17,14 @@ public class Vision extends OpenCvPipeline {
     public static int IMAGE_WIDTH = 320;
     public static int IMAGE_HEIGHT = 240;
     public static int MINIMUM_SIZE = 60;
-    public static int LEFT = (int) 0.3 * IMAGE_WIDTH;
-    public static int RIGHT = (int) 0.7 * IMAGE_WIDTH;
+    public static int LEFT = (int) (0.3 * IMAGE_WIDTH);
+    public static int RIGHT = (int) (0.7 * IMAGE_WIDTH);
 
-    public int ROUTE = -1;
+    public static final int LEFT_PATH = 0;
+    public static final int CENTER_PATH = 1;
+    public static final int RIGHT_PATH = 2;
+
+    public int route = -1;
 
     // Red
 
@@ -64,19 +68,19 @@ public class Vision extends OpenCvPipeline {
         if (contours.size() > 0){
             IndexValue maxArea = max(contours);
             if (maxArea.value < MINIMUM_SIZE) {
-                ROUTE = -1;
+                route = -1;
                 return input;
             }
             Rect rect = Imgproc.boundingRect(contours.get(maxArea.index));
             Point center = new Point(rect.x + rect.width / 2, rect.y + rect.height / 2);
             if (center.x <= LEFT) {
-                ROUTE = 0;
+                route = 0;
             }
             else if (center.x >= RIGHT) {
-                ROUTE = 2;
+                route = 2;
             }
             else {
-                ROUTE = 1;
+                route = 1;
             }
         }
         return input;

@@ -5,6 +5,7 @@ import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
@@ -20,9 +21,22 @@ public class Chassis {
     public static String FL_NAME = "fl";
     public static String BR_NAME = "br";
     public static String BL_NAME = "bl";
+    public static String ARM_NAME = "arm";
+    public static String PIVOT_NAME = "pivot";
+    public static String ROLLER_NAME = "roller";
+    public static String FLAP_NAME = "flap";
     public static String CAMERA_NAME = "camera";
 
+    public static final boolean TANK_DRIVE = false;
+    public static final boolean TWO_WHEELED = true;
+
+    public static final double POWER_DISTANCE_MULTIPLIER = 2.0;
+    public static final double POWER_ANGLE_MULTIPLIER = 2.0;
+    public static final int ROBOT_WIDTH = 18;
+
     public DcMotorEx fr, fl, br, bl;
+    public DcMotorEx arm, pivot, roller;
+    public Servo flap;
     public BNO055IMU imu;
     public OpenCvCamera camera;
     public HardwareMap map;
@@ -49,21 +63,35 @@ public class Chassis {
     public void initializeMotors() {
         fr = map.get(DcMotorEx.class, FR_NAME);
         fl = map.get(DcMotorEx.class, FL_NAME);
-        br = map.get(DcMotorEx.class, BR_NAME);
-        bl = map.get(DcMotorEx.class, BL_NAME);
+        if (!TWO_WHEELED) {
+            br = map.get(DcMotorEx.class, BR_NAME);
+            bl = map.get(DcMotorEx.class, BL_NAME);
+        }
+        arm = map.get(DcMotorEx.class, ARM_NAME);
+        pivot = map.get(DcMotorEx.class, PIVOT_NAME);
+        roller = map.get(DcMotorEx.class, ROLLER_NAME);
+        flap = map.get(Servo.class, FLAP_NAME);
 
         fr.setDirection(DcMotorSimple.Direction.REVERSE);
-        br.setDirection(DcMotorSimple.Direction.REVERSE);
+        if (!TWO_WHEELED) {
+            br.setDirection(DcMotorSimple.Direction.REVERSE);
+        }
 
-        fr.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
-        fl.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
-        br.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
-        bl.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
-
-        fr.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
-        fl.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
-        br.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
-        bl.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+//        fr.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
+//        fl.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
+//
+//        if (!TWO_WHEELED) {
+//            br.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
+//            bl.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
+//        }
+//
+//        fr.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+//        fl.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+//
+//        if (!TWO_WHEELED) {
+//            br.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+//            bl.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+//        }
     }
 
     public void initializeCamera() {
@@ -78,6 +106,108 @@ public class Chassis {
             return Math.signum(angle_value)*(Math.abs(angle_value)%360-360);
         } else {
             return Math.signum(angle_value)*(Math.abs(angle_value)%360);
+        }
+    }
+
+    public void moveChassis(double power, int distance) {
+        // encoders are not used. must use time
+
+        fr.setPower(power);
+        fl.setPower(power);
+
+        if (!TWO_WHEELED) {
+            br.setPower(power);
+            bl.setPower(power);
+        }
+
+        try {
+            Thread.sleep((long) (distance / (Math.abs(power) * POWER_DISTANCE_MULTIPLIER) * 1000));
+
+            fr.setPower(0);
+            fl.setPower(0);
+
+            if (!TWO_WHEELED) {
+                br.setPower(0);
+                bl.setPower(0);
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void turnChassis(double power, int angle) {
+        // encoders are not used. must use time
+
+        fr.setPower(power);
+        fl.setPower(-power);
+
+        if (!TWO_WHEELED) {
+            br.setPower(power);
+            bl.setPower(-power);
+        }
+
+        int distance = (int) (Math.PI * ROBOT_WIDTH * angle / 360);
+
+        try {
+            Thread.sleep((long) (distance / (Math.abs(power) * POWER_DISTANCE_MULTIPLIER) * 1000));
+
+            fr.setPower(0);
+            fl.setPower(0);
+
+            if (!TWO_WHEELED) {
+                br.setPower(0);
+                bl.setPower(0);
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void turnArm(double power, int angle) {
+        arm.setPower(power);
+
+        try {
+            Thread.sleep((long) (angle / (Math.abs(power) * POWER_ANGLE_MULTIPLIER) * 1000));
+
+            arm.setPower(0);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void turnPivot(double power, int angle) {
+        pivot.setPower(power);
+
+        try {
+            Thread.sleep((long) (angle / (Math.abs(power) * POWER_ANGLE_MULTIPLIER) * 1000));
+
+            pivot.setPower(0);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void turnRoller(double power, double seconds) {
+        roller.setPower(power);
+
+        try {
+            Thread.sleep((long) (seconds * 1000));
+
+            roller.setPower(0);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void turnFlap(double position, double seconds) {
+        flap.setPosition(position);
+
+        try {
+            Thread.sleep((long) (seconds * 1000));
+
+            flap.setPosition(0);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
     }
 }
