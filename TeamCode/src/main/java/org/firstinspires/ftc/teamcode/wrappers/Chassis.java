@@ -30,6 +30,8 @@ public class Chassis {
     public static final boolean TANK_DRIVE = false;
     public static final boolean TWO_WHEELED = true;
 
+    public static final int CORE_HEX_TICKS_PER_REV = 288;
+
     public static final double POWER_DISTANCE_MULTIPLIER = 2.0;
     public static final double POWER_ANGLE_MULTIPLIER = 2.0;
     public static final int ROBOT_WIDTH = 18;
@@ -163,7 +165,7 @@ public class Chassis {
         }
     }
 
-    public void turnArm(double power, int angle) {
+    public void turnArmWithoutEncoder(double power, int angle) {
         arm.setPower(power);
 
         try {
@@ -175,7 +177,22 @@ public class Chassis {
         }
     }
 
-    public void turnPivot(double power, int angle) {
+    public void turnArmAuto(double power, int angle) {
+        arm.setTargetPosition(CORE_HEX_TICKS_PER_REV * angle / 360);
+        arm.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
+        arm.setPower(power);
+        while (arm.isBusy()) {
+            // wait
+        }
+        arm.setPower(0);
+        arm.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
+    }
+
+    public void turnArmTeleOp(double power) {
+        arm.setPower(power);
+    }
+
+    public void turnPivotWithoutEncoder(double power, int angle) {
         pivot.setPower(power);
 
         try {
@@ -187,7 +204,22 @@ public class Chassis {
         }
     }
 
-    public void turnRoller(double power, double seconds) {
+    public void turnPivotAuto(double power, int angle) {
+        pivot.setTargetPosition(CORE_HEX_TICKS_PER_REV * angle / 360);
+        pivot.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
+        pivot.setPower(power);
+        while (pivot.isBusy()) {
+            // wait
+        }
+        pivot.setPower(0);
+        pivot.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
+    }
+
+    public void turnPivotTeleOp(double power) {
+        pivot.setPower(power);
+    }
+
+    public void turnRollerWithoutEncoder(double power, double seconds) {
         roller.setPower(power);
 
         try {
@@ -197,6 +229,22 @@ public class Chassis {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+
+    public void turnRollerAuto(double power, double seconds) {
+        roller.setPower(power);
+
+        try {
+            Thread.sleep((long) (seconds * 1000));
+
+            roller.setPower(0);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void turnRollerTeleOp(double power) {
+        roller.setPower(power);
     }
 
     public void turnFlap(double position, double seconds) {
