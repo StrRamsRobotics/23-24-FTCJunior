@@ -71,7 +71,6 @@ public class MainAuto {
                 chassis.turnChassis(1, 45);
                 break;
         }
-        chassis.turnPivot(1, 90);
         // back drive roller
         chassis.turnRoller(-0.25, 1);
 
@@ -79,6 +78,7 @@ public class MainAuto {
         isExecutingYellowPath = true;
     }
 
+    // April tag contour detection necessary
     public void executeYellowPath() {
         switch (mode) {
             case LEFT_BLUE:
