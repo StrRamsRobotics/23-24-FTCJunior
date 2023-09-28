@@ -72,7 +72,7 @@ public class MainAuto {
                 break;
         }
         // back drive roller
-        chassis.turnRoller(-0.25, 1);
+        chassis.turnRollerAuto(-0.25, 1);
 
         isExecutingPurplePath = false;
         isExecutingYellowPath = true;
@@ -138,9 +138,9 @@ public class MainAuto {
                 chassis.moveChassis(1, Game.TILE_SIZE);
                 break;
         }
-        chassis.turnArm(1, 120);
+        chassis.turnArmAuto(1, 120);
         chassis.turnFlap(0.5, 3);
-        chassis.turnArm(-1, 120);
+        chassis.turnArmAuto(-1, 120);
         isExecutingYellowPath = false;
         isExecutingBackstagePath = true;
     }
