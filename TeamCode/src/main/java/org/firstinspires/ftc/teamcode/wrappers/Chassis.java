@@ -28,8 +28,8 @@ public class Chassis {
     public static String FLAP_NAME = "flap";
     public static String CAMERA_NAME = "camera";
 
-    public static final boolean TANK_DRIVE = false;
-    public static final boolean TWO_WHEELED = true;
+    public static final boolean TANK_DRIVE = true;
+    public static final boolean TWO_WHEELED = false;
 
     public static final double POWER_DISTANCE_MULTIPLIER = 2.0;
     public static final double POWER_ANGLE_MULTIPLIER = 2.0;
