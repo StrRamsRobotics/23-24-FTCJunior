@@ -31,6 +31,7 @@ public class Chassis {
     public static final boolean TWO_WHEELED = true;
 
     public static final int CORE_HEX_TICKS_PER_REV = 288;
+    public static final int ROLLER_RADIUS = 2; // inches
 
     public static final double POWER_DISTANCE_MULTIPLIER = 2.0;
     public static final double POWER_ANGLE_MULTIPLIER = 2.0;
@@ -231,16 +232,16 @@ public class Chassis {
         }
     }
 
-    public void turnRollerAuto(double power, double seconds) {
-        roller.setPower(power);
-
-        try {
-            Thread.sleep((long) (seconds * 1000));
-
-            roller.setPower(0);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+    public void turnRollerAuto(double power, int distance) {
+        int angle = (int) Math.toDegrees((double) distance / ROLLER_RADIUS);
+        pivot.setTargetPosition(CORE_HEX_TICKS_PER_REV * angle / 360);
+        pivot.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
+        pivot.setPower(power);
+        while (pivot.isBusy()) {
+            // wait
         }
+        pivot.setPower(0);
+        pivot.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
     }
 
     public void turnRollerTeleOp(double power) {
