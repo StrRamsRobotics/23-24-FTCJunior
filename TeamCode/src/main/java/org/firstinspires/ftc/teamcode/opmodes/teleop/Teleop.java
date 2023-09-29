@@ -52,7 +52,7 @@ public class Teleop extends BaseTeleop {
         double lx = gamepad2.left_stick_x, ly = gamepad2.left_stick_y, rx = gamepad2.right_stick_x, ry = gamepad2.right_stick_y;
         double lxp = Math.pow(lx, 2), lyp = Math.pow(ly, 2), rxp = Math.pow(rx, 2), ryp = Math.pow(ry, 2);
         boolean a = gamepad2.a, b = gamepad2.b, x = gamepad2.x, y = gamepad2.y;
-        chassis.turnArmTeleOp(lyp);
+        chassis.turnArmTeleOp(MathHelper.deadzone(lyp, JOYSTICK_DEADZONE));
         if (x) {
             chassis.turnRollerTeleOp(1);
         }
