@@ -8,6 +8,8 @@ import org.firstinspires.ftc.teamcode.wrappers.Chassis;
 
 @TeleOp(name = "TeleOp")
 public class Teleop extends BaseTeleop {
+    public static final double JOYSTICK_DEADZONE = 0.025;
+
     @Override
     public void runSetup() {
 
@@ -24,24 +26,24 @@ public class Teleop extends BaseTeleop {
         double lxp = Math.pow(lx, 2), lyp = Math.pow(ly, 2), rxp = Math.pow(rx, 2), ryp = Math.pow(ry, 2);
         if (Chassis.TANK_DRIVE) {
             // Tank drive
-            chassis.fl.setPower(MathHelper.deadzone(lyp, 0.1));
-            chassis.bl.setPower(MathHelper.deadzone(lyp, 0.1));
-            chassis.fr.setPower(MathHelper.deadzone(ryp, 0.1));
-            chassis.br.setPower(MathHelper.deadzone(ryp, 0.1));
+            chassis.fl.setPower(MathHelper.deadzone(lyp, JOYSTICK_DEADZONE));
+            chassis.bl.setPower(MathHelper.deadzone(lyp, JOYSTICK_DEADZONE));
+            chassis.fr.setPower(MathHelper.deadzone(ryp, JOYSTICK_DEADZONE));
+            chassis.br.setPower(MathHelper.deadzone(ryp, JOYSTICK_DEADZONE));
             // two wheeled
             if (Chassis.TWO_WHEELED) {
-                chassis.bl.setPower(MathHelper.deadzone(lyp, 0.1));
-                chassis.br.setPower(MathHelper.deadzone(ryp, 0.1));
+                chassis.bl.setPower(MathHelper.deadzone(lyp, JOYSTICK_DEADZONE));
+                chassis.br.setPower(MathHelper.deadzone(ryp, JOYSTICK_DEADZONE));
             }
         } else {
             // Arcade drive
-            chassis.fl.setPower(MathHelper.deadzone(lyp - rxp, 0.1));
-            chassis.bl.setPower(MathHelper.deadzone(lyp - rxp, 0.1));
-            chassis.fr.setPower(MathHelper.deadzone(lyp + rxp, 0.1));
-            chassis.br.setPower(MathHelper.deadzone(lyp + rxp, 0.1));
+            chassis.fl.setPower(MathHelper.deadzone(lyp - rxp, JOYSTICK_DEADZONE));
+            chassis.bl.setPower(MathHelper.deadzone(lyp - rxp, JOYSTICK_DEADZONE));
+            chassis.fr.setPower(MathHelper.deadzone(lyp + rxp, JOYSTICK_DEADZONE));
+            chassis.br.setPower(MathHelper.deadzone(lyp + rxp, JOYSTICK_DEADZONE));
             if (Chassis.TWO_WHEELED) {
-                chassis.bl.setPower(MathHelper.deadzone(lyp - rxp, 0.1));
-                chassis.br.setPower(MathHelper.deadzone(lyp + rxp, 0.1));
+                chassis.bl.setPower(MathHelper.deadzone(lyp - rxp, JOYSTICK_DEADZONE));
+                chassis.br.setPower(MathHelper.deadzone(lyp + rxp, JOYSTICK_DEADZONE));
             }
         }
     }
