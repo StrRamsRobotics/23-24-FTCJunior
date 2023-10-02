@@ -12,4 +12,18 @@ public class MathHelper {
     public static double radius(double x, double y) {
         return Math.sqrt(x * x + y * y);
     }
+
+    public static double angle(double x, double y) {
+        return Math.atan2(y, x);
+    }
+
+    public static double toHeading(double angle) {
+        angle = angle % 360;
+        if (angle > 180) {
+            return angle - 180;
+        }
+        else {
+            return angle;
+        }
+    }
 }

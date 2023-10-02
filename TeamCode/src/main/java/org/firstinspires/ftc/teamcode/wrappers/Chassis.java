@@ -12,8 +12,10 @@ import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
+import org.firstinspires.ftc.teamcode.opmodes.auto.Vision;
 import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
+import org.openftc.easyopencv.OpenCvCameraRotation;
 
 public class Chassis {
     public static String IMU_NAME = "imu";
@@ -30,12 +32,16 @@ public class Chassis {
     public static final boolean TANK_DRIVE = false;
     public static final boolean TWO_WHEELED = true;
 
+    public static final int ROBOT_WIDTH = 18; // inches
+    public static final int ROBOT_LENGTH = 18; // inches
+    public static final int DISTANCE_PER_SECOND = 12; // inches
     public static final int CORE_HEX_TICKS_PER_REV = 288;
     public static final int ROLLER_RADIUS = 2; // inches
 
+    @Deprecated
     public static final double POWER_DISTANCE_MULTIPLIER = 2.0;
+    @Deprecated
     public static final double POWER_ANGLE_MULTIPLIER = 2.0;
-    public static final int ROBOT_WIDTH = 18;
 
     public DcMotorEx fr, fl, br, bl;
     public DcMotorEx arm, pivot, roller;
@@ -71,7 +77,7 @@ public class Chassis {
             bl = map.get(DcMotorEx.class, BL_NAME);
         }
         arm = map.get(DcMotorEx.class, ARM_NAME);
-        pivot = map.get(DcMotorEx.class, PIVOT_NAME);
+//        pivot = map.get(DcMotorEx.class, PIVOT_NAME);
         roller = map.get(DcMotorEx.class, ROLLER_NAME);
         flap = map.get(Servo.class, FLAP_NAME);
 
@@ -112,7 +118,8 @@ public class Chassis {
         }
     }
 
-    public void moveChassis(double power, int distance) {
+    @Deprecated
+    public void moveChassisOld(double power, int distance) {
         // encoders are not used. must use time
 
         fr.setPower(power);
@@ -138,7 +145,21 @@ public class Chassis {
         }
     }
 
-    public void turnChassis(double power, int angle) {
+    @Deprecated
+    public void moveChassis(double pr, double pl) {
+        // encoders are not used. must use time
+
+        fr.setPower(pr);
+        fl.setPower(pl);
+
+        if (!TWO_WHEELED) {
+            br.setPower(pr);
+            bl.setPower(pl);
+        }
+    }
+
+    @Deprecated
+    public void turnChassisOld(double power, int angle) {
         // encoders are not used. must use time
 
         fr.setPower(power);
@@ -166,6 +187,7 @@ public class Chassis {
         }
     }
 
+    @Deprecated
     public void turnArmWithoutEncoder(double power, int angle) {
         arm.setPower(power);
 
@@ -178,6 +200,7 @@ public class Chassis {
         }
     }
 
+    @Deprecated
     public void turnArmAuto(double power, int angle) {
         arm.setTargetPosition(CORE_HEX_TICKS_PER_REV * angle / 360);
         arm.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
@@ -189,10 +212,12 @@ public class Chassis {
         arm.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
     }
 
+    @Deprecated
     public void turnArmTeleOp(double power) {
         arm.setPower(power);
     }
 
+    @Deprecated
     public void turnPivotWithoutEncoder(double power, int angle) {
         pivot.setPower(power);
 
@@ -205,6 +230,7 @@ public class Chassis {
         }
     }
 
+    @Deprecated
     public void turnPivotAuto(double power, int angle) {
         pivot.setTargetPosition(CORE_HEX_TICKS_PER_REV * angle / 360);
         pivot.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
@@ -216,10 +242,12 @@ public class Chassis {
         pivot.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
     }
 
+    @Deprecated
     public void turnPivotTeleOp(double power) {
         pivot.setPower(power);
     }
 
+    @Deprecated
     public void turnRollerWithoutEncoder(double power, double seconds) {
         roller.setPower(power);
 
@@ -232,6 +260,7 @@ public class Chassis {
         }
     }
 
+    @Deprecated
     public void turnRollerAuto(double power, int distance) {
         int angle = (int) Math.toDegrees((double) distance / ROLLER_RADIUS);
         pivot.setTargetPosition(CORE_HEX_TICKS_PER_REV * angle / 360);
@@ -244,10 +273,12 @@ public class Chassis {
         pivot.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
     }
 
+    @Deprecated
     public void turnRollerTeleOp(double power) {
         roller.setPower(power);
     }
 
+    @Deprecated
     public void turnFlap(double position, double seconds) {
         flap.setPosition(position);
 

@@ -5,7 +5,7 @@ import org.firstinspires.ftc.teamcode.wrappers.Game;
 import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraRotation;
 
-public class MainAuto {
+public class MainAutoOld {
     public static final int LEFT_BLUE = 0;
     public static final int RIGHT_BLUE = 1;
     public static final int LEFT_RED = 2;
@@ -28,7 +28,7 @@ public class MainAuto {
             this.chassis.camera.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener() {
                 @Override
                 public void onOpened() {
-                    MainAuto.this.chassis.camera.startStreaming(Vision.IMAGE_WIDTH, Vision.IMAGE_HEIGHT, OpenCvCameraRotation.UPRIGHT);
+                    MainAutoOld.this.chassis.camera.startStreaming(Vision.IMAGE_WIDTH, Vision.IMAGE_HEIGHT, OpenCvCameraRotation.UPRIGHT);
                 }
 
                 @Override
@@ -60,15 +60,15 @@ public class MainAuto {
     public void executePurplePath() {
         switch (vision.route) {
             case Vision.LEFT_PATH:
-                chassis.moveChassis(1, Game.TILE_SIZE);
-                chassis.turnChassis(-1, 45);
+                chassis.moveChassisOld(1, Game.TILE_SIZE);
+                chassis.turnChassisOld(-1, 45);
                 break;
             case Vision.CENTER_PATH:
-                chassis.moveChassis(1, Game.TILE_SIZE);
+                chassis.moveChassisOld(1, Game.TILE_SIZE);
                 break;
             case Vision.RIGHT_PATH:
-                chassis.moveChassis(1, Game.TILE_SIZE);
-                chassis.turnChassis(1, 45);
+                chassis.moveChassisOld(1, Game.TILE_SIZE);
+                chassis.turnChassisOld(1, 45);
                 break;
         }
         // back drive roller
@@ -84,58 +84,58 @@ public class MainAuto {
             case LEFT_BLUE:
                 switch (vision.route) {
                     case Vision.LEFT_PATH:
-                        chassis.turnChassis(1, 135);
+                        chassis.turnChassisOld(1, 135);
                         break;
                     case Vision.CENTER_PATH:
-                        chassis.turnChassis(1, 90);
+                        chassis.turnChassisOld(1, 90);
                         break;
                     case Vision.RIGHT_PATH:
-                        chassis.turnChassis(1, 45);
+                        chassis.turnChassisOld(1, 45);
                         break;
                 }
-                chassis.moveChassis(1, Game.TILE_SIZE);
+                chassis.moveChassisOld(1, Game.TILE_SIZE);
                 break;
             case RIGHT_BLUE:
                 switch (vision.route) {
                     case Vision.LEFT_PATH:
-                        chassis.turnChassis(1, 135);
+                        chassis.turnChassisOld(1, 135);
                         break;
                     case Vision.CENTER_PATH:
-                        chassis.turnChassis(1, 90);
+                        chassis.turnChassisOld(1, 90);
                         break;
                     case Vision.RIGHT_PATH:
-                        chassis.turnChassis(1, 45);
+                        chassis.turnChassisOld(1, 45);
                         break;
                 }
-                chassis.moveChassis(3, Game.TILE_SIZE);
+                chassis.moveChassisOld(3, Game.TILE_SIZE);
                 break;
             case LEFT_RED:
                 switch (vision.route) {
                     case Vision.LEFT_PATH:
-                        chassis.turnChassis(-1, 45);
+                        chassis.turnChassisOld(-1, 45);
                         break;
                     case Vision.CENTER_PATH:
-                        chassis.turnChassis(-1, 90);
+                        chassis.turnChassisOld(-1, 90);
                         break;
                     case Vision.RIGHT_PATH:
-                        chassis.turnChassis(-1, 135);
+                        chassis.turnChassisOld(-1, 135);
                         break;
                 }
-                chassis.moveChassis(3, Game.TILE_SIZE);
+                chassis.moveChassisOld(3, Game.TILE_SIZE);
                 break;
             case RIGHT_RED:
                 switch (vision.route) {
                     case Vision.LEFT_PATH:
-                        chassis.turnChassis(-1, 45);
+                        chassis.turnChassisOld(-1, 45);
                         break;
                     case Vision.CENTER_PATH:
-                        chassis.turnChassis(-1, 90);
+                        chassis.turnChassisOld(-1, 90);
                         break;
                     case Vision.RIGHT_PATH:
-                        chassis.turnChassis(-1, 135);
+                        chassis.turnChassisOld(-1, 135);
                         break;
                 }
-                chassis.moveChassis(1, Game.TILE_SIZE);
+                chassis.moveChassisOld(1, Game.TILE_SIZE);
                 break;
         }
         chassis.turnArmAuto(1, 120);
@@ -149,14 +149,14 @@ public class MainAuto {
         switch (mode) {
             case LEFT_BLUE:
             case RIGHT_BLUE:
-                chassis.turnChassis(-1, 90);
+                chassis.turnChassisOld(-1, 90);
                 break;
             case LEFT_RED:
             case RIGHT_RED:
-                chassis.turnChassis(1, 90);
+                chassis.turnChassisOld(1, 90);
                 break;
         }
-        chassis.moveChassis(-1, Game.TILE_SIZE);
+        chassis.moveChassisOld(-1, Game.TILE_SIZE);
         isExecutingBackstagePath = false;
     }
 }
