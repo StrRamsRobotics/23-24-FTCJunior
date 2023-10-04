@@ -16,9 +16,8 @@ public class VisionAction extends AutoAction {
 
     public VisionAction tick() {
         chassis.telemetry.addData("Running", "VisionAction");
-        chassis.telemetry.update();
         try {
-            VisionPipeline vision = new VisionPipeline();
+            VisionPipeline vision = new VisionPipeline(chassis);
             chassis.camera.setPipeline(vision);
             chassis.camera.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener() {
                 @Override
@@ -35,6 +34,8 @@ public class VisionAction extends AutoAction {
                 // do absolutely nothing
             }
             route = vision.route;
+            chassis.telemetry.addData("Finalized route", route);
+            chassis.telemetry.update();
             chassis.camera.closeCameraDeviceAsync(() -> {
                 // well also do nothing here
             });

@@ -31,15 +31,15 @@ public class RightBlueAuto extends BaseAuto {
         ArrayList<AutoAction> purpleActions = new ArrayList<>();
         ArrayList<AutoAction> yellowActions = new ArrayList<>();
         yellowActions.add(new AprilTagAction(chassis, Game.BLUE_TEAM, route));
-        if (Chassis.HAS_ARM) yellowActions.add(new ArmAction(chassis, 1, 120));
+        if (Chassis.HAS_ARM) yellowActions.add(new ArmAction(chassis, Chassis.ARM_POWER, 120));
         if (Chassis.HAS_FLAP) yellowActions.add(new FlapAction(chassis, 1));
         yellowActions.add(new WaitAction(chassis, 1000));
         if (Chassis.HAS_FLAP) yellowActions.add(new FlapAction(chassis, 0));
-        if (Chassis.HAS_ARM) yellowActions.add(new ArmAction(chassis, 1, -120));
+        if (Chassis.HAS_ARM) yellowActions.add(new ArmAction(chassis, Chassis.ARM_POWER, -120));
         switch(route) {
             case 0:
                 purpleActions.add(new TurnAction(chassis, 1, 45));
-                if (Chassis.HAS_ROLLER) purpleActions.add(new RollerAction(chassis, -1));
+                if (Chassis.HAS_ROLLER) purpleActions.add(new RollerAction(chassis, -Chassis.ROLLER_POWER));
                 purpleActions.add(new WaitAction(chassis, 1000));
                 if (Chassis.HAS_ROLLER) purpleActions.add(new RollerAction(chassis, 0));
                 points.add(new AutoPoint(new Point(2 * Game.TILE_SIZE, 4.5 * Game.TILE_SIZE), purpleActions, true));
@@ -49,7 +49,7 @@ public class RightBlueAuto extends BaseAuto {
                 break;
             case 2:
                 purpleActions.add(new TurnAction(chassis, 1, -45));
-                if (Chassis.HAS_ROLLER) purpleActions.add(new RollerAction(chassis, -1));
+                if (Chassis.HAS_ROLLER) purpleActions.add(new RollerAction(chassis, -Chassis.ROLLER_POWER));
                 purpleActions.add(new WaitAction(chassis,1000));
                 if (Chassis.HAS_ROLLER) purpleActions.add(new RollerAction(chassis, 0));
                 points.add(new AutoPoint(new Point(2 * Game.TILE_SIZE, 4.5 * Game.TILE_SIZE), purpleActions, true));
@@ -59,7 +59,7 @@ public class RightBlueAuto extends BaseAuto {
                 break;
             case 1:
             default:
-                if (Chassis.HAS_ROLLER) purpleActions.add(new RollerAction(chassis, -1));
+                if (Chassis.HAS_ROLLER) purpleActions.add(new RollerAction(chassis, -Chassis.ROLLER_POWER));
                 purpleActions.add(new WaitAction(chassis,1000));
                 if (Chassis.HAS_ROLLER) purpleActions.add(new RollerAction(chassis, 0));
                 points.add(new AutoPoint(new Point(2 * Game.TILE_SIZE, 4.5 * Game.TILE_SIZE), purpleActions, true));

@@ -19,9 +19,24 @@ public class MoveAction extends AutoAction {
         }
     }
 
+    public MoveAction (Chassis chassis, double power, boolean reverse) {
+        super(chassis);
+        if (reverse) {
+            this.power = -power;
+        }
+        else {
+            this.power = power;
+        }
+    }
+
+    public MoveAction (Chassis chassis, double power) {
+        super(chassis);
+        this.power = power;
+    }
+
     public MoveAction tick() {
         chassis.telemetry.addData("Running", "MoveAction");
-        chassis.telemetry.update();
+        chassis.telemetry.addData("Power", power);
         chassis.fr.setPower(power);
         chassis.fl.setPower(power);
         if (!Chassis.TWO_WHEELED) {

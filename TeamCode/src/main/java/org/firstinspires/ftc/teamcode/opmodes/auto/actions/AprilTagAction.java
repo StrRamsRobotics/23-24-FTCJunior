@@ -3,7 +3,6 @@ package org.firstinspires.ftc.teamcode.opmodes.auto.actions;
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.teamcode.opmodes.auto.classes.AutoAction;
 import org.firstinspires.ftc.teamcode.opmodes.auto.pipelines.AprilTagDetectionPipeline;
-import org.firstinspires.ftc.teamcode.opmodes.auto.pipelines.VisionPipeline;
 import org.firstinspires.ftc.teamcode.wrappers.Chassis;
 import org.firstinspires.ftc.teamcode.wrappers.Game;
 import org.openftc.apriltag.AprilTagDetection;
@@ -17,12 +16,12 @@ public class AprilTagAction extends AutoAction {
     OpenCvCamera camera;
     AprilTagDetectionPipeline aprilTagDetectionPipeline;
 
-    public double fx = 1042;
-    public double fy = 781;
-    public double cx = 800;
-    public double cy = 600;
+    public static final double FX = 1042;
+    public static final double FY = 781;
+    public static final double CX = 800;
+    public static final double CY = 600;
 
-    public double tagsize = 0.166;
+    public static final double TAGSIZE = 0.166;
 
     public int numFramesWithoutDetection = 0;
 
@@ -52,13 +51,13 @@ public class AprilTagAction extends AutoAction {
         if (!cameraInitialized) {
             int cameraMonitorViewId = chassis.map.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", chassis.map.appContext.getPackageName());
             camera = OpenCvCameraFactory.getInstance().createWebcam(chassis.map.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
-            aprilTagDetectionPipeline = new AprilTagDetectionPipeline(tagsize, fx, fy, cx, cy);
+            aprilTagDetectionPipeline = new AprilTagDetectionPipeline(TAGSIZE, FX, FY, CX, CY);
 
             camera.setPipeline(aprilTagDetectionPipeline);
             camera.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener() {
                 @Override
                 public void onOpened() {
-                    camera.startStreaming(VisionPipeline.IMAGE_WIDTH, VisionPipeline.IMAGE_HEIGHT, OpenCvCameraRotation.UPRIGHT);
+                    camera.startStreaming(AprilTagDetectionPipeline.IMAGE_WIDTH, AprilTagDetectionPipeline.IMAGE_HEIGHT, OpenCvCameraRotation.UPRIGHT);
                 }
 
                 @Override
@@ -72,9 +71,9 @@ public class AprilTagAction extends AutoAction {
 
         if(detections != null) {
             if(detections.size() == 0) {
+                chassis.telemetry.addData("AprilTag Action", "No AprilTag Detected");
                 numFramesWithoutDetection++;
-                if(numFramesWithoutDetection >= THRESHOLD_NUM_FRAMES_NO_DETECTION_BEFORE_LOW_DECIMATION)
-                {
+                if(numFramesWithoutDetection >= THRESHOLD_NUM_FRAMES_NO_DETECTION_BEFORE_LOW_DECIMATION) {
                     aprilTagDetectionPipeline.setDecimation(DECIMATION_LOW);
                 }
             }
@@ -84,6 +83,10 @@ public class AprilTagAction extends AutoAction {
                     aprilTagDetectionPipeline.setDecimation(DECIMATION_HIGH);
                 }
                 for(AprilTagDetection detection : detections) {
+                    chassis.telemetry.addData("AprilTag ID", detection.id);
+                    chassis.telemetry.addData("AprilTag X", detection.pose.x);
+                    chassis.telemetry.addData("AprilTag Y", detection.pose.y);
+                    chassis.telemetry.addData("AprilTag Z", detection.pose.z);
                     if (
                             detection.id == LEFT_BLUE_ID && route == 0 && team == Game.BLUE_TEAM ||
                             detection.id == CENTER_BLUE_ID && route == 1 && team == Game.BLUE_TEAM ||
@@ -93,18 +96,35 @@ public class AprilTagAction extends AutoAction {
                             detection.id == RIGHT_RED_ID && route == 2 && team == Game.RED_TEAM
                     ) {
                         if (detection.pose.x >= 10) {
-
+                            chassis.telemetry.addData("AprilTag Action", "Turn Left");
+                            chassis.fr.setPower(Chassis.MOVE_POWER);
+                            if (!Chassis.TWO_WHEELED) {
+                                chassis.br.setPower(Chassis.MOVE_POWER);
+                            }
                             return this;
                         } else if (detection.pose.x <= -10) {
-
+                            chassis.telemetry.addData("AprilTag Action", "Turn Right");
+                            chassis.fl.setPower(Chassis.MOVE_POWER);
+                            if (!Chassis.TWO_WHEELED) {
+                                chassis.bl.setPower(Chassis.MOVE_POWER);
+                            }
                             return this;
                         } else {
-
+                            chassis.telemetry.addData("AprilTag Action", "AprilTag Centered");
+                            chassis.fl.setPower(0);
+                            chassis.fr.setPower(0);
+                            if (!Chassis.TWO_WHEELED) {
+                                chassis.bl.setPower(0);
+                                chassis.br.setPower(0);
+                            }
                             return null;
                         }
                     }
                 }
             }
+        }
+        else {
+            chassis.telemetry.addData("AprilTag Action", "Detections is null");
         }
         return null;
     }

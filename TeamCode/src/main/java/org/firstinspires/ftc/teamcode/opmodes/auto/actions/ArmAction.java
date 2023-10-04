@@ -20,7 +20,7 @@ public class ArmAction extends AutoAction {
 
     public ArmAction tick() {
         chassis.telemetry.addData("Running", "ArmAction");
-        chassis.telemetry.update();
+        chassis.telemetry.addData("Angle", angle);
 
         chassis.arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         chassis.arm.setPower(this.power);

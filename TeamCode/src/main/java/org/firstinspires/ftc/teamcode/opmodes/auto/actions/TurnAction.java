@@ -13,8 +13,8 @@ public class TurnAction extends AutoAction {
 
     public TurnAction(Chassis chassis, double power, AutoLine line) {
         super(chassis);
-        this.power = power;
-        this.angle = line.getAngle();
+        this.power = power * Math.signum(line.getAngle());
+        this.angle = Math.abs(line.getAngle());
         this.arcLength = Math.toRadians(angle) * Chassis.ROBOT_WIDTH / 2;
         this.startTime = System.currentTimeMillis();
     }
@@ -30,10 +30,10 @@ public class TurnAction extends AutoAction {
     public TurnAction tick() {
         chassis.telemetry.addData("Running", "TurnAction");
         long currentTime = System.currentTimeMillis();
-        double distance = (currentTime - startTime) * Chassis.DISTANCE_PER_SECOND / 1000.0;
+        double distance = (currentTime - startTime) * Chassis.MOVE_DISTANCE_PER_SECOND / 1000.0;
+        chassis.telemetry.addData("Power", power);
         chassis.telemetry.addData("Distance", distance);
         chassis.telemetry.addData("ArcLength", arcLength);
-        chassis.telemetry.update();
         if (distance < arcLength) {
             chassis.fr.setPower(power);
             chassis.fl.setPower(power);
