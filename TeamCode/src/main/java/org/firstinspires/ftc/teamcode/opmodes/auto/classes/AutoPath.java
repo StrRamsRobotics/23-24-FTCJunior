@@ -12,6 +12,9 @@ public class AutoPath {
     public AutoPoint currentPoint;
     public AutoLine currentLine;
     public AutoPoint activePoint;
+    public AutoPoint nextPoint;
+    public boolean activePointTicked = true;
+    public double distanceToNextPoint;
 
     public long prevTime;
 
@@ -35,6 +38,10 @@ public class AutoPath {
             }
         }
         if (autoPoints.size() > 0) currentPoint = autoPoints.get(0);
+        if (autoPoints.size() > 1) {
+            nextPoint = autoPoints.get(1);
+            distanceToNextPoint = nextPoint.distanceTo(currentPoint);
+        }
         if (lines.size() > 0) currentLine = lines.get(0);
         prevTime = System.currentTimeMillis();
     }
@@ -51,18 +58,24 @@ public class AutoPath {
     public AutoPath tick() {
         long currentTime = System.currentTimeMillis();
         double distance = (currentTime - prevTime) * Chassis.DISTANCE_PER_SECOND / 1000.0;
-        if (activePoint != null) {
-            activePoint = activePoint.tick();
+        chassis.telemetry.addData("bruh", activePointTicked);
+        chassis.telemetry.update();
+        if (activePointTicked && activePoint != null) {
+            activePointTicked = activePoint.tick() != null;
         }
-        else {
+        if (activePointTicked) {
             currentPoint = currentLine.getNextPoint(currentPoint, distance);
-            for (AutoPoint autoPoint : autoPoints) {
-                if (autoPoint.approximatelyEquals(currentPoint)) {
-                    activePoint = autoPoint;
-                    break;
-                }
+            chassis.telemetry.addData("Slope", currentLine.slope);
+            if (autoPoints.indexOf(activePoint) + 1 >= autoPoints.size() && currentPoint.distanceTo(nextPoint) > distanceToNextPoint) {
+                distanceToNextPoint = currentPoint.distanceTo(nextPoint);
+                chassis.telemetry.addData("Active point", autoPoints.indexOf(activePoint));
+                chassis.telemetry.update();
+                activePoint = nextPoint;
+                nextPoint = autoPoints.get(autoPoints.indexOf(activePoint) + 1);
+                activePointTicked = true;
             }
         }
+        prevTime = currentTime;
         return this;
     }
 }

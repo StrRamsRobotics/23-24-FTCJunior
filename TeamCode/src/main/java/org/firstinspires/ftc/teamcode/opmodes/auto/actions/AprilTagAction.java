@@ -93,13 +93,13 @@ public class AprilTagAction extends AutoAction {
                             detection.id == RIGHT_RED_ID && route == 2 && team == Game.RED_TEAM
                     ) {
                         if (detection.pose.x >= 10) {
-//                            chassis.drive(0, 0.5, 0);
+
                             return this;
                         } else if (detection.pose.x <= -10) {
-//                            chassis.drive(0, -0.5, 0);
+
                             return this;
                         } else {
-//                            chassis.drive(0, 0, 0);
+
                             return null;
                         }
                     }

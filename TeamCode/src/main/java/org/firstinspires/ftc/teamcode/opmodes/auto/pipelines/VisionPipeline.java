@@ -14,8 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class VisionPipeline extends OpenCvPipeline {
-    public static int IMAGE_WIDTH = 1280;
-    public static int IMAGE_HEIGHT = 720;
+    public static int IMAGE_WIDTH = 1600;
+    public static int IMAGE_HEIGHT = 1200;
     public static int MINIMUM_SIZE = 60;
     public static int LEFT = (int) (0.3 * IMAGE_WIDTH);
     public static int RIGHT = (int) (0.7 * IMAGE_WIDTH);

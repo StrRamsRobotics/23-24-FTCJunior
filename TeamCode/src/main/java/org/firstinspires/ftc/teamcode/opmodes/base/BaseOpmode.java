@@ -10,6 +10,8 @@ public abstract class BaseOpmode extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
         telemetry.addData("Status", "Initializing...");
+        telemetry.update();
+
         chassis = new Chassis(hardwareMap, telemetry);
         runSetup();
         waitForStart();

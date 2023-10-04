@@ -33,14 +33,14 @@ public class LeftRedAuto extends BaseAuto {
         yellowActions.add(new AprilTagAction(chassis, Game.RED_TEAM, route));
         if (Chassis.HAS_ARM) yellowActions.add(new ArmAction(chassis, 1, 120));
         if (Chassis.HAS_FLAP) yellowActions.add(new FlapAction(chassis, 1));
-        yellowActions.add(new WaitAction(1000));
+        yellowActions.add(new WaitAction(chassis, 1000));
         if (Chassis.HAS_FLAP) yellowActions.add(new FlapAction(chassis, 0));
         if (Chassis.HAS_ARM) yellowActions.add(new ArmAction(chassis, 1, -120));
         switch(route) {
             case 0:
                 purpleActions.add(new TurnAction(chassis, 1, 45));
                 if (Chassis.HAS_ROLLER) purpleActions.add(new RollerAction(chassis, -1));
-                purpleActions.add(new WaitAction(1000));
+                purpleActions.add(new WaitAction(chassis, 1000));
                 if (Chassis.HAS_ROLLER) purpleActions.add(new RollerAction(chassis, 0));
                 points.add(new AutoPoint(new Point(4 * Game.TILE_SIZE, 4.5 * Game.TILE_SIZE), purpleActions, true));
                 points.add(new AutoPoint(new Point(3.5 * Game.TILE_SIZE, 4.5 * Game.TILE_SIZE), purpleActions, true));
@@ -50,7 +50,7 @@ public class LeftRedAuto extends BaseAuto {
             case 2:
                 purpleActions.add(new TurnAction(chassis, 1, -45));
                 if (Chassis.HAS_ROLLER) purpleActions.add(new RollerAction(chassis, -1));
-                purpleActions.add(new WaitAction(1000));
+                purpleActions.add(new WaitAction(chassis,1000));
                 if (Chassis.HAS_ROLLER) purpleActions.add(new RollerAction(chassis, 0));
                 points.add(new AutoPoint(new Point(4 * Game.TILE_SIZE, 4.5 * Game.TILE_SIZE), purpleActions, true));
                 points.add(new AutoPoint(new Point(3.5 * Game.TILE_SIZE, 4.5 * Game.TILE_SIZE), purpleActions, true));
@@ -60,7 +60,7 @@ public class LeftRedAuto extends BaseAuto {
             case 1:
             default:
                 if (Chassis.HAS_ROLLER) purpleActions.add(new RollerAction(chassis, -1));
-                purpleActions.add(new WaitAction(1000));
+                purpleActions.add(new WaitAction(chassis,1000));
                 if (Chassis.HAS_ROLLER) purpleActions.add(new RollerAction(chassis, 0));
                 points.add(new AutoPoint(new Point(4 * Game.TILE_SIZE, 4.5 * Game.TILE_SIZE), purpleActions, true));
                 points.add(new AutoPoint(new Point(3.5 * Game.TILE_SIZE, 4.5 * Game.TILE_SIZE), purpleActions, true));
