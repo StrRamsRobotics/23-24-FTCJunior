@@ -20,6 +20,7 @@ public class MoveAction extends AutoAction {
     }
 
     public MoveAction tick() {
+        chassis.telemetry.addData("dude", "what");
         chassis.fr.setPower(power);
         chassis.fl.setPower(power);
         if (!Chassis.TWO_WHEELED) {

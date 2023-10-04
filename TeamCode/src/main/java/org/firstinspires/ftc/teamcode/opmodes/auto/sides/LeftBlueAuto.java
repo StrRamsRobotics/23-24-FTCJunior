@@ -31,33 +31,33 @@ public class LeftBlueAuto extends BaseAuto {
         points.add(new AutoPoint(new Point(0, 2.5 * Game.TILE_SIZE), new ArrayList<>(), 90, true));
         ArrayList<AutoAction> purpleActions = new ArrayList<>();
         ArrayList<AutoAction> yellowActions = new ArrayList<>();
-        yellowActions.add(new AprilTagAction(chassis));
-        yellowActions.add(new ArmAction(chassis, 1, 120));
-        yellowActions.add(new FlapAction(chassis, 1));
-        yellowActions.add(new WaitAction(1000));
-        yellowActions.add(new FlapAction(chassis, 0));
-        yellowActions.add(new ArmAction(chassis, 1, -120));
+        // yellowActions.add(new AprilTagAction(chassis));
+        // yellowActions.add(new ArmAction(chassis, 1, 120));
+        // yellowActions.add(new FlapAction(chassis, 1));
+        // yellowActions.add(new WaitAction(1000));
+        // yellowActions.add(new FlapAction(chassis, 0));
+        // yellowActions.add(new ArmAction(chassis, 1, -120));
         switch(route) {
             case 0:
-                purpleActions.add(new RollerAction(chassis, -1));
+                // purpleActions.add(new RollerAction(chassis, -1));
                 purpleActions.add(new WaitAction(1000));
-                purpleActions.add(new RollerAction(chassis, 0));
+                // purpleActions.add(new RollerAction(chassis, 0));
                 points.add(new AutoPoint(new Point(1.5 * Game.TILE_SIZE, 1.75 * Game.TILE_SIZE), purpleActions, true));
                 points.add(new AutoPoint(new Point(1.25 * Game.TILE_SIZE, 1.5 * Game.TILE_SIZE), yellowActions, true));
                 break;
             case 2:
-                purpleActions.add(new TurnAction(chassis, 1, -45));
-                purpleActions.add(new RollerAction(chassis, -1));
+                // purpleActions.add(new TurnAction(chassis, 1, -45));
+                // purpleActions.add(new RollerAction(chassis, -1));
                 purpleActions.add(new WaitAction(1000));
-                purpleActions.add(new RollerAction(chassis, 0));
+                // purpleActions.add(new RollerAction(chassis, 0));
                 points.add(new AutoPoint(new Point(2 * Game.TILE_SIZE, 2.5 * Game.TILE_SIZE), purpleActions, true));
                 points.add(new AutoPoint(new Point(1.75 * Game.TILE_SIZE, 1.5 * Game.TILE_SIZE), yellowActions, true));
                 break;
             case 1:
             default:
-                purpleActions.add(new RollerAction(chassis, -1));
+                // purpleActions.add(new RollerAction(chassis, -1));
                 purpleActions.add(new WaitAction(1000));
-                purpleActions.add(new RollerAction(chassis, 0));
+                // purpleActions.add(new RollerAction(chassis, 0));
                 points.add(new AutoPoint(new Point(2 * Game.TILE_SIZE, 2.5 * Game.TILE_SIZE), purpleActions, true));
                 points.add(new AutoPoint(new Point(1.5 * Game.TILE_SIZE, 1.5 * Game.TILE_SIZE), yellowActions, true));
                 break;

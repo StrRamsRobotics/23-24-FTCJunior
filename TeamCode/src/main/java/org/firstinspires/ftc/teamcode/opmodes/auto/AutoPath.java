@@ -21,10 +21,11 @@ public class AutoPath {
     public AutoPath(Chassis chassis, ArrayList<AutoPoint> autoPoints) {
         this.chassis = chassis;
         this.autoPoints = autoPoints;
+        this.lines = new ArrayList<>();
         for (AutoPoint autoPoint : autoPoints) {
             if (autoPoints.indexOf(autoPoint) != autoPoints.size() - 1) {
                 AutoLine line = getConnectingLine(autoPoint);
-                if (autoPoint.heading == null) {
+                if (autoPoint.heading == Double.MAX_VALUE) {
                     autoPoint.heading = line.getHeading();
                 }
                 lines.add(line);

@@ -7,6 +7,7 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
+import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
@@ -49,9 +50,11 @@ public class Chassis {
     public BNO055IMU imu;
     public OpenCvCamera camera;
     public HardwareMap map;
+    public Telemetry telemetry;
 
-    public Chassis(HardwareMap map) {
+    public Chassis(HardwareMap map, Telemetry telemetry) {
         this.map = map;
+        this.telemetry = telemetry;
         initializeIMU();
         initializeMotors();
         initializeCamera();
@@ -76,10 +79,10 @@ public class Chassis {
             br = map.get(DcMotorEx.class, BR_NAME);
             bl = map.get(DcMotorEx.class, BL_NAME);
         }
-        arm = map.get(DcMotorEx.class, ARM_NAME);
+        // arm = map.get(DcMotorEx.class, ARM_NAME);
 //        pivot = map.get(DcMotorEx.class, PIVOT_NAME);
-        roller = map.get(DcMotorEx.class, ROLLER_NAME);
-        flap = map.get(Servo.class, FLAP_NAME);
+//      // roller = map.get(DcMotorEx.class, ROLLER_NAME);
+        // flap = map.get(Servo.class, FLAP_NAME);
 
         fr.setDirection(DcMotorSimple.Direction.REVERSE);
         if (!TWO_WHEELED) {
