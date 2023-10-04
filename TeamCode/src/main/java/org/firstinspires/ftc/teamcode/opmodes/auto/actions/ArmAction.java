@@ -2,7 +2,7 @@ package org.firstinspires.ftc.teamcode.opmodes.auto.actions;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 
-import org.firstinspires.ftc.teamcode.opmodes.auto.AutoAction;
+import org.firstinspires.ftc.teamcode.opmodes.auto.classes.AutoAction;
 import org.firstinspires.ftc.teamcode.utils.helpers.MathHelper;
 import org.firstinspires.ftc.teamcode.wrappers.Chassis;
 
@@ -19,6 +19,9 @@ public class ArmAction extends AutoAction {
     }
 
     public ArmAction tick() {
+        chassis.telemetry.addData("Running", "ArmAction");
+        chassis.telemetry.update();
+
         chassis.arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         chassis.arm.setPower(this.power);
         if (chassis.arm.isBusy()) {

@@ -1,7 +1,5 @@
 package org.firstinspires.ftc.teamcode.utils.classes;
 
-import org.firstinspires.ftc.teamcode.opmodes.auto.AutoLine;
-
 import java.util.ArrayList;
 
 public class Path {

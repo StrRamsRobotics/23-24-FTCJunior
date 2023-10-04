@@ -1,5 +1,6 @@
-package org.firstinspires.ftc.teamcode.opmodes.auto;
+package org.firstinspires.ftc.teamcode.opmodes.auto.deprecated;
 
+import org.firstinspires.ftc.teamcode.opmodes.auto.pipelines.VisionPipeline;
 import org.firstinspires.ftc.teamcode.wrappers.Chassis;
 import org.firstinspires.ftc.teamcode.wrappers.Game;
 import org.openftc.easyopencv.OpenCvCamera;
@@ -17,18 +18,18 @@ public class MainAutoOld {
     public boolean isExecutingBackstagePath = false;
 
     public Chassis chassis;
-    public Vision vision;
+    public VisionPipeline vision;
 
     public void runSetup(int mode, Chassis chassis) {
         this.mode = mode;
         this.chassis = chassis;
         try {
-            vision = new Vision();
+            vision = new VisionPipeline();
             this.chassis.camera.setPipeline(vision);
             this.chassis.camera.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener() {
                 @Override
                 public void onOpened() {
-                    MainAutoOld.this.chassis.camera.startStreaming(Vision.IMAGE_WIDTH, Vision.IMAGE_HEIGHT, OpenCvCameraRotation.UPRIGHT);
+                    MainAutoOld.this.chassis.camera.startStreaming(VisionPipeline.IMAGE_WIDTH, VisionPipeline.IMAGE_HEIGHT, OpenCvCameraRotation.UPRIGHT);
                 }
 
                 @Override
@@ -59,14 +60,14 @@ public class MainAutoOld {
 
     public void executePurplePath() {
         switch (vision.route) {
-            case Vision.LEFT_PATH:
+            case VisionPipeline.LEFT_PATH:
                 chassis.moveChassisOld(1, Game.TILE_SIZE);
                 chassis.turnChassisOld(-1, 45);
                 break;
-            case Vision.CENTER_PATH:
+            case VisionPipeline.CENTER_PATH:
                 chassis.moveChassisOld(1, Game.TILE_SIZE);
                 break;
-            case Vision.RIGHT_PATH:
+            case VisionPipeline.RIGHT_PATH:
                 chassis.moveChassisOld(1, Game.TILE_SIZE);
                 chassis.turnChassisOld(1, 45);
                 break;
@@ -83,13 +84,13 @@ public class MainAutoOld {
         switch (mode) {
             case LEFT_BLUE:
                 switch (vision.route) {
-                    case Vision.LEFT_PATH:
+                    case VisionPipeline.LEFT_PATH:
                         chassis.turnChassisOld(1, 135);
                         break;
-                    case Vision.CENTER_PATH:
+                    case VisionPipeline.CENTER_PATH:
                         chassis.turnChassisOld(1, 90);
                         break;
-                    case Vision.RIGHT_PATH:
+                    case VisionPipeline.RIGHT_PATH:
                         chassis.turnChassisOld(1, 45);
                         break;
                 }
@@ -97,13 +98,13 @@ public class MainAutoOld {
                 break;
             case RIGHT_BLUE:
                 switch (vision.route) {
-                    case Vision.LEFT_PATH:
+                    case VisionPipeline.LEFT_PATH:
                         chassis.turnChassisOld(1, 135);
                         break;
-                    case Vision.CENTER_PATH:
+                    case VisionPipeline.CENTER_PATH:
                         chassis.turnChassisOld(1, 90);
                         break;
-                    case Vision.RIGHT_PATH:
+                    case VisionPipeline.RIGHT_PATH:
                         chassis.turnChassisOld(1, 45);
                         break;
                 }
@@ -111,13 +112,13 @@ public class MainAutoOld {
                 break;
             case LEFT_RED:
                 switch (vision.route) {
-                    case Vision.LEFT_PATH:
+                    case VisionPipeline.LEFT_PATH:
                         chassis.turnChassisOld(-1, 45);
                         break;
-                    case Vision.CENTER_PATH:
+                    case VisionPipeline.CENTER_PATH:
                         chassis.turnChassisOld(-1, 90);
                         break;
-                    case Vision.RIGHT_PATH:
+                    case VisionPipeline.RIGHT_PATH:
                         chassis.turnChassisOld(-1, 135);
                         break;
                 }
@@ -125,13 +126,13 @@ public class MainAutoOld {
                 break;
             case RIGHT_RED:
                 switch (vision.route) {
-                    case Vision.LEFT_PATH:
+                    case VisionPipeline.LEFT_PATH:
                         chassis.turnChassisOld(-1, 45);
                         break;
-                    case Vision.CENTER_PATH:
+                    case VisionPipeline.CENTER_PATH:
                         chassis.turnChassisOld(-1, 90);
                         break;
-                    case Vision.RIGHT_PATH:
+                    case VisionPipeline.RIGHT_PATH:
                         chassis.turnChassisOld(-1, 135);
                         break;
                 }

@@ -2,7 +2,7 @@ package org.firstinspires.ftc.teamcode.opmodes.auto.actions;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 
-import org.firstinspires.ftc.teamcode.opmodes.auto.AutoAction;
+import org.firstinspires.ftc.teamcode.opmodes.auto.classes.AutoAction;
 import org.firstinspires.ftc.teamcode.wrappers.Chassis;
 
 public class PivotAction extends AutoAction {
@@ -19,6 +19,8 @@ public class PivotAction extends AutoAction {
     }
 
     public PivotAction tick() {
+        chassis.telemetry.addData("Running", "PivotAction");
+        chassis.telemetry.update();
         chassis.pivot.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         chassis.pivot.setPower(this.power);
         if (chassis.pivot.isBusy()) {

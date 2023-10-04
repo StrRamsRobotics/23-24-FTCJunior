@@ -1,6 +1,6 @@
 package org.firstinspires.ftc.teamcode.opmodes.base;
 
-import org.firstinspires.ftc.teamcode.opmodes.auto.AutoPath;
+import org.firstinspires.ftc.teamcode.opmodes.auto.classes.AutoPath;
 import org.firstinspires.ftc.teamcode.opmodes.auto.actions.VisionAction;
 
 public abstract class BaseAuto extends BaseOpmode {

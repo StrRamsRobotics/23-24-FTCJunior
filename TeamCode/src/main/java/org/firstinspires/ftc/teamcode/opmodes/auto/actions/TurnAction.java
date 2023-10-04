@@ -1,7 +1,7 @@
 package org.firstinspires.ftc.teamcode.opmodes.auto.actions;
 
-import org.firstinspires.ftc.teamcode.opmodes.auto.AutoAction;
-import org.firstinspires.ftc.teamcode.opmodes.auto.AutoLine;
+import org.firstinspires.ftc.teamcode.opmodes.auto.classes.AutoAction;
+import org.firstinspires.ftc.teamcode.opmodes.auto.classes.AutoLine;
 import org.firstinspires.ftc.teamcode.wrappers.Chassis;
 
 public class TurnAction extends AutoAction {
@@ -28,6 +28,8 @@ public class TurnAction extends AutoAction {
     }
 
     public TurnAction tick() {
+        chassis.telemetry.addData("Running", "TurnAction");
+        chassis.telemetry.update();
         long currentTime = System.currentTimeMillis();
         double distance = (currentTime - startTime) * Chassis.DISTANCE_PER_SECOND / 1000.0;
         if (distance < arcLength) {
