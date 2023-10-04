@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.opmodes.auto;
+package org.firstinspires.ftc.teamcode.opmodes.auto.classes;
 
 import org.firstinspires.ftc.teamcode.opmodes.auto.actions.TurnAction;
 import org.firstinspires.ftc.teamcode.utils.classes.Point;
@@ -9,13 +9,13 @@ import java.util.ArrayList;
 public class AutoPoint extends Point {
     public ArrayList<AutoAction> autoActions = new ArrayList<>();
     public AutoAction currentAutoAction;
-    public Double heading = null;
+    public double heading = Double.MAX_VALUE;
     public boolean isReverse = false;
 
     public AutoPoint (Point point, ArrayList<AutoAction> autoActions, double heading, boolean isReverse) {
         super(point);
         this.autoActions = autoActions;
-        this.currentAutoAction = autoActions.get(0);
+        if (autoActions.size() > 0) this.currentAutoAction = autoActions.get(0);
         this.heading = heading;
         for (AutoAction autoAction : autoActions) {
             if (autoAction instanceof TurnAction) {
@@ -29,7 +29,7 @@ public class AutoPoint extends Point {
     public AutoPoint (Point point, ArrayList<AutoAction> autoActions, double heading) {
         super(point);
         this.autoActions = autoActions;
-        this.currentAutoAction = autoActions.get(0);
+        if (autoActions.size() > 0) this.currentAutoAction = autoActions.get(0);
         for (AutoAction autoAction : autoActions) {
             if (autoAction instanceof TurnAction) {
                 double angle = ((TurnAction) autoAction).angle;
@@ -42,7 +42,7 @@ public class AutoPoint extends Point {
     public AutoPoint (Point point, ArrayList<AutoAction> autoActions, boolean isReverse) {
         super(point);
         this.autoActions = autoActions;
-        this.currentAutoAction = autoActions.get(0);
+        if (autoActions.size() > 0) this.currentAutoAction = autoActions.get(0);
         for (AutoAction autoAction : autoActions) {
             if (autoAction instanceof TurnAction) {
                 double angle = ((TurnAction) autoAction).angle;
@@ -63,7 +63,7 @@ public class AutoPoint extends Point {
                 this.heading = MathHelper.toHeading(this.heading);
             }
         }
-        this.currentAutoAction = autoActions.get(0);
+        if (autoActions.size() > 0) this.currentAutoAction = autoActions.get(0);
     }
 
     public AutoPoint addAutoAction(AutoAction autoAction) {

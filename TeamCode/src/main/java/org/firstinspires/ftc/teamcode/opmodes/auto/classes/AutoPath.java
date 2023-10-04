@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.opmodes.auto;
+package org.firstinspires.ftc.teamcode.opmodes.auto.classes;
 
 import org.firstinspires.ftc.teamcode.opmodes.auto.actions.MoveAction;
 import org.firstinspires.ftc.teamcode.opmodes.auto.actions.TurnAction;
@@ -24,7 +24,7 @@ public class AutoPath {
         for (AutoPoint autoPoint : autoPoints) {
             if (autoPoints.indexOf(autoPoint) != autoPoints.size() - 1) {
                 AutoLine line = getConnectingLine(autoPoint);
-                if (autoPoint.heading == null) {
+                if (autoPoint.heading == Double.MAX_VALUE) {
                     autoPoint.heading = line.getHeading();
                 }
                 lines.add(line);
@@ -33,8 +33,8 @@ public class AutoPath {
                         .addAutoAction(new MoveAction(chassis, 1, line));
             }
         }
-        currentPoint = autoPoints.get(0);
-        currentLine = lines.get(0);
+        if (autoPoints.size() > 0) currentPoint = autoPoints.get(0);
+        if (lines.size() > 0) currentLine = lines.get(0);
         prevTime = System.currentTimeMillis();
     }
 

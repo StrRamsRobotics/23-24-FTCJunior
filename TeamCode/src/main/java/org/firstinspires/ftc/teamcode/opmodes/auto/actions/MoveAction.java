@@ -1,7 +1,7 @@
 package org.firstinspires.ftc.teamcode.opmodes.auto.actions;
 
-import org.firstinspires.ftc.teamcode.opmodes.auto.AutoAction;
-import org.firstinspires.ftc.teamcode.opmodes.auto.AutoLine;
+import org.firstinspires.ftc.teamcode.opmodes.auto.classes.AutoAction;
+import org.firstinspires.ftc.teamcode.opmodes.auto.classes.AutoLine;
 import org.firstinspires.ftc.teamcode.wrappers.Chassis;
 
 public class MoveAction extends AutoAction {
@@ -20,6 +20,8 @@ public class MoveAction extends AutoAction {
     }
 
     public MoveAction tick() {
+        chassis.telemetry.addData("Running", "MoveAction");
+        chassis.telemetry.update();
         chassis.fr.setPower(power);
         chassis.fl.setPower(power);
         if (!Chassis.TWO_WHEELED) {

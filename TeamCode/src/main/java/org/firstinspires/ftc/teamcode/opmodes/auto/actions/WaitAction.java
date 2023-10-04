@@ -1,6 +1,6 @@
 package org.firstinspires.ftc.teamcode.opmodes.auto.actions;
 
-import org.firstinspires.ftc.teamcode.opmodes.auto.AutoAction;
+import org.firstinspires.ftc.teamcode.opmodes.auto.classes.AutoAction;
 
 public class WaitAction extends AutoAction {
     public long startTime;
@@ -13,6 +13,8 @@ public class WaitAction extends AutoAction {
     }
 
     public WaitAction tick() {
+        chassis.telemetry.addData("Running", "WaitAction");
+        chassis.telemetry.update();
         if (System.currentTimeMillis() - startTime >= waitTime) {
             return null;
         }

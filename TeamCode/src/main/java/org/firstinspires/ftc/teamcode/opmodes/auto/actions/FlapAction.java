@@ -1,6 +1,6 @@
 package org.firstinspires.ftc.teamcode.opmodes.auto.actions;
 
-import org.firstinspires.ftc.teamcode.opmodes.auto.AutoAction;
+import org.firstinspires.ftc.teamcode.opmodes.auto.classes.AutoAction;
 import org.firstinspires.ftc.teamcode.wrappers.Chassis;
 
 public class FlapAction extends AutoAction {
@@ -12,6 +12,8 @@ public class FlapAction extends AutoAction {
     }
 
     public FlapAction tick() {
+        chassis.telemetry.addData("Running", "FlapAction");
+        chassis.telemetry.update();
         chassis.flap.setPosition(position);
         return null;
     }

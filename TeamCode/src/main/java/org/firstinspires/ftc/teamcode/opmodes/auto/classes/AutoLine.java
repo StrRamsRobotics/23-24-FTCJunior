@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.opmodes.auto;
+package org.firstinspires.ftc.teamcode.opmodes.auto.classes;
 
 import org.firstinspires.ftc.teamcode.utils.classes.Point;
 import org.firstinspires.ftc.teamcode.utils.helpers.MathHelper;

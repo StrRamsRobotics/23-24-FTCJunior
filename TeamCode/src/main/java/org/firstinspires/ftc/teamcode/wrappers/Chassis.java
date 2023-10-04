@@ -7,15 +7,14 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
+import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
-import org.firstinspires.ftc.teamcode.opmodes.auto.Vision;
 import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
-import org.openftc.easyopencv.OpenCvCameraRotation;
 
 public class Chassis {
     public static String IMU_NAME = "imu";
@@ -31,6 +30,12 @@ public class Chassis {
 
     public static final boolean TANK_DRIVE = false;
     public static final boolean TWO_WHEELED = true;
+    public static final boolean HAS_CHASSIS_ENCODERS = false;
+
+    public static final boolean HAS_ARM = false;
+    public static final boolean HAS_PIVOT = false;
+    public static final boolean HAS_ROLLER = false;
+    public static final boolean HAS_FLAP = false;
 
     public static final int ROBOT_WIDTH = 18; // inches
     public static final int ROBOT_LENGTH = 18; // inches
@@ -49,9 +54,11 @@ public class Chassis {
     public BNO055IMU imu;
     public OpenCvCamera camera;
     public HardwareMap map;
+    public Telemetry telemetry;
 
-    public Chassis(HardwareMap map) {
+    public Chassis(HardwareMap map, Telemetry telemetry) {
         this.map = map;
+        this.telemetry = telemetry;
         initializeIMU();
         initializeMotors();
         initializeCamera();
@@ -76,31 +83,41 @@ public class Chassis {
             br = map.get(DcMotorEx.class, BR_NAME);
             bl = map.get(DcMotorEx.class, BL_NAME);
         }
-        arm = map.get(DcMotorEx.class, ARM_NAME);
-//        pivot = map.get(DcMotorEx.class, PIVOT_NAME);
-        roller = map.get(DcMotorEx.class, ROLLER_NAME);
-        flap = map.get(Servo.class, FLAP_NAME);
-
         fr.setDirection(DcMotorSimple.Direction.REVERSE);
         if (!TWO_WHEELED) {
             br.setDirection(DcMotorSimple.Direction.REVERSE);
         }
 
-//        fr.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
-//        fl.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
-//
-//        if (!TWO_WHEELED) {
-//            br.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
-//            bl.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
-//        }
-//
-//        fr.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
-//        fl.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
-//
-//        if (!TWO_WHEELED) {
-//            br.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
-//            bl.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
-//        }
+        if (HAS_ARM) {
+            arm = map.get(DcMotorEx.class, ARM_NAME);
+        }
+        if (HAS_PIVOT) {
+            pivot = map.get(DcMotorEx.class, PIVOT_NAME);
+        }
+        if (HAS_ROLLER) {
+            roller = map.get(DcMotorEx.class, ROLLER_NAME);
+        }
+        if (HAS_FLAP) {
+            flap = map.get(Servo.class, FLAP_NAME);
+        }
+
+        if (HAS_CHASSIS_ENCODERS) {
+            fr.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
+            fl.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
+
+            if (!TWO_WHEELED) {
+                br.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
+                bl.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
+            }
+
+            fr.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+            fl.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+
+            if (!TWO_WHEELED) {
+                br.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+                bl.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+            }
+        }
     }
 
     public void initializeCamera() {
