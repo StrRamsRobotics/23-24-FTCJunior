@@ -24,7 +24,7 @@ public class MainAutoOld {
         this.mode = mode;
         this.chassis = chassis;
         try {
-            vision = new VisionPipeline();
+            vision = new VisionPipeline(chassis);
             this.chassis.camera.setPipeline(vision);
             this.chassis.camera.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener() {
                 @Override
