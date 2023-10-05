@@ -25,7 +25,7 @@ public class LeftBlueAuto extends BaseAuto {
 
     @Override
     public void runSetup() {
-        // super.runSetup();
+        super.runSetup();
         // based off of front of robot
         points.add(new AutoPoint(new Point(0, 2.5 * Game.TILE_SIZE), new ArrayList<>(), 90, true));
         ArrayList<AutoAction> purpleActions = new ArrayList<>();

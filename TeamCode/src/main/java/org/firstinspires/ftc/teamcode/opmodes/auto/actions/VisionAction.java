@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.opmodes.auto.actions;
 
+import com.acmerobotics.dashboard.FtcDashboard;
+
 import org.firstinspires.ftc.teamcode.opmodes.auto.classes.AutoAction;
 import org.firstinspires.ftc.teamcode.opmodes.auto.pipelines.VisionPipeline;
 import org.firstinspires.ftc.teamcode.wrappers.Chassis;
@@ -23,6 +25,8 @@ public class VisionAction extends AutoAction {
                 @Override
                 public void onOpened() {
                     chassis.camera.startStreaming(VisionPipeline.IMAGE_WIDTH, VisionPipeline.IMAGE_HEIGHT, OpenCvCameraRotation.UPRIGHT);
+                    FtcDashboard ftcDashboard = FtcDashboard.getInstance();
+                    ftcDashboard.startCameraStream(chassis.camera, 30);
                 }
 
                 @Override
