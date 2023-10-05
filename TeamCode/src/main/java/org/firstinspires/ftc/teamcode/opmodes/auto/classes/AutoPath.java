@@ -13,8 +13,7 @@ public class AutoPath {
     public AutoLine currentLine;
     public AutoPoint activePoint;
     public AutoPoint nextPoint;
-    public boolean activePointTicked = true;
-    public double distanceToNextPoint;
+    public double activeDistanceToNext;
 
     public long prevTime;
 
@@ -33,14 +32,18 @@ public class AutoPath {
                 }
                 lines.add(line);
                 autoPoint
-                        .addAutoAction(new TurnAction(chassis, 1, line))
-                        .addAutoAction(new MoveAction(chassis, 1, line));
+                        .addAutoAction(new MoveAction(chassis, 0, line))
+                        .addAutoAction(new TurnAction(chassis, Chassis.MOVE_POWER, line))
+                        .addAutoAction(new MoveAction(chassis, Chassis.MOVE_POWER, line));
             }
         }
-        if (autoPoints.size() > 0) currentPoint = autoPoints.get(0);
+        if (autoPoints.size() > 0) {
+            currentPoint = autoPoints.get(0);
+            activePoint = currentPoint;
+        }
         if (autoPoints.size() > 1) {
             nextPoint = autoPoints.get(1);
-            distanceToNextPoint = nextPoint.distanceTo(currentPoint);
+            activeDistanceToNext = nextPoint.distanceTo(currentPoint);
         }
         if (lines.size() > 0) currentLine = lines.get(0);
         prevTime = System.currentTimeMillis();
@@ -57,25 +60,43 @@ public class AutoPath {
 
     public AutoPath tick() {
         long currentTime = System.currentTimeMillis();
-        double distance = (currentTime - prevTime) * Chassis.DISTANCE_PER_SECOND / 1000.0;
-        chassis.telemetry.addData("bruh", activePointTicked);
-        chassis.telemetry.update();
-        if (activePointTicked && activePoint != null) {
-            activePointTicked = activePoint.tick() != null;
+        double stepDistance = (currentTime - prevTime) * Chassis.MOVE_DISTANCE_PER_SECOND / 1000.0;
+        boolean activePointRunning = true;
+        if (activePointRunning && activePoint != null) {
+            chassis.telemetry.addData("Active point x", activePoint.x);
+            chassis.telemetry.addData("Active point y", activePoint.y);
+            chassis.telemetry.addData("Active point heading", activePoint.heading);
+            chassis.telemetry.addData("Active point distance to current", activePoint.distanceTo(currentPoint));
+            chassis.telemetry.addData("Active point distance to next", activeDistanceToNext);
+            AutoPoint point = activePoint.tick();
+            if (point == null) {
+                activePointRunning = false;
+            }
+            else {
+                activePoint = point;
+            }
+            chassis.telemetry.addData("Active point running", activePointRunning);
         }
-        if (activePointTicked) {
-            currentPoint = currentLine.getNextPoint(currentPoint, distance);
+        if (!activePointRunning) {
+            currentPoint = currentLine.getNextPoint(currentPoint, stepDistance);
             chassis.telemetry.addData("Slope", currentLine.slope);
-            if (autoPoints.indexOf(activePoint) + 1 >= autoPoints.size() && currentPoint.distanceTo(nextPoint) > distanceToNextPoint) {
-                distanceToNextPoint = currentPoint.distanceTo(nextPoint);
-                chassis.telemetry.addData("Active point", autoPoints.indexOf(activePoint));
-                chassis.telemetry.update();
+            chassis.telemetry.addData("Step distance", stepDistance);
+            chassis.telemetry.addData("Current point x", currentPoint.x);
+            chassis.telemetry.addData("Current point y", currentPoint.y);
+            if (
+                    autoPoints.indexOf(activePoint) + 1 >= autoPoints.size() &&
+                    activePoint.distanceTo(currentPoint) > activeDistanceToNext
+            ) {
+                activeDistanceToNext = currentPoint.distanceTo(nextPoint);
                 activePoint = nextPoint;
+                chassis.telemetry.addData("New active point", autoPoints.indexOf(activePoint));
+                chassis.telemetry.addData("Active point x", activePoint.x);
+                chassis.telemetry.addData("Active point y", activePoint.y);
                 nextPoint = autoPoints.get(autoPoints.indexOf(activePoint) + 1);
-                activePointTicked = true;
             }
         }
         prevTime = currentTime;
+        chassis.telemetry.update();
         return this;
     }
 }

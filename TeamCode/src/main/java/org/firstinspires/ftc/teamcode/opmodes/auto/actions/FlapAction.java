@@ -13,7 +13,7 @@ public class FlapAction extends AutoAction {
 
     public FlapAction tick() {
         chassis.telemetry.addData("Running", "FlapAction");
-        chassis.telemetry.update();
+        chassis.telemetry.addData("Position", position);
         chassis.flap.setPosition(position);
         return null;
     }

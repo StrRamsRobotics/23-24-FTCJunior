@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.opmodes.auto.pipelines;
 
 import org.firstinspires.ftc.teamcode.utils.classes.IndexValue;
+import org.firstinspires.ftc.teamcode.wrappers.Chassis;
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfPoint;
@@ -16,7 +17,7 @@ import java.util.List;
 public class VisionPipeline extends OpenCvPipeline {
     public static int IMAGE_WIDTH = 1600;
     public static int IMAGE_HEIGHT = 1200;
-    public static int MINIMUM_SIZE = 60;
+    public static int MINIMUM_SIZE = 20;
     public static int LEFT = (int) (0.3 * IMAGE_WIDTH);
     public static int RIGHT = (int) (0.7 * IMAGE_WIDTH);
 
@@ -24,6 +25,7 @@ public class VisionPipeline extends OpenCvPipeline {
     public static final int CENTER_PATH = 1;
     public static final int RIGHT_PATH = 2;
 
+    public Chassis chassis;
     public int route = -1;
 
     // Red
@@ -51,6 +53,11 @@ public class VisionPipeline extends OpenCvPipeline {
 
     public List<MatOfPoint> contours = new ArrayList<>();
 
+    public VisionPipeline(Chassis chassis) {
+        super();
+        this.chassis = chassis;
+    }
+
     @Override
     public Mat processFrame(Mat input) {
         Imgproc.cvtColor(input, input, Imgproc.COLOR_RGB2HSV);
@@ -73,6 +80,8 @@ public class VisionPipeline extends OpenCvPipeline {
             }
             Rect rect = Imgproc.boundingRect(contours.get(maxArea.index));
             Point center = new Point(rect.x + rect.width / 2, rect.y + rect.height / 2);
+            chassis.telemetry.addData("Center X", center.x);
+            chassis.telemetry.addData("Center Y", center.y);
             if (center.x <= LEFT) {
                 route = 0;
             }
@@ -82,6 +91,8 @@ public class VisionPipeline extends OpenCvPipeline {
             else {
                 route = 1;
             }
+            chassis.telemetry.addData("Running route", route);
+            chassis.telemetry.update();
         }
         return input;
     }

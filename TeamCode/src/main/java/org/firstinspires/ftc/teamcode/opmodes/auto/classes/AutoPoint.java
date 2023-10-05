@@ -92,8 +92,6 @@ public class AutoPoint extends Point {
             }
             return this;
         }
-        else {
-            return null;
-        }
+       return null;
     }
 }

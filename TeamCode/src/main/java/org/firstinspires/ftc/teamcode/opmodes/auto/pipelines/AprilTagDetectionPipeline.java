@@ -18,6 +18,8 @@ import org.openftc.easyopencv.OpenCvPipeline;
 import java.util.ArrayList;
 
 public class AprilTagDetectionPipeline extends OpenCvPipeline {
+    public static int IMAGE_WIDTH = 1600;
+    public static int IMAGE_HEIGHT = 1200;
     private long nativeApriltagPtr;
     private Mat grey = new Mat();
     private ArrayList<AprilTagDetection> detections = new ArrayList<>();

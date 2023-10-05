@@ -20,7 +20,7 @@ public class PivotAction extends AutoAction {
 
     public PivotAction tick() {
         chassis.telemetry.addData("Running", "PivotAction");
-        chassis.telemetry.update();
+        chassis.telemetry.addData("Angle", angle);
         chassis.pivot.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         chassis.pivot.setPower(this.power);
         if (chassis.pivot.isBusy()) {
