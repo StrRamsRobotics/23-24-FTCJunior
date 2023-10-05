@@ -43,6 +43,7 @@ public class VisionAction extends AutoAction {
             chassis.camera.closeCameraDeviceAsync(() -> {
                 // well also do nothing here
             });
+            return null;
         } catch (Exception e) {}
         return null;
     }

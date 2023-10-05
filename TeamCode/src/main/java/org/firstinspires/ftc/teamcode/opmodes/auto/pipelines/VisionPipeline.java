@@ -71,7 +71,7 @@ public class VisionPipeline extends OpenCvPipeline {
         contours.clear();
 
         Imgproc.findContours(mask, contours, hierarchy, Imgproc.RETR_TREE, Imgproc.CHAIN_APPROX_SIMPLE);
-
+        Imgproc.drawContours(input, contours, -1, new Scalar(255, 0, 0), 15);
         if (contours.size() > 0){
             IndexValue maxArea = max(contours);
             if (maxArea.value < MINIMUM_SIZE) {

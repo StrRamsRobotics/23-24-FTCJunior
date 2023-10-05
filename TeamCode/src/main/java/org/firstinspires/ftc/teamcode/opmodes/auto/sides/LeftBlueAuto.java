@@ -72,6 +72,7 @@ public class LeftBlueAuto extends BaseAuto {
 
     @Override
     public void runLoop() {
+        chassis.telemetry.addData("Route", route);
         path.tick();
     }
 }
