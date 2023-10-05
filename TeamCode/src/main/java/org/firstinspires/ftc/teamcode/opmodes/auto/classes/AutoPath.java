@@ -84,7 +84,7 @@ public class AutoPath {
             chassis.telemetry.addData("Current point x", currentPoint.x);
             chassis.telemetry.addData("Current point y", currentPoint.y);
             if (
-                    autoPoints.indexOf(activePoint) + 1 >= autoPoints.size() &&
+                    autoPoints.indexOf(activePoint) + 1 <= autoPoints.size() &&
                     activePoint.distanceTo(currentPoint) > activeDistanceToNext
             ) {
                 activeDistanceToNext = currentPoint.distanceTo(nextPoint);
