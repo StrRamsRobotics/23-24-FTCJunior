@@ -82,7 +82,7 @@ import java.util.Locale;
  * To calibrate the IMU, run this sample OpMode with a gamepad attached to the driver station.
  * Once the IMU has reached sufficient calibration as reported on telemetry, press the 'A'
  * button on the gamepad to write the calibration to a file. That file can then be indicated
- * later when running an OpMode which uses the IMU.
+ * later when running an OpMode which` uses the IMU.
  *
  * Note: if your intended uses of the IMU do not include use of all its sensors (for example,
  * you might not use the magnetometer), then it makes little sense for you to wait for full

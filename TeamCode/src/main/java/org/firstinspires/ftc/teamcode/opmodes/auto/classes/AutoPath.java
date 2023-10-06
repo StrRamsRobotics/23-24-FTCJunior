@@ -63,6 +63,8 @@ public class AutoPath {
         double stepDistance = (currentTime - prevTime) * Chassis.MOVE_DISTANCE_PER_SECOND / 1000.0;
         boolean activePointRunning = true;
         if (activePointRunning && activePoint != null) {
+            chassis.telemetry.addData("Number of points", autoPoints.size());
+            chassis.telemetry.addData("Active point index", autoPoints.indexOf(activePoint));
             chassis.telemetry.addData("Active point x", activePoint.x);
             chassis.telemetry.addData("Active point y", activePoint.y);
             chassis.telemetry.addData("Active point heading", activePoint.heading);
@@ -84,15 +86,15 @@ public class AutoPath {
             chassis.telemetry.addData("Current point x", currentPoint.x);
             chassis.telemetry.addData("Current point y", currentPoint.y);
             if (
-                    autoPoints.indexOf(activePoint) + 1 >= autoPoints.size() &&
+                    autoPoints.indexOf(nextPoint) + 1 < autoPoints.size() &&
                     activePoint.distanceTo(currentPoint) > activeDistanceToNext
             ) {
-                activeDistanceToNext = currentPoint.distanceTo(nextPoint);
                 activePoint = nextPoint;
                 chassis.telemetry.addData("New active point", autoPoints.indexOf(activePoint));
                 chassis.telemetry.addData("Active point x", activePoint.x);
                 chassis.telemetry.addData("Active point y", activePoint.y);
                 nextPoint = autoPoints.get(autoPoints.indexOf(activePoint) + 1);
+                activeDistanceToNext = activePoint.distanceTo(nextPoint);
             }
         }
         prevTime = currentTime;
