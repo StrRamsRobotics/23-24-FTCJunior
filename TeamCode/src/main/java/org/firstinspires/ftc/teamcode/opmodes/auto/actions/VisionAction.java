@@ -35,6 +35,7 @@ public class VisionAction extends AutoAction {
             } catch (Exception e) {}
         }
         route = visionPipeline.route;
+        chassis.telemetry.addData("VisionAction Route", route);
         if (route != -1) {
             chassis.camera.closeCameraDeviceAsync(() -> {
             });
