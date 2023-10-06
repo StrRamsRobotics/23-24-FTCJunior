@@ -13,7 +13,6 @@ import org.openftc.easyopencv.OpenCvCameraRotation;
 import java.util.ArrayList;
 
 public class AprilTagAction extends AutoAction {
-    OpenCvCamera camera;
     AprilTagDetectionPipeline aprilTagDetectionPipeline;
 
     public static final double FX = 1042;
@@ -49,15 +48,14 @@ public class AprilTagAction extends AutoAction {
 
     public AprilTagAction tick() {
         if (!cameraInitialized) {
-            int cameraMonitorViewId = chassis.map.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", chassis.map.appContext.getPackageName());
-            camera = OpenCvCameraFactory.getInstance().createWebcam(chassis.map.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
+            int cameraMonitorViewId = chassis.hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", chassis.hardwareMap.appContext.getPackageName());
             aprilTagDetectionPipeline = new AprilTagDetectionPipeline(TAGSIZE, FX, FY, CX, CY);
 
-            camera.setPipeline(aprilTagDetectionPipeline);
-            camera.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener() {
+            chassis.camera.setPipeline(aprilTagDetectionPipeline);
+            chassis.camera.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener() {
                 @Override
                 public void onOpened() {
-                    camera.startStreaming(AprilTagDetectionPipeline.IMAGE_WIDTH, AprilTagDetectionPipeline.IMAGE_HEIGHT, OpenCvCameraRotation.UPRIGHT);
+                    chassis.camera.startStreaming(AprilTagDetectionPipeline.IMAGE_WIDTH, AprilTagDetectionPipeline.IMAGE_HEIGHT, OpenCvCameraRotation.UPRIGHT);
                 }
 
                 @Override
@@ -117,6 +115,8 @@ public class AprilTagAction extends AutoAction {
                                 chassis.bl.setPower(0);
                                 chassis.br.setPower(0);
                             }
+                            chassis.camera.closeCameraDeviceAsync(() -> {
+                            });
                             return null;
                         }
                     }

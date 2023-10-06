@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.opmodes.auto.deprecated;
 import org.firstinspires.ftc.teamcode.opmodes.auto.pipelines.VisionPipeline;
 import org.firstinspires.ftc.teamcode.wrappers.Chassis;
 import org.firstinspires.ftc.teamcode.wrappers.Game;
+import org.firstinspires.ftc.teamcode.wrappers.deprecated.ChassisOld;
 import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraRotation;
 
@@ -17,14 +18,14 @@ public class MainAutoOld {
     public boolean isExecutingYellowPath = false;
     public boolean isExecutingBackstagePath = false;
 
-    public Chassis chassis;
+    public ChassisOld chassis;
     public VisionPipeline vision;
 
-    public void runSetup(int mode, Chassis chassis) {
+    public void runSetup(int mode, ChassisOld chassis) {
         this.mode = mode;
         this.chassis = chassis;
         try {
-            vision = new VisionPipeline(chassis);
+            vision = new VisionPipeline();
             this.chassis.camera.setPipeline(vision);
             this.chassis.camera.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener() {
                 @Override

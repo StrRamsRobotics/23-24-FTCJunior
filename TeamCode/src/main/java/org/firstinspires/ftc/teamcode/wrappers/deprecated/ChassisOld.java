@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.wrappers;
+package org.firstinspires.ftc.teamcode.wrappers.deprecated;
 
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
@@ -18,7 +18,7 @@ import org.firstinspires.ftc.teamcode.opmodes.auto.pipelines.VisionPipeline;
 import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
 
-public class Chassis {
+public class ChassisOld {
     public static String IMU_NAME = "imu";
     public static String FR_NAME = "fr";
     public static String FL_NAME = "fl";
@@ -63,7 +63,7 @@ public class Chassis {
     public HardwareMap hardwareMap;
     public Telemetry telemetry;
 
-    public Chassis(HardwareMap hardwareMap, Telemetry telemetry) {
+    public ChassisOld(HardwareMap hardwareMap, Telemetry telemetry) {
         initializeUtils(hardwareMap, telemetry);
         initializeIMU();
         initializeMotors();
@@ -143,6 +143,179 @@ public class Chassis {
             return Math.signum(angle_value)*(Math.abs(angle_value)%360-360);
         } else {
             return Math.signum(angle_value)*(Math.abs(angle_value)%360);
+        }
+    }
+
+    @Deprecated
+    public void moveChassisOld(double power, int distance) {
+        // encoders are not used. must use time
+
+        fr.setPower(power);
+        fl.setPower(power);
+
+        if (!TWO_WHEELED) {
+            br.setPower(power);
+            bl.setPower(power);
+        }
+
+        try {
+            Thread.sleep((long) (distance / (Math.abs(power) * POWER_DISTANCE_MULTIPLIER) * 1000));
+
+            fr.setPower(0);
+            fl.setPower(0);
+
+            if (!TWO_WHEELED) {
+                br.setPower(0);
+                bl.setPower(0);
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Deprecated
+    public void moveChassis(double pr, double pl) {
+        // encoders are not used. must use time
+
+        fr.setPower(pr);
+        fl.setPower(pl);
+
+        if (!TWO_WHEELED) {
+            br.setPower(pr);
+            bl.setPower(pl);
+        }
+    }
+
+    @Deprecated
+    public void turnChassisOld(double power, int angle) {
+        // encoders are not used. must use time
+
+        fr.setPower(power);
+        fl.setPower(-power);
+
+        if (!TWO_WHEELED) {
+            br.setPower(power);
+            bl.setPower(-power);
+        }
+
+        int distance = (int) (Math.PI * ROBOT_WIDTH * angle / 360);
+
+        try {
+            Thread.sleep((long) (distance / (Math.abs(power) * POWER_DISTANCE_MULTIPLIER) * 1000));
+
+            fr.setPower(0);
+            fl.setPower(0);
+
+            if (!TWO_WHEELED) {
+                br.setPower(0);
+                bl.setPower(0);
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Deprecated
+    public void turnArmWithoutEncoder(double power, int angle) {
+        arm.setPower(power);
+
+        try {
+            Thread.sleep((long) (angle / (Math.abs(power) * POWER_ANGLE_MULTIPLIER) * 1000));
+
+            arm.setPower(0);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Deprecated
+    public void turnArmAuto(double power, int angle) {
+        arm.setTargetPosition(CORE_HEX_TICKS_PER_REV * angle / 360);
+        arm.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
+        arm.setPower(power);
+        while (arm.isBusy()) {
+            // wait
+        }
+        arm.setPower(0);
+        arm.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
+    }
+
+    @Deprecated
+    public void turnArmTeleOp(double power) {
+        arm.setPower(power);
+    }
+
+    @Deprecated
+    public void turnPivotWithoutEncoder(double power, int angle) {
+        pivot.setPower(power);
+
+        try {
+            Thread.sleep((long) (angle / (Math.abs(power) * POWER_ANGLE_MULTIPLIER) * 1000));
+
+            pivot.setPower(0);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Deprecated
+    public void turnPivotAuto(double power, int angle) {
+        pivot.setTargetPosition(CORE_HEX_TICKS_PER_REV * angle / 360);
+        pivot.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
+        pivot.setPower(power);
+        while (pivot.isBusy()) {
+            // wait
+        }
+        pivot.setPower(0);
+        pivot.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
+    }
+
+    @Deprecated
+    public void turnPivotTeleOp(double power) {
+        pivot.setPower(power);
+    }
+
+    @Deprecated
+    public void turnRollerWithoutEncoder(double power, double seconds) {
+        roller.setPower(power);
+
+        try {
+            Thread.sleep((long) (seconds * 1000));
+
+            roller.setPower(0);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Deprecated
+    public void turnRollerAuto(double power, int distance) {
+        int angle = (int) Math.toDegrees((double) distance / ROLLER_RADIUS);
+        pivot.setTargetPosition(CORE_HEX_TICKS_PER_REV * angle / 360);
+        pivot.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
+        pivot.setPower(power);
+        while (pivot.isBusy()) {
+            // wait
+        }
+        pivot.setPower(0);
+        pivot.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
+    }
+
+    @Deprecated
+    public void turnRollerTeleOp(double power) {
+        roller.setPower(power);
+    }
+
+    @Deprecated
+    public void turnFlap(double position, double seconds) {
+        flap.setPosition(position);
+
+        try {
+            Thread.sleep((long) (seconds * 1000));
+
+            flap.setPosition(0);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
     }
 }
