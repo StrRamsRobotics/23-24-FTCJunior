@@ -13,6 +13,8 @@ import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
+import org.firstinspires.ftc.teamcode.opmodes.auto.pipelines.AprilTagDetectionPipeline;
+import org.firstinspires.ftc.teamcode.opmodes.auto.pipelines.VisionPipeline;
 import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
 
@@ -52,6 +54,10 @@ public class Chassis {
     public static final double POWER_DISTANCE_MULTIPLIER = 2.0;
     @Deprecated
     public static final double POWER_ANGLE_MULTIPLIER = 2.0;
+
+    
+    VisionPipeline vision;
+    AprilTagDetectionPipeline aprilTagDetectionPipeline;
 
     public DcMotorEx fr, fl, br, bl;
     public DcMotorEx arm, pivot, roller;

@@ -72,7 +72,7 @@ public class VisionPipeline extends OpenCvPipeline {
 
         Imgproc.findContours(mask, contours, hierarchy, Imgproc.RETR_TREE, Imgproc.CHAIN_APPROX_SIMPLE);
 
-        if (contours.size() > 0){
+        if (contours.size() > 0) {
             IndexValue maxArea = max(contours);
             if (maxArea.value < MINIMUM_SIZE) {
                 route = -1;
@@ -84,11 +84,9 @@ public class VisionPipeline extends OpenCvPipeline {
             chassis.telemetry.addData("Center Y", center.y);
             if (center.x <= LEFT) {
                 route = 0;
-            }
-            else if (center.x >= RIGHT) {
+            } else if (center.x >= RIGHT) {
                 route = 2;
-            }
-            else {
+            } else {
                 route = 1;
             }
             chassis.telemetry.addData("Running route", route);
