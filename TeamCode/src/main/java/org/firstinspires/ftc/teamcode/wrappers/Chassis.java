@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.wrappers;
 
+import com.acmerobotics.dashboard.FtcDashboard;
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
@@ -62,6 +63,7 @@ public class Chassis {
     public OpenCvCamera camera;
     public HardwareMap hardwareMap;
     public Telemetry telemetry;
+    public FtcDashboard ftcDashboard = FtcDashboard.getInstance();
 
     public Chassis(HardwareMap hardwareMap, Telemetry telemetry) {
         initializeUtils(hardwareMap, telemetry);

@@ -8,8 +8,6 @@ public abstract class BaseAuto extends BaseOpmode {
     public AutoPath autoPath;
 
     public void runSetup() {
-        VisionAction visionAction = new VisionAction(chassis);
-        visionAction.tick();
-        route = visionAction.route;
+
     }
 }

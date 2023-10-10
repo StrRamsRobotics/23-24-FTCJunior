@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.opmodes.auto.sides;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
+import org.firstinspires.ftc.teamcode.opmodes.auto.actions.VisionAction;
 import org.firstinspires.ftc.teamcode.opmodes.auto.classes.AutoAction;
 import org.firstinspires.ftc.teamcode.opmodes.auto.classes.AutoPath;
 import org.firstinspires.ftc.teamcode.opmodes.auto.classes.AutoPoint;
@@ -20,12 +21,16 @@ import java.util.ArrayList;
 
 @Autonomous(name="leftBlueAuto")
 public class LeftBlueAuto extends BaseAuto {
+    VisionAction visionAction = null;
     public ArrayList<AutoPoint> points = new ArrayList<>();
     public AutoPath path;
 
     @Override
     public void runSetup() {
-        super.runSetup();
+
+    }
+
+    public void createPoints() {
         // based off of front of robot
         points.add(new AutoPoint(new Point(0, 2.5 * Game.TILE_SIZE), new ArrayList<>(), 90, true));
         ArrayList<AutoAction> purpleActions = new ArrayList<>();
@@ -72,7 +77,23 @@ public class LeftBlueAuto extends BaseAuto {
 
     @Override
     public void runLoop() {
-        chassis.telemetry.addData("Route", route);
-        path.tick();
+        if (route == -1) {
+            if (visionAction == null) {
+                visionAction = new VisionAction(chassis);
+            }
+            visionAction = visionAction.tick();
+            if (visionAction != null) {
+                route = visionAction.route;
+            }
+            //chassis.telemetry.addData("Route", route);
+            chassis.telemetry.update();
+        }
+        else {
+            if (points.size() == 0) {
+                createPoints();
+            }
+            chassis.telemetry.addData("Route", route);
+            path.tick();
+        }
     }
 }

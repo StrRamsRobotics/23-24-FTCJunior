@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.opmodes.auto.pipelines;
 
 import org.firstinspires.ftc.teamcode.utils.classes.IndexValue;
+import org.firstinspires.ftc.teamcode.wrappers.Chassis;
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfPoint;
@@ -50,6 +51,8 @@ public class VisionPipeline extends OpenCvPipeline {
 
     public List<MatOfPoint> contours = new ArrayList<>();
 
+    public Point center;
+
     public VisionPipeline() {
         super();
     }
@@ -74,7 +77,7 @@ public class VisionPipeline extends OpenCvPipeline {
                 return input;
             }
             Rect rect = Imgproc.boundingRect(contours.get(maxArea.index));
-            Point center = new Point(rect.x + rect.width / 2.0, rect.y + rect.height / 2.0);
+            center = new Point(rect.x + rect.width / 2.0, rect.y + rect.height / 2.0);
             Imgproc.rectangle(input, rect, new Scalar(255, 0, 0), 10);
             Imgproc.circle(input, center, 10, new Scalar(0, 0, 255), 10);
             if (center.x <= LEFT) {
@@ -87,7 +90,6 @@ public class VisionPipeline extends OpenCvPipeline {
                 route = 1;
             }
         }
-        Imgproc.cvtColor(input, input, Imgproc.COLOR_HSV2RGB);
         return input;
     }
 

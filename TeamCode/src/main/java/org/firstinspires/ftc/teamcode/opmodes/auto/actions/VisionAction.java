@@ -26,6 +26,7 @@ public class VisionAction extends AutoAction {
                     @Override
                     public void onOpened() {
                         chassis.camera.startStreaming(VisionPipeline.IMAGE_WIDTH, VisionPipeline.IMAGE_HEIGHT, OpenCvCameraRotation.UPRIGHT);
+                        chassis.ftcDashboard.startCameraStream(chassis.camera, 15);
                     }
 
                     @Override
@@ -33,9 +34,14 @@ public class VisionAction extends AutoAction {
                     }
                 });
             } catch (Exception e) {}
+            isCameraInitialized = true;
         }
         route = visionPipeline.route;
         chassis.telemetry.addData("VisionAction Route", route);
+        if (visionPipeline.center != null) {
+            chassis.telemetry.addData("Center X", visionPipeline.center.x);
+
+        }
         if (route != -1) {
             chassis.camera.closeCameraDeviceAsync(() -> {
             });
