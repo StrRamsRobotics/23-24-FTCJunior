@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.opmodes.auto.classes;
 
+import com.acmerobotics.dashboard.telemetry.TelemetryPacket;
+
 import org.firstinspires.ftc.teamcode.opmodes.auto.actions.MoveAction;
 import org.firstinspires.ftc.teamcode.opmodes.auto.actions.TurnAction;
 import org.firstinspires.ftc.teamcode.wrappers.Chassis;
@@ -62,14 +64,24 @@ public class AutoPath {
         long currentTime = System.currentTimeMillis();
         double stepDistance = (currentTime - prevTime) * Chassis.MOVE_DISTANCE_PER_SECOND / 1000.0;
         boolean activePointRunning = true;
+
+        TelemetryPacket packet = new TelemetryPacket();
+
         if (activePointRunning && activePoint != null) {
             chassis.telemetry.addData("Number of points", autoPoints.size());
+            packet.put("Number of points", autoPoints.size());
             chassis.telemetry.addData("Active point index", autoPoints.indexOf(activePoint));
+            packet.put("Active point index", autoPoints.indexOf(activePoint));
             chassis.telemetry.addData("Active point x", activePoint.x);
+            packet.put("Active point x", activePoint.x);
             chassis.telemetry.addData("Active point y", activePoint.y);
+            packet.put("Active point y", activePoint.y);
             chassis.telemetry.addData("Active point heading", activePoint.heading);
+            packet.put("Active point heading", activePoint.heading);
             chassis.telemetry.addData("Active point distance to current", activePoint.distanceTo(currentPoint));
+            packet.put("Active point distance to current", activePoint.distanceTo(currentPoint));
             chassis.telemetry.addData("Active point distance to next", activeDistanceToNext);
+            packet.put("Active point distance to next", activeDistanceToNext);
             AutoPoint point = activePoint.tick();
             if (point == null) {
                 activePointRunning = false;
@@ -78,21 +90,29 @@ public class AutoPath {
                 activePoint = point;
             }
             chassis.telemetry.addData("Active point running", activePointRunning);
+            packet.put("Active point running", activePointRunning);
         }
         if (!activePointRunning) {
             currentPoint = currentLine.getNextPoint(currentPoint, stepDistance);
             chassis.telemetry.addData("Slope", currentLine.slope);
+            packet.put("Slope", currentLine.slope);
             chassis.telemetry.addData("Step distance", stepDistance);
+            packet.put("Step distance", stepDistance);
             chassis.telemetry.addData("Current point x", currentPoint.x);
+            packet.put("Current point x", currentPoint.x);
             chassis.telemetry.addData("Current point y", currentPoint.y);
+            packet.put("Current point y", currentPoint.y);
             if (
                     autoPoints.indexOf(nextPoint) + 1 < autoPoints.size() &&
                     activePoint.distanceTo(currentPoint) > activeDistanceToNext
             ) {
                 activePoint = nextPoint;
                 chassis.telemetry.addData("New active point", autoPoints.indexOf(activePoint));
+                packet.put("New active point", autoPoints.indexOf(activePoint));
                 chassis.telemetry.addData("Active point x", activePoint.x);
+                packet.put("Active point x", activePoint.x);
                 chassis.telemetry.addData("Active point y", activePoint.y);
+                packet.put("Active point y", activePoint.y);
                 nextPoint = autoPoints.get(autoPoints.indexOf(activePoint) + 1);
                 activeDistanceToNext = activePoint.distanceTo(nextPoint);
             }
