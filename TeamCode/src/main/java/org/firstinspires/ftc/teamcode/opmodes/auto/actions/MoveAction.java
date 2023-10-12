@@ -6,18 +6,6 @@ import org.firstinspires.ftc.teamcode.wrappers.Chassis;
 
 public class MoveAction extends AutoAction {
     public double power;
-    public AutoLine line;
-
-    public MoveAction (Chassis chassis, double power, AutoLine line) {
-        super(chassis);
-        this.line = line;
-        if (this.line.point1.isReverse) {
-            this.power = -power;
-        }
-        else {
-            this.power = power;
-        }
-    }
 
     public MoveAction (Chassis chassis, double power, boolean reverse) {
         super(chassis);
@@ -34,15 +22,14 @@ public class MoveAction extends AutoAction {
         this.power = power;
     }
 
-    public MoveAction tick() {
-        chassis.telemetry.addData("Running", "MoveAction");
-        chassis.telemetry.addData("Power", power);
+    public void tick() {
+        chassis.logHelper.addData("Running", "MoveAction");
         chassis.fr.setPower(power);
         chassis.fl.setPower(power);
         if (!Chassis.TWO_WHEELED) {
             chassis.br.setPower(power);
             chassis.bl.setPower(power);
         }
-        return null;
+        active = false;
     }
 }

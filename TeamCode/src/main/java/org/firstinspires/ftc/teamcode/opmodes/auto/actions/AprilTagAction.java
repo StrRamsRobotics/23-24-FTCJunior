@@ -46,7 +46,7 @@ public class AprilTagAction extends AutoAction {
         this.route = route;
     }
 
-    public AprilTagAction tick() {
+    public void tick() {
         if (!cameraInitialized) {
             int cameraMonitorViewId = chassis.hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", chassis.hardwareMap.appContext.getPackageName());
             aprilTagDetectionPipeline = new AprilTagDetectionPipeline(TAGSIZE, FX, FY, CX, CY);
@@ -69,7 +69,7 @@ public class AprilTagAction extends AutoAction {
 
         if(detections != null) {
             if(detections.size() == 0) {
-                chassis.telemetry.addData("AprilTag Action", "No AprilTag Detected");
+                chassis.logHelper.addData("AprilTag Action", "No AprilTag Detected");
                 numFramesWithoutDetection++;
                 if(numFramesWithoutDetection >= THRESHOLD_NUM_FRAMES_NO_DETECTION_BEFORE_LOW_DECIMATION) {
                     aprilTagDetectionPipeline.setDecimation(DECIMATION_LOW);
@@ -81,10 +81,10 @@ public class AprilTagAction extends AutoAction {
                     aprilTagDetectionPipeline.setDecimation(DECIMATION_HIGH);
                 }
                 for(AprilTagDetection detection : detections) {
-                    chassis.telemetry.addData("AprilTag ID", detection.id);
-                    chassis.telemetry.addData("AprilTag X", detection.pose.x);
-                    chassis.telemetry.addData("AprilTag Y", detection.pose.y);
-                    chassis.telemetry.addData("AprilTag Z", detection.pose.z);
+                    chassis.logHelper.addData("AprilTag ID", detection.id);
+                    chassis.logHelper.addData("AprilTag X", detection.pose.x);
+                    chassis.logHelper.addData("AprilTag Y", detection.pose.y);
+                    chassis.logHelper.addData("AprilTag Z", detection.pose.z);
                     if (
                             detection.id == LEFT_BLUE_ID && route == 0 && team == Game.BLUE_TEAM ||
                             detection.id == CENTER_BLUE_ID && route == 1 && team == Game.BLUE_TEAM ||
@@ -94,21 +94,19 @@ public class AprilTagAction extends AutoAction {
                             detection.id == RIGHT_RED_ID && route == 2 && team == Game.RED_TEAM
                     ) {
                         if (detection.pose.x >= 10) {
-                            chassis.telemetry.addData("AprilTag Action", "Turn Left");
+                            chassis.logHelper.addData("AprilTag Action", "Turn Left");
                             chassis.fr.setPower(Chassis.MOVE_POWER);
                             if (!Chassis.TWO_WHEELED) {
                                 chassis.br.setPower(Chassis.MOVE_POWER);
                             }
-                            return this;
                         } else if (detection.pose.x <= -10) {
-                            chassis.telemetry.addData("AprilTag Action", "Turn Right");
+                            chassis.logHelper.addData("AprilTag Action", "Turn Right");
                             chassis.fl.setPower(Chassis.MOVE_POWER);
                             if (!Chassis.TWO_WHEELED) {
                                 chassis.bl.setPower(Chassis.MOVE_POWER);
                             }
-                            return this;
                         } else {
-                            chassis.telemetry.addData("AprilTag Action", "AprilTag Centered");
+                            chassis.logHelper.addData("AprilTag Action", "AprilTag Centered");
                             chassis.fl.setPower(0);
                             chassis.fr.setPower(0);
                             if (!Chassis.TWO_WHEELED) {
@@ -117,15 +115,14 @@ public class AprilTagAction extends AutoAction {
                             }
                             chassis.camera.closeCameraDeviceAsync(() -> {
                             });
-                            return null;
+                            active = false;
                         }
                     }
                 }
             }
         }
         else {
-            chassis.telemetry.addData("AprilTag Action", "Detections is null");
+            chassis.logHelper.addData("AprilTag Action", "No AprilTag Detected");
         }
-        return null;
     }
 }

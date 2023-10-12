@@ -11,10 +11,10 @@ public class RollerAction extends AutoAction {
         this.power = power;
     }
 
-    public RollerAction tick() {
-        chassis.telemetry.addData("Running", "RollerAction");
-        chassis.telemetry.addData("Power", power);
+    public void tick() {
+        chassis.logHelper.addData("Running", "RollerAction");
+        chassis.logHelper.addData("Power", power);
         chassis.roller.setPower(power);
-        return this;
+        active = false;
     }
 }

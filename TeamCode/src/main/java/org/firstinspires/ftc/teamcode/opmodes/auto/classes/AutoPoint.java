@@ -11,6 +11,7 @@ public class AutoPoint extends Point {
     public AutoAction currentAutoAction;
     public double heading = Double.MAX_VALUE;
     public boolean isReverse = false;
+    public boolean active = true;
 
     public AutoPoint (Point point, ArrayList<AutoAction> autoActions, double heading, boolean isReverse) {
         super(point);
@@ -28,34 +29,36 @@ public class AutoPoint extends Point {
 
     public AutoPoint (Point point, ArrayList<AutoAction> autoActions, double heading) {
         super(point);
-        this.autoActions = autoActions;
-        if (autoActions.size() > 0) this.currentAutoAction = autoActions.get(0);
-        for (AutoAction autoAction : autoActions) {
-            if (autoAction instanceof TurnAction) {
-                double angle = ((TurnAction) autoAction).angle;
-                this.heading += angle;
-            }
-        }
+        setAutoActions(autoActions);
         this.heading = heading;
     }
 
     public AutoPoint (Point point, ArrayList<AutoAction> autoActions, boolean isReverse) {
         super(point);
-        this.autoActions = autoActions;
-        if (autoActions.size() > 0) this.currentAutoAction = autoActions.get(0);
-        for (AutoAction autoAction : autoActions) {
-            if (autoAction instanceof TurnAction) {
-                double angle = ((TurnAction) autoAction).angle;
-                this.heading += angle;
-                this.heading = MathHelper.toHeading(this.heading);
-            }
-        }
+        setAutoActions(autoActions);
         this.isReverse = isReverse;
     }
 
     public AutoPoint (Point point, ArrayList<AutoAction> autoActions) {
         super(point);
+        setAutoActions(autoActions);
+    }
+
+    public AutoPoint addAutoAction(AutoAction autoAction) {
+        autoActions.add(autoAction);
+        setAutoActions(autoActions);
+        return this;
+    }
+
+    public AutoPoint addAutoAction(int loc, AutoAction autoAction) {
+        autoActions.add(loc, autoAction);
+        setAutoActions(autoActions);
+        return this;
+    }
+
+    public void setAutoActions(ArrayList<AutoAction> autoActions) {
         this.autoActions = autoActions;
+        if (autoActions.size() > 0) this.currentAutoAction = autoActions.get(0);
         for (AutoAction autoAction : autoActions) {
             if (autoAction instanceof TurnAction) {
                 double angle = ((TurnAction) autoAction).angle;
@@ -63,35 +66,23 @@ public class AutoPoint extends Point {
                 this.heading = MathHelper.toHeading(this.heading);
             }
         }
-        if (autoActions.size() > 0) this.currentAutoAction = autoActions.get(0);
+        this.active = true;
     }
 
-    public AutoPoint addAutoAction(AutoAction autoAction) {
-        autoActions.add(autoAction);
-        if (autoAction instanceof TurnAction) {
-            double angle = ((TurnAction) autoAction).angle;
-            this.heading += angle;
-            this.heading = MathHelper.toHeading(this.heading);
-        }
-        return this;
-    }
-
-    public AutoPoint tick() {
+    public void tick() {
         if (autoActions.size() > 0) {
-            AutoAction action = null;
             if (currentAutoAction != null) {
-                action = currentAutoAction.tick();
-            }
-            if (action == null) {
-                if (autoActions.indexOf(currentAutoAction) + 1 < autoActions.size()) {
-                    currentAutoAction = autoActions.get(autoActions.indexOf(currentAutoAction) + 1);
+                currentAutoAction.tick();
+                if (!currentAutoAction.active) {
+                    if (autoActions.indexOf(currentAutoAction) + 1 < autoActions.size()) {
+                        currentAutoAction = autoActions.get(autoActions.indexOf(currentAutoAction) + 1);
+                    }
+                    else {
+                        currentAutoAction = null;
+                        active = false;
+                    }
                 }
-                else {
-                    return null;
-                }
             }
-            return this;
         }
-       return null;
     }
 }

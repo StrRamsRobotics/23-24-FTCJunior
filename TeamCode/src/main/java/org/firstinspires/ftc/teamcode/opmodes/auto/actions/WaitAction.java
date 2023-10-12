@@ -13,12 +13,11 @@ public class WaitAction extends AutoAction {
         this.waitTime = waitTime;
     }
 
-    public WaitAction tick() {
-        chassis.telemetry.addData("Running", "WaitAction");
-        chassis.telemetry.addData("WaitTime", waitTime);
+    public void tick() {
+        chassis.logHelper.addData("Running", "WaitAction");
+        chassis.logHelper.addData("WaitTime", waitTime);
         if (System.currentTimeMillis() - startTime >= waitTime) {
-            return null;
+            active = false;
         }
-        return this;
     }
 }

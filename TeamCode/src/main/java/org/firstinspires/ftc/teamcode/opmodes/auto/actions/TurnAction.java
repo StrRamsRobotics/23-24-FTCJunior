@@ -27,13 +27,13 @@ public class TurnAction extends AutoAction {
         this.startTime = System.currentTimeMillis();
     }
 
-    public TurnAction tick() {
-        chassis.telemetry.addData("Running", "TurnAction");
+    public void tick() {
+        chassis.logHelper.addData("Running", "TurnAction");
         long currentTime = System.currentTimeMillis();
         double distance = (currentTime - startTime) * Chassis.MOVE_DISTANCE_PER_SECOND / 1000.0;
-        chassis.telemetry.addData("Power", power);
-        chassis.telemetry.addData("Distance", distance);
-        chassis.telemetry.addData("ArcLength", arcLength);
+        chassis.logHelper.addData("Angle", angle);
+        chassis.logHelper.addData("Distance", distance);
+        chassis.logHelper.addData("ArcLength", arcLength);
         if (distance < arcLength) {
             chassis.fr.setPower(power);
             chassis.fl.setPower(power);
@@ -41,7 +41,6 @@ public class TurnAction extends AutoAction {
                 chassis.br.setPower(power);
                 chassis.bl.setPower(power);
             }
-            return this;
         } else {
             chassis.fr.setPower(0);
             chassis.fl.setPower(0);
@@ -49,7 +48,7 @@ public class TurnAction extends AutoAction {
                 chassis.br.setPower(0);
                 chassis.bl.setPower(0);
             }
-            return null;
+            active = false;
         }
     }
 }
