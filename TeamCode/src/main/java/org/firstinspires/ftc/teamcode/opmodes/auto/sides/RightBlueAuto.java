@@ -22,7 +22,10 @@ import java.util.ArrayList;
 @Autonomous(name="rightBlueAuto")
 public class RightBlueAuto extends BaseAuto {
     @Override
-    public void runSetup(){}
+    public void runSetup() {
+        visionAction = new VisionAction(chassis, true);
+        visionAction.tick(); // to init camera stream before 30 seconds
+    }
     @Override
     public void createPoints() {
         // based off of front of robot
@@ -73,9 +76,6 @@ public class RightBlueAuto extends BaseAuto {
     @Override
     public void runLoop() {
         if (route == -1) {
-            if (visionAction == null) {
-                visionAction = new VisionAction(chassis, true);
-            }
             visionAction.tick();
             if (!visionAction.active) {
                 route = visionAction.route;
@@ -87,7 +87,9 @@ public class RightBlueAuto extends BaseAuto {
                 createPoints();
             }
             chassis.logHelper.addData("Route", route);
-            path.tick();
+            if (path.active) {
+                path.tick();
+            }
         }
     }
 }
