@@ -8,12 +8,14 @@ import org.openftc.easyopencv.OpenCvCameraRotation;
 
 public class VisionAction extends AutoAction {
     public VisionPipeline visionPipeline;
+    public int counter = 0;
     public boolean isCameraInitialized = false;
     public int route;
 
     public VisionAction(Chassis chassis) {
         super(chassis);
         route = -1;
+        active = true;
     }
 
     public VisionAction tick() {
@@ -37,6 +39,7 @@ public class VisionAction extends AutoAction {
             isCameraInitialized = true;
         }
         route = visionPipeline.route;
+        chassis.telemetry.addData("COunter", counter++);
         chassis.telemetry.addData("VisionAction Route", route);
         if (visionPipeline.center != null) {
             chassis.telemetry.addData("Center X", visionPipeline.center.x);
@@ -45,6 +48,7 @@ public class VisionAction extends AutoAction {
         if (route != -1) {
             chassis.camera.closeCameraDeviceAsync(() -> {
             });
+            active = false;
             return null;
         }
         else {

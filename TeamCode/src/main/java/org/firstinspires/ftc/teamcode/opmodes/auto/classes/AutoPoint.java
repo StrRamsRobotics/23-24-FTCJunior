@@ -68,29 +68,31 @@ public class AutoPoint extends Point {
 
     public AutoPoint addAutoAction(AutoAction autoAction) {
         autoActions.add(autoAction);
-        if (autoAction instanceof TurnAction) {
-            double angle = ((TurnAction) autoAction).angle;
-            this.heading += angle;
-            this.heading = MathHelper.toHeading(this.heading);
-        }
+        //if (autoAction instanceof TurnAction) {
+         //   double angle = ((TurnAction) autoAction).angle;
+         //   this.heading += angle;
+         //   this.heading = MathHelper.toHeading(this.heading);
+        //}
+        if (autoActions.size() > 0) this.currentAutoAction = autoActions.get(0);
         return this;
     }
 
     public AutoPoint tick() {
         if (autoActions.size() > 0) {
-            AutoAction action = null;
             if (currentAutoAction != null) {
-                action = currentAutoAction.tick();
-            }
-            if (action == null) {
-                if (autoActions.indexOf(currentAutoAction) + 1 < autoActions.size()) {
-                    currentAutoAction = autoActions.get(autoActions.indexOf(currentAutoAction) + 1);
+                currentAutoAction.tick();
+
+                if (!currentAutoAction.active) {
+                    if (autoActions.indexOf(currentAutoAction) + 1 < autoActions.size()) {
+                        currentAutoAction = autoActions.get(autoActions.indexOf(currentAutoAction) + 1);
+                    }
+                    else {
+                        return null;
+                    }
                 }
-                else {
-                    return null;
-                }
+                return this;
             }
-            return this;
+            return null;
         }
        return null;
     }

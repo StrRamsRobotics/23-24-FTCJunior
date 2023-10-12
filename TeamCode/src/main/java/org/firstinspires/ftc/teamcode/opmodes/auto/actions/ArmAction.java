@@ -16,6 +16,7 @@ public class ArmAction extends AutoAction {
         this.power = power;
         chassis.arm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         chassis.arm.setTargetPosition((int) (this.angle * Chassis.CORE_HEX_TICKS_PER_REV / 360.0));
+        active = true;
     }
 
     public ArmAction tick() {
@@ -29,6 +30,7 @@ public class ArmAction extends AutoAction {
         } else {
             chassis.pivot.setPower(0);
             chassis.pivot.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            active = false;
             return null;
         }
     }

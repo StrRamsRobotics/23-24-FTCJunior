@@ -17,7 +17,7 @@ import java.util.List;
 public class VisionPipeline extends OpenCvPipeline {
     public static int IMAGE_WIDTH = 1600;
     public static int IMAGE_HEIGHT = 1200;
-    public static int MINIMUM_SIZE = 20;
+    public static int MINIMUM_SIZE = 60;
     public static int LEFT = (int) ((1.0/3.0) * IMAGE_WIDTH);
     public static int RIGHT = (int) ((2.0/3.0) * IMAGE_WIDTH);
 
@@ -70,15 +70,16 @@ public class VisionPipeline extends OpenCvPipeline {
         contours.clear();
 
         Imgproc.findContours(mask, contours, hierarchy, Imgproc.RETR_TREE, Imgproc.CHAIN_APPROX_SIMPLE);
-        if (contours.size() > 0){
+        if (contours.size() > 0) {
             IndexValue maxArea = max(contours);
-            if (maxArea.value < MINIMUM_SIZE) {
-                route = -1;
-                return input;
-            }
+
+            //if (maxArea.value < MINIMUM_SIZE) {
+            //    route = -1;
+            //    return input;
+            //}
             Rect rect = Imgproc.boundingRect(contours.get(maxArea.index));
             center = new Point(rect.x + rect.width / 2.0, rect.y + rect.height / 2.0);
-            Imgproc.rectangle(input, rect, new Scalar(255, 0, 0), 10);
+            Imgproc.rectangle(input, rect, new Scalar(0, 0, 255), 10);
             Imgproc.circle(input, center, 10, new Scalar(0, 0, 255), 10);
             if (center.x <= LEFT) {
                 route = 0;
@@ -90,6 +91,7 @@ public class VisionPipeline extends OpenCvPipeline {
                 route = 1;
             }
         }
+        Imgproc.cvtColor(input, input, Imgproc.COLOR_HSV2RGB);
         return input;
     }
 
@@ -100,7 +102,8 @@ public class VisionPipeline extends OpenCvPipeline {
             Mat contour = contours.get(idx);
             double contourArea = Imgproc.contourArea(contour);
             Rect rect = Imgproc.boundingRect(contour);
-            if (contourArea > maxArea && rect.height<2.5*rect.width && rect.height>rect.width) {
+            //if (contourArea > maxArea && rect.height<2.5*rect.width && rect.height>rect.width) {
+            if (contourArea > maxArea) {
                 maxArea = contourArea;
                 maxAreaIdx = idx;
             }

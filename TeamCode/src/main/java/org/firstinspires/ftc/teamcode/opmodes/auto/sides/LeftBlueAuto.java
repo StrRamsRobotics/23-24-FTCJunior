@@ -81,10 +81,8 @@ public class LeftBlueAuto extends BaseAuto {
             if (visionAction == null) {
                 visionAction = new VisionAction(chassis);
             }
-            visionAction = visionAction.tick();
-            if (visionAction != null) {
-                route = visionAction.route;
-            }
+            visionAction.tick();
+            route = visionAction.route;
             //chassis.telemetry.addData("Route", route);
             chassis.telemetry.update();
         }
@@ -93,6 +91,7 @@ public class LeftBlueAuto extends BaseAuto {
                 createPoints();
             }
             chassis.telemetry.addData("Route", route);
+            chassis.telemetry.addData("Center", visionAction.visionPipeline.center.x);
             path.tick();
         }
     }

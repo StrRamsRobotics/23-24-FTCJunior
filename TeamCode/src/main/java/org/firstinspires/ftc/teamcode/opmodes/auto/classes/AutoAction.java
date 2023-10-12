@@ -5,7 +5,7 @@ import org.firstinspires.ftc.teamcode.wrappers.Chassis;
 public abstract class AutoAction {
     public Chassis chassis;
 
-    public boolean active;
+    public boolean active = true;
 
     public AutoAction (Chassis chassis) {
         this.chassis = chassis;

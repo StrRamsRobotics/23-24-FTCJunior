@@ -25,6 +25,7 @@ public class TurnAction extends AutoAction {
         this.angle = angle;
         this.arcLength = Math.toRadians(angle) * Chassis.ROBOT_WIDTH / 2;
         this.startTime = System.currentTimeMillis();
+        active = true;
     }
 
     public TurnAction tick() {
@@ -32,6 +33,7 @@ public class TurnAction extends AutoAction {
         long currentTime = System.currentTimeMillis();
         double distance = (currentTime - startTime) * Chassis.MOVE_DISTANCE_PER_SECOND / 1000.0;
         chassis.telemetry.addData("Power", power);
+        chassis.telemetry.addData("Angle", angle);
         chassis.telemetry.addData("Distance", distance);
         chassis.telemetry.addData("ArcLength", arcLength);
         if (distance < arcLength) {
@@ -49,7 +51,9 @@ public class TurnAction extends AutoAction {
                 chassis.br.setPower(0);
                 chassis.bl.setPower(0);
             }
+            active = false;
             return null;
+            //return this;
         }
     }
 }

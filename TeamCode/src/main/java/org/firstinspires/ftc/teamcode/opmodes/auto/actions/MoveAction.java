@@ -17,6 +17,7 @@ public class MoveAction extends AutoAction {
         else {
             this.power = power;
         }
+        active = true;
     }
 
     public MoveAction (Chassis chassis, double power, boolean reverse) {
@@ -27,11 +28,13 @@ public class MoveAction extends AutoAction {
         else {
             this.power = power;
         }
+        active = true;
     }
 
     public MoveAction (Chassis chassis, double power) {
         super(chassis);
         this.power = power;
+        active = true;
     }
 
     public MoveAction tick() {
@@ -43,6 +46,7 @@ public class MoveAction extends AutoAction {
             chassis.br.setPower(power);
             chassis.bl.setPower(power);
         }
+        active = false;
         return null;
     }
 }

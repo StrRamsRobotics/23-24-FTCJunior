@@ -31,8 +31,8 @@ public class AutoPath {
                     autoPoint.heading = line.getHeading();
                 }
                 lines.add(line);
+                autoPoint.autoActions.add(0, new MoveAction(chassis, 0));
                 autoPoint
-                        .addAutoAction(new MoveAction(chassis, 0, line))
                         .addAutoAction(new TurnAction(chassis, Chassis.MOVE_POWER, line))
                         .addAutoAction(new MoveAction(chassis, Chassis.MOVE_POWER, line));
             }
@@ -67,10 +67,13 @@ public class AutoPath {
             chassis.telemetry.addData("Active point index", autoPoints.indexOf(activePoint));
             chassis.telemetry.addData("Active point x", activePoint.x);
             chassis.telemetry.addData("Active point y", activePoint.y);
+            chassis.telemetry.addData("Active point actions", activePoint.autoActions.size());
+            chassis.telemetry.addData("Current auto Action", activePoint.autoActions.indexOf(activePoint.currentAutoAction));
             chassis.telemetry.addData("Active point heading", activePoint.heading);
-            chassis.telemetry.addData("Active point distance to current", activePoint.distanceTo(currentPoint));
-            chassis.telemetry.addData("Active point distance to next", activeDistanceToNext);
+            //chassis.telemetry.addData("Active point distance to current", activePoint.distanceTo(currentPoint));
+            //chassis.telemetry.addData("Active point distance to next", activeDistanceToNext);
             AutoPoint point = activePoint.tick();
+            chassis.telemetry.addData("Point", point);
             if (point == null) {
                 activePointRunning = false;
             }
@@ -80,21 +83,31 @@ public class AutoPath {
             chassis.telemetry.addData("Active point running", activePointRunning);
         }
         if (!activePointRunning) {
+            chassis.telemetry.addData("Active point distance to current", activePoint.distanceTo(currentPoint));
+            chassis.telemetry.addData("Active point distance to next", activeDistanceToNext);
             currentPoint = currentLine.getNextPoint(currentPoint, stepDistance);
             chassis.telemetry.addData("Slope", currentLine.slope);
             chassis.telemetry.addData("Step distance", stepDistance);
             chassis.telemetry.addData("Current point x", currentPoint.x);
             chassis.telemetry.addData("Current point y", currentPoint.y);
             if (
-                    autoPoints.indexOf(nextPoint) + 1 < autoPoints.size() &&
+                    autoPoints.indexOf(nextPoint) < autoPoints.size() &&
                     activePoint.distanceTo(currentPoint) > activeDistanceToNext
             ) {
+                nextPoint = autoPoints.get(autoPoints.indexOf(activePoint) + 1);
                 activePoint = nextPoint;
                 chassis.telemetry.addData("New active point", autoPoints.indexOf(activePoint));
                 chassis.telemetry.addData("Active point x", activePoint.x);
                 chassis.telemetry.addData("Active point y", activePoint.y);
-                nextPoint = autoPoints.get(autoPoints.indexOf(activePoint) + 1);
                 activeDistanceToNext = activePoint.distanceTo(nextPoint);
+            }
+            else {
+                chassis.fr.setPower(0);
+                chassis.fl.setPower(0);
+                if (!Chassis.TWO_WHEELED) {
+                    chassis.br.setPower(0);
+                    chassis.bl.setPower(0);
+                }
             }
         }
         prevTime = currentTime;
