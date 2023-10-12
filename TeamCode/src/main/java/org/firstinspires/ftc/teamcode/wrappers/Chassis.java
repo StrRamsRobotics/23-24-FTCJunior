@@ -16,6 +16,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 import org.firstinspires.ftc.teamcode.opmodes.auto.pipelines.AprilTagDetectionPipeline;
 import org.firstinspires.ftc.teamcode.opmodes.auto.pipelines.VisionPipeline;
+import org.firstinspires.ftc.teamcode.utils.helpers.LogHelper;
 import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
 
@@ -64,6 +65,7 @@ public class Chassis {
     public HardwareMap hardwareMap;
     public Telemetry telemetry;
     public FtcDashboard ftcDashboard = FtcDashboard.getInstance();
+    public LogHelper logHelper = new LogHelper(this);
 
     public Chassis(HardwareMap hardwareMap, Telemetry telemetry) {
         initializeUtils(hardwareMap, telemetry);

@@ -8,29 +8,28 @@ import org.openftc.easyopencv.OpenCvCameraRotation;
 
 public class VisionAction extends AutoAction {
     public VisionPipeline visionPipeline;
-    public int counter = 0;
     public boolean isCameraInitialized = false;
     public int route;
+    public boolean isBlue;
 
-    public VisionAction(Chassis chassis) {
+    public VisionAction(Chassis chassis, boolean isBlue) {
         super(chassis);
         route = -1;
-        active = true;
+        this.isBlue = isBlue;
     }
 
-    public VisionAction tick() {
-        chassis.telemetry.addData("Running", "VisionAction");
+    public void tick() {
+        chassis.logHelper.addData("Running", "VisionAction");
         if (!isCameraInitialized) {
             try {
-                visionPipeline = new VisionPipeline();
+                visionPipeline = new VisionPipeline(isBlue);
                 chassis.camera.setPipeline(visionPipeline);
                 chassis.camera.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener() {
                     @Override
                     public void onOpened() {
                         chassis.camera.startStreaming(VisionPipeline.IMAGE_WIDTH, VisionPipeline.IMAGE_HEIGHT, OpenCvCameraRotation.UPRIGHT);
-                        chassis.ftcDashboard.startCameraStream(chassis.camera, 15);
+                        chassis.ftcDashboard.startCameraStream(chassis.camera, 30);
                     }
-
                     @Override
                     public void onError(int errorCode) {
                     }
@@ -39,20 +38,17 @@ public class VisionAction extends AutoAction {
             isCameraInitialized = true;
         }
         route = visionPipeline.route;
-        chassis.telemetry.addData("COunter", counter++);
-        chassis.telemetry.addData("VisionAction Route", route);
-        if (visionPipeline.center != null) {
-            chassis.telemetry.addData("Center X", visionPipeline.center.x);
-
+        if (visionPipeline.maxArea != null) {
+            chassis.logHelper.addData("Max Area", visionPipeline.maxArea.value);
         }
+        if (visionPipeline.center != null) {
+            chassis.logHelper.addData("Center X", visionPipeline.center.x);
+        }
+        chassis.logHelper.addData("VisionAction Route", route);
         if (route != -1) {
             chassis.camera.closeCameraDeviceAsync(() -> {
             });
             active = false;
-            return null;
-        }
-        else {
-            return this;
         }
     }
 }

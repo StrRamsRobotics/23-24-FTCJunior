@@ -9,7 +9,9 @@ public abstract class AutoAction {
 
     public AutoAction (Chassis chassis) {
         this.chassis = chassis;
+        this.chassis.logHelper.addData("AutoAction Initialized", this.getClass().getSimpleName());
+        this.active = true;
     }
 
-    public abstract AutoAction tick();
+    public abstract void tick();
 }

@@ -16,22 +16,23 @@ public class ArmAction extends AutoAction {
         this.power = power;
         chassis.arm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         chassis.arm.setTargetPosition((int) (this.angle * Chassis.CORE_HEX_TICKS_PER_REV / 360.0));
-        active = true;
     }
 
-    public ArmAction tick() {
-        chassis.telemetry.addData("Running", "ArmAction");
-        chassis.telemetry.addData("Angle", angle);
+    public void tick() {
+        chassis.logHelper.addData("Running", "ArmAction");
+        chassis.logHelper.addData("Angle", angle);
+        chassis.logHelper.addData("Arm Position", chassis.arm.getCurrentPosition());
+        chassis.logHelper.addData("Arm Target", chassis.arm.getTargetPosition());
 
         chassis.arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         chassis.arm.setPower(this.power);
         if (chassis.arm.isBusy()) {
-            return this;
+            chassis.logHelper.addData("Arm Busy", true);
         } else {
+            chassis.logHelper.addData("Arm Busy", false);
             chassis.pivot.setPower(0);
             chassis.pivot.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
             active = false;
-            return null;
         }
     }
 }

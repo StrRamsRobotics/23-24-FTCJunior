@@ -21,15 +21,11 @@ import java.util.ArrayList;
 
 @Autonomous(name="leftBlueAuto")
 public class LeftBlueAuto extends BaseAuto {
-    VisionAction visionAction = null;
-    public ArrayList<AutoPoint> points = new ArrayList<>();
-    public AutoPath path;
 
     @Override
-    public void runSetup() {
+    public void runSetup(){}
 
-    }
-
+    @Override
     public void createPoints() {
         // based off of front of robot
         points.add(new AutoPoint(new Point(0, 2.5 * Game.TILE_SIZE), new ArrayList<>(), 90, true));
@@ -67,31 +63,25 @@ public class LeftBlueAuto extends BaseAuto {
                 break;
         }
         path = new AutoPath(chassis, points);
-        for (AutoPoint point : points) {
-            chassis.telemetry.addData("Point ", points.indexOf(point));
-            chassis.telemetry.addData("X ", point.x);
-            chassis.telemetry.addData("Y ", point.y);
-        }
-        chassis.telemetry.update();
     }
 
     @Override
     public void runLoop() {
         if (route == -1) {
             if (visionAction == null) {
-                visionAction = new VisionAction(chassis);
+                visionAction = new VisionAction(chassis, true);
             }
             visionAction.tick();
-            route = visionAction.route;
-            //chassis.telemetry.addData("Route", route);
-            chassis.telemetry.update();
+            if (!visionAction.active) {
+                route = visionAction.route;
+            }
+            chassis.logHelper.update();
         }
         else {
             if (points.size() == 0) {
                 createPoints();
             }
-            chassis.telemetry.addData("Route", route);
-            chassis.telemetry.addData("Center", visionAction.visionPipeline.center.x);
+            chassis.logHelper.addData("Route", route);
             path.tick();
         }
     }
