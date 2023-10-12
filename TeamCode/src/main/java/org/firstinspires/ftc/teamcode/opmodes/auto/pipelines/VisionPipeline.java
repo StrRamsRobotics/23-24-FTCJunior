@@ -1,7 +1,6 @@
 package org.firstinspires.ftc.teamcode.opmodes.auto.pipelines;
 
 import org.firstinspires.ftc.teamcode.utils.classes.IndexValue;
-import org.firstinspires.ftc.teamcode.wrappers.Chassis;
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfPoint;
@@ -53,7 +52,7 @@ public class VisionPipeline extends OpenCvPipeline {
 
     public Point center;
     public boolean isBlue;
-    public IndexValue maxArea = new IndexValue(0, 0);
+    public IndexValue maxAreaIV = new IndexValue(0, 0);
 
     public VisionPipeline(boolean isBlue) {
         super();
@@ -65,7 +64,8 @@ public class VisionPipeline extends OpenCvPipeline {
         Imgproc.cvtColor(input, input, Imgproc.COLOR_RGB2HSV);
         if (isBlue) {
             Core.inRange(input, lowerBlue, upperBlue, blue);
-            Core.bitwise_or(blue, mask, mask);
+            blue.copyTo(mask);
+            //Core.bitwise_or(blue, mask, mask);
         }
         else {
             Core.inRange(input, lowerRed, upperRed, red);
@@ -77,12 +77,12 @@ public class VisionPipeline extends OpenCvPipeline {
 
         Imgproc.findContours(mask, contours, hierarchy, Imgproc.RETR_TREE, Imgproc.CHAIN_APPROX_SIMPLE);
         if (contours.size() > 0){
-            maxArea = max(contours);
-            if (maxArea.value < MINIMUM_SIZE) {
-                route = -1;
-                return input;
-            }
-            Rect rect = Imgproc.boundingRect(contours.get(maxArea.index));
+            maxAreaIV = max(contours);
+            //if (maxAreaIV.value < MINIMUM_SIZE) {
+            //    route = -1;
+            //    return input;
+            //}
+            Rect rect = Imgproc.boundingRect(contours.get(maxAreaIV.index));
             center = new Point(rect.x + rect.width / 2.0, rect.y + rect.height / 2.0);
             Imgproc.rectangle(input, rect, new Scalar(255, 0, 0), 10);
             Imgproc.circle(input, center, 10, new Scalar(0, 0, 255), 10);

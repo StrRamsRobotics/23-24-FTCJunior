@@ -70,21 +70,25 @@ public class AutoPath {
             chassis.logHelper.addData("Active point x", activePoint.x);
             chassis.logHelper.addData("Active point y", activePoint.y);
             chassis.logHelper.addData("Active point heading", activePoint.heading);
+            chassis.logHelper.addData("Line heading", currentLine.getHeading());
             chassis.logHelper.addData("Active point distance to current", activePoint.distanceTo(currentPoint));
             chassis.logHelper.addData("Active point distance to next", activeDistanceToNext);
             activePoint.tick();
             chassis.logHelper.addData("Active point action index", activePoint.autoActions.indexOf(activePoint.currentAutoAction));
-            chassis.logHelper.addData("Active point action active", activePoint.currentAutoAction.active);
+            if (activePoint.currentAutoAction != null) {
+                chassis.logHelper.addData("Active point action active", activePoint.currentAutoAction.active);
+            }
             chassis.logHelper.addData("Active point active", activePoint.active);
             if (!activePoint.active) {
                 currentPoint = currentLine.getNextPoint(currentPoint, stepDistance);
-                double currentDistanceToNext = currentPoint.distanceTo(nextPoint);
+                double currentDistanceToNext = currentPoint.distanceTo(activePoint);
                 chassis.logHelper.addData("Slope", currentLine.slope);
                 chassis.logHelper.addData("Step distance", stepDistance);
                 chassis.logHelper.addData("Current point x", currentPoint.x);
                 chassis.logHelper.addData("Current point y", currentPoint.y);
                 chassis.logHelper.addData("Current point heading", currentPoint.heading);
                 if (currentDistanceToNext > activeDistanceToNext) {
+                    chassis.logHelper.addData("Next index", autoPoints.indexOf(nextPoint) + 1);
                     if (autoPoints.indexOf(nextPoint) + 1 < autoPoints.size()) {
                         activePoint = nextPoint;
                         nextPoint = autoPoints.get(autoPoints.indexOf(activePoint) + 1);
@@ -94,12 +98,24 @@ public class AutoPath {
                     }
                     else {
                         active = false;
+                        chassis.fr.setPower(0);
+                        chassis.fl.setPower(0);
+                        if (!Chassis.TWO_WHEELED) {
+                            chassis.br.setPower(0);
+                            chassis.bl.setPower(0);
+                        }
                     }
                 }
             }
         }
         else {
             active = false;
+            chassis.fr.setPower(0);
+            chassis.fl.setPower(0);
+            if (!Chassis.TWO_WHEELED) {
+                chassis.br.setPower(0);
+                chassis.bl.setPower(0);
+            }
         }
 
         prevTime = currentTime;

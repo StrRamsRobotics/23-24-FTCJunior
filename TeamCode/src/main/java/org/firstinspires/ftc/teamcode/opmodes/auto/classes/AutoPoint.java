@@ -84,5 +84,8 @@ public class AutoPoint extends Point {
                 }
             }
         }
+        else {
+            active = false;
+        }
     }
 }

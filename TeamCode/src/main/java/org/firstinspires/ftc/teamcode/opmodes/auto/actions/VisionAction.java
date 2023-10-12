@@ -38,8 +38,8 @@ public class VisionAction extends AutoAction {
             isCameraInitialized = true;
         }
         route = visionPipeline.route;
-        if (visionPipeline.maxArea != null) {
-            chassis.logHelper.addData("Max Area", visionPipeline.maxArea.value);
+        if (visionPipeline.maxAreaIV != null) {
+            chassis.logHelper.addData("Max Area", visionPipeline.maxAreaIV.value);
         }
         if (visionPipeline.center != null) {
             chassis.logHelper.addData("Center X", visionPipeline.center.x);

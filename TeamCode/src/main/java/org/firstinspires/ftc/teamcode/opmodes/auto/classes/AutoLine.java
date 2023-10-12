@@ -21,8 +21,10 @@ public class AutoLine {
     public double getAngle() {
         double heading1 = 0, heading2 = 0;
         if (point1.isReverse) heading1 = MathHelper.toHeading(point1.heading - 180);
-        if (point2.isReverse) heading2 = MathHelper.toHeading(point2.heading - 180);
-        return MathHelper.toHeading(heading2 - heading1);
+        else heading1 = point1.heading;
+        //if (point2.isReverse) heading2 = MathHelper.toHeading(point2.heading - 180);
+        //else heading2 = point2.heading;
+        return MathHelper.toHeading((point2.isReverse ? -getHeading() : getHeading()) - heading1);
     }
 
     public double getHeading() {
@@ -30,6 +32,9 @@ public class AutoLine {
     }
 
     public AutoPoint getNextPoint(AutoPoint point, double distance) {
+        if (slope == Double.POSITIVE_INFINITY || slope == Double.NEGATIVE_INFINITY) {
+            return new AutoPoint(new Point(point.x, point.y + distance), new ArrayList<>());
+        }
         double x = point.x + Math.sqrt(Math.pow(distance, 2) / (1 + Math.pow(slope, 2)));
         double y = slope * x + yIntercept;
         return new AutoPoint(new Point(x, y), new ArrayList<>());
