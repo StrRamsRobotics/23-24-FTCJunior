@@ -76,12 +76,9 @@ public class VisionPipeline extends OpenCvPipeline {
         contours.clear();
 
         Imgproc.findContours(mask, contours, hierarchy, Imgproc.RETR_TREE, Imgproc.CHAIN_APPROX_SIMPLE);
+        Imgproc.cvtColor(input, input, Imgproc.COLOR_HSV2RGB);
         if (contours.size() > 0){
             maxAreaIV = max(contours);
-            //if (maxAreaIV.value < MINIMUM_SIZE) {
-            //    route = -1;
-            //    return input;
-            //}
             Rect rect = Imgproc.boundingRect(contours.get(maxAreaIV.index));
             center = new Point(rect.x + rect.width / 2.0, rect.y + rect.height / 2.0);
             Imgproc.rectangle(input, rect, new Scalar(255, 0, 0), 10);
