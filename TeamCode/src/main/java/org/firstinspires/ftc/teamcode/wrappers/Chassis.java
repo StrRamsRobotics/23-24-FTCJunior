@@ -33,15 +33,15 @@ public class Chassis {
     public static String CAMERA_NAME = "camera";
 
     public static final boolean TANK_DRIVE = false;
-    public static final boolean TWO_WHEELED = false;
+    public static final boolean TWO_WHEELED = true;
     public static final boolean HAS_CHASSIS_ENCODERS = false;
 
     public static final boolean HAS_ARM = false;
     public static final boolean HAS_PIVOT = false;
-    public static final boolean HAS_ROLLER = false;
-    public static final boolean HAS_FLAP = false;
+    public static final boolean HAS_ROLLER = true;
+    public static final boolean HAS_FLAP = true;
 
-    public static final double MOVE_POWER = 1;
+    public static final double MOVE_POWER = 0.75;
     public static final double ARM_POWER = 1;
     public static final double PIVOT_POWER = 1;
     public static final double ROLLER_POWER = 1;
