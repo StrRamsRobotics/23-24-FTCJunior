@@ -8,7 +8,6 @@ import org.openftc.easyopencv.OpenCvCameraRotation;
 
 public class VisionAction extends AutoAction {
     public VisionPipeline visionPipeline;
-    public boolean isCameraInitialized = false;
     public int route;
     public boolean isBlue;
 
@@ -20,7 +19,7 @@ public class VisionAction extends AutoAction {
 
     public void tick() {
         chassis.logHelper.addData("Running", "VisionAction");
-        if (!isCameraInitialized) {
+        if (!isInitialized) {
             try {
                 visionPipeline = new VisionPipeline(isBlue);
                 chassis.camera.setPipeline(visionPipeline);
@@ -35,7 +34,7 @@ public class VisionAction extends AutoAction {
                     }
                 });
             } catch (Exception e) {}
-            isCameraInitialized = true;
+            isInitialized = true;
         }
         route = visionPipeline.route;
         if (visionPipeline.maxAreaIV != null) {

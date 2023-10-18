@@ -9,22 +9,20 @@ import org.firstinspires.ftc.teamcode.wrappers.Chassis;
 public class ArmAction extends AutoAction {
     public double angle;
     public double power;
-    public boolean isArmInitialized = false;
 
     public ArmAction(Chassis chassis, double power, double angle) {
         super(chassis);
         this.angle = MathHelper.clamp(angle, 0, 120);
         this.power = power;
         chassis.arm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        isArmInitialized = false;
     }
 
     public void tick() {
-        if (!isArmInitialized) {
-            chassis.arm.setTargetPosition(-(int) (this.angle * Chassis.CORE_HEX_TICKS_PER_REV / 360.0));
-            isArmInitialized = true;
-        }
         chassis.logHelper.addData("Running", "ArmAction");
+        if (!this.isInitialized) {
+            chassis.arm.setTargetPosition(-(int) (this.angle * Chassis.CORE_HEX_TICKS_PER_REV / 360.0));
+            this.isInitialized = true;
+        }
         chassis.logHelper.addData("Angle", angle);
         chassis.logHelper.addData("Arm Position", chassis.arm.getCurrentPosition());
         chassis.logHelper.addData("Arm Target", chassis.arm.getTargetPosition());

@@ -24,11 +24,14 @@ public class MoveAction extends AutoAction {
 
     public void tick() {
         chassis.logHelper.addData("Running", "MoveAction");
-        chassis.fr.setPower(power);
-        chassis.fl.setPower(power);
-        if (!Chassis.TWO_WHEELED) {
-            chassis.br.setPower(power);
-            chassis.bl.setPower(power);
+        if (!isInitialized) {
+            chassis.fr.setPower(power);
+            chassis.fl.setPower(power);
+            if (!Chassis.TWO_WHEELED) {
+                chassis.br.setPower(power);
+                chassis.bl.setPower(power);
+            }
+            isInitialized = true;
         }
         active = false;
     }

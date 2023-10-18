@@ -20,9 +20,13 @@ public class PivotAction extends AutoAction {
 
     public void tick() {
         chassis.logHelper.addData("Running", "PivotAction");
-        chassis.logHelper.addData("Angle", angle);
-        chassis.pivot.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        chassis.pivot.setPower(this.power);
+        if (!isInitialized) {
+            chassis.pivot.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            chassis.pivot.setPower(this.power);
+            isInitialized = true;
+        }
+        chassis.logHelper.addData("Angle", this.angle);
+        chassis.logHelper.addData("Target Position", chassis.pivot.getTargetPosition());
         if (chassis.pivot.isBusy()) {
         } else {
             chassis.pivot.setPower(0);

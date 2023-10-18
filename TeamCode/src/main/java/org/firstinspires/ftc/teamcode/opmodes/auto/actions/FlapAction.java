@@ -13,8 +13,12 @@ public class FlapAction extends AutoAction {
 
     public void tick() {
         chassis.logHelper.addData("Running", "FlapAction");
+        chassis.logHelper.addData("Direction", chassis.flap.getDirection());
         chassis.logHelper.addData("Position", position);
-        chassis.flap.setPosition(position);
+        if (!this.isInitialized) {
+            chassis.flap.setPosition(position);
+            isInitialized = true;
+        }
         active = false;
     }
 }

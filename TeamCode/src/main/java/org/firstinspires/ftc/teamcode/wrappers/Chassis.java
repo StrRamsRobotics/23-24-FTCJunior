@@ -44,18 +44,13 @@ public class Chassis {
     public static final double MOVE_POWER = 0.75;
     public static final double ARM_POWER = 1;
     public static final double PIVOT_POWER = 1;
-    public static final double ROLLER_POWER = 1;
+    public static final double ROLLER_POWER = 0.5;
 
     public static final int ROBOT_WIDTH = 18; // inches
     public static final int ROBOT_LENGTH = 18; // inches
     public static final double MOVE_DISTANCE_PER_SECOND = 24 * MOVE_POWER; // inches
     public static final int CORE_HEX_TICKS_PER_REV = 288;
     public static final int ROLLER_RADIUS = 2; // inches
-
-    @Deprecated
-    public static final double POWER_DISTANCE_MULTIPLIER = 2.0;
-    @Deprecated
-    public static final double POWER_ANGLE_MULTIPLIER = 2.0;
 
     public DcMotorEx fr, fl, br, bl;
     public DcMotorEx arm, pivot, roller;

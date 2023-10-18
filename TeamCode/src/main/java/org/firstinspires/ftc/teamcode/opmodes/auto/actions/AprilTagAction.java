@@ -38,7 +38,6 @@ public class AprilTagAction extends AutoAction {
 
     public int team = 0;
     public int route = 0;
-    public boolean cameraInitialized = false;
 
     public AprilTagAction(Chassis chassis, int team, int route) {
         super(chassis);
@@ -47,7 +46,7 @@ public class AprilTagAction extends AutoAction {
     }
 
     public void tick() {
-        if (!cameraInitialized) {
+        if (!this.isInitialized) {
             int cameraMonitorViewId = chassis.hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", chassis.hardwareMap.appContext.getPackageName());
             aprilTagDetectionPipeline = new AprilTagDetectionPipeline(TAGSIZE, FX, FY, CX, CY);
 
@@ -63,7 +62,7 @@ public class AprilTagAction extends AutoAction {
 
                 }
             });
-            cameraInitialized = true;
+            this.isInitialized = true;
         }
         ArrayList<AprilTagDetection> detections = aprilTagDetectionPipeline.getDetectionsUpdate();
 
@@ -93,6 +92,9 @@ public class AprilTagAction extends AutoAction {
                             detection.id == CENTER_RED_ID && route == 1 && team == Game.RED_TEAM ||
                             detection.id == RIGHT_RED_ID && route == 2 && team == Game.RED_TEAM
                     ) {
+                        chassis.logHelper.addData("AprilTag Pose X", detection.pose.x);
+                        chassis.logHelper.addData("AprilTag Pose Y", detection.pose.y);
+                        chassis.logHelper.addData("AprilTag Pose Z", detection.pose.z);
                         if (detection.pose.x >= 10) {
                             chassis.logHelper.addData("AprilTag Action", "Turn Left");
                             chassis.fr.setPower(Chassis.MOVE_POWER);

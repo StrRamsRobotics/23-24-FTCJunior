@@ -10,7 +10,6 @@ public class TurnAction extends AutoAction {
     public double angle;
     public double arcLength;
     public long startTime;
-    public boolean started = false;
 
     public TurnAction(Chassis chassis, double power, AutoLine line) {
         super(chassis);
@@ -28,9 +27,9 @@ public class TurnAction extends AutoAction {
     }
 
     public void tick() {
-        if (!started) {
+        if (!this.isInitialized) {
             this.startTime = System.currentTimeMillis();
-            started = true;
+            this.isInitialized = true;
         }
         chassis.logHelper.addData("Running", "TurnAction");
         long currentTime = System.currentTimeMillis();

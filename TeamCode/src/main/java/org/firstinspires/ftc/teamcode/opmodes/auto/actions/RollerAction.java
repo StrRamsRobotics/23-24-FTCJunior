@@ -14,7 +14,10 @@ public class RollerAction extends AutoAction {
     public void tick() {
         chassis.logHelper.addData("Running", "RollerAction");
         chassis.logHelper.addData("Power", power);
-        chassis.roller.setPower(power);
+        if (!isInitialized) {
+            chassis.roller.setPower(power);
+            isInitialized = true;
+        }
         active = false;
     }
 }
