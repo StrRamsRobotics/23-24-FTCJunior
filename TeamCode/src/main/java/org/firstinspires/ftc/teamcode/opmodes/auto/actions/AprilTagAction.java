@@ -19,6 +19,7 @@ public class AprilTagAction extends AutoAction {
     public static final double FY = 781;
     public static final double CX = 800;
     public static final double CY = 600;
+    public static final double DETECTION_X = 0.05;
 
     public static final double TAGSIZE = 0.166;
 
@@ -38,6 +39,7 @@ public class AprilTagAction extends AutoAction {
 
     public int team = 0;
     public int route = 0;
+    public int counter = 0;
 
     public AprilTagAction(Chassis chassis, int team, int route) {
         super(chassis);
@@ -65,7 +67,8 @@ public class AprilTagAction extends AutoAction {
             this.isInitialized = true;
         }
         ArrayList<AprilTagDetection> detections = aprilTagDetectionPipeline.getDetectionsUpdate();
-
+        counter++;
+        chassis.logHelper.addData("Counter", counter);
         if(detections != null) {
             if(detections.size() == 0) {
                 chassis.logHelper.addData("AprilTag Action", "No AprilTag Detected");
@@ -92,20 +95,21 @@ public class AprilTagAction extends AutoAction {
                             detection.id == CENTER_RED_ID && route == 1 && team == Game.RED_TEAM ||
                             detection.id == RIGHT_RED_ID && route == 2 && team == Game.RED_TEAM
                     ) {
-                        chassis.logHelper.addData("AprilTag Pose X", detection.pose.x);
-                        chassis.logHelper.addData("AprilTag Pose Y", detection.pose.y);
-                        chassis.logHelper.addData("AprilTag Pose Z", detection.pose.z);
-                        if (detection.pose.x >= 10) {
+                        if (detection.pose.x >= DETECTION_X) {
                             chassis.logHelper.addData("AprilTag Action", "Turn Left");
                             chassis.fr.setPower(Chassis.MOVE_POWER);
+                            chassis.fl.setPower(0);
                             if (!Chassis.TWO_WHEELED) {
                                 chassis.br.setPower(Chassis.MOVE_POWER);
+                                chassis.bl.setPower(0);
                             }
-                        } else if (detection.pose.x <= -10) {
+                        } else if (detection.pose.x <= -DETECTION_X) {
                             chassis.logHelper.addData("AprilTag Action", "Turn Right");
                             chassis.fl.setPower(Chassis.MOVE_POWER);
+                            chassis.fr.setPower(0);
                             if (!Chassis.TWO_WHEELED) {
                                 chassis.bl.setPower(Chassis.MOVE_POWER);
+                                chassis.br.setPower(0);
                             }
                         } else {
                             chassis.logHelper.addData("AprilTag Action", "AprilTag Centered");

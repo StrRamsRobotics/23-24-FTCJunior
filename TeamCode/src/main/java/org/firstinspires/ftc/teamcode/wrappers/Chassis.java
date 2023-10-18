@@ -33,12 +33,12 @@ public class Chassis {
     public static String CAMERA_NAME = "camera";
 
     public static final boolean TANK_DRIVE = false;
-    public static final boolean TWO_WHEELED = true;
+    public static final boolean TWO_WHEELED = false;
     public static final boolean HAS_CHASSIS_ENCODERS = false;
 
     public static final boolean HAS_ARM = false;
     public static final boolean HAS_PIVOT = false;
-    public static final boolean HAS_ROLLER = true;
+    public static final boolean HAS_ROLLER = false;
     public static final boolean HAS_FLAP = true;
 
     public static final double MOVE_POWER = 0.75;
@@ -93,22 +93,28 @@ public class Chassis {
             br = hardwareMap.get(DcMotorEx.class, BR_NAME);
             bl = hardwareMap.get(DcMotorEx.class, BL_NAME);
         }
-        fr.setDirection(DcMotorSimple.Direction.REVERSE);
+        fr.setDirection(DcMotorEx.Direction.REVERSE);
+        fl.setDirection(DcMotorEx.Direction.FORWARD);
         if (!TWO_WHEELED) {
-            br.setDirection(DcMotorSimple.Direction.REVERSE);
+            br.setDirection(DcMotorEx.Direction.REVERSE);
+            bl.setDirection(DcMotorEx.Direction.FORWARD);
         }
 
         if (HAS_ARM) {
             arm = hardwareMap.get(DcMotorEx.class, ARM_NAME);
+            arm.setDirection(DcMotorEx.Direction.FORWARD);
         }
         if (HAS_PIVOT) {
             pivot = hardwareMap.get(DcMotorEx.class, PIVOT_NAME);
+            pivot.setDirection(DcMotorEx.Direction.FORWARD);
         }
         if (HAS_ROLLER) {
             roller = hardwareMap.get(DcMotorEx.class, ROLLER_NAME);
+            roller.setDirection(DcMotorEx.Direction.FORWARD);
         }
         if (HAS_FLAP) {
             flap = hardwareMap.get(Servo.class, FLAP_NAME);
+            flap.setDirection(Servo.Direction.FORWARD);
         }
 
         if (HAS_CHASSIS_ENCODERS) {

@@ -20,7 +20,7 @@ public class ArmAction extends AutoAction {
     public void tick() {
         chassis.logHelper.addData("Running", "ArmAction");
         if (!this.isInitialized) {
-            chassis.arm.setTargetPosition(-(int) (this.angle * Chassis.CORE_HEX_TICKS_PER_REV / 360.0));
+            chassis.arm.setTargetPosition((int) (this.angle * Chassis.CORE_HEX_TICKS_PER_REV / 360.0));
             this.isInitialized = true;
         }
         chassis.logHelper.addData("Angle", angle);
