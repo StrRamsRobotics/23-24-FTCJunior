@@ -88,15 +88,13 @@ public class Chassis {
 
     public void initializeMotors() {
         fr = hardwareMap.get(DcMotorEx.class, FR_NAME);
-        fl = hardwareMap.get(DcMotorEx.class, FL_NAME);
-        if (!TWO_WHEELED) {
-            br = hardwareMap.get(DcMotorEx.class, BR_NAME);
-            bl = hardwareMap.get(DcMotorEx.class, BL_NAME);
-        }
         fr.setDirection(DcMotorEx.Direction.REVERSE);
+        fl = hardwareMap.get(DcMotorEx.class, FL_NAME);
         fl.setDirection(DcMotorEx.Direction.FORWARD);
         if (!TWO_WHEELED) {
+            br = hardwareMap.get(DcMotorEx.class, BR_NAME);
             br.setDirection(DcMotorEx.Direction.REVERSE);
+            bl = hardwareMap.get(DcMotorEx.class, BL_NAME);
             bl.setDirection(DcMotorEx.Direction.FORWARD);
         }
 
