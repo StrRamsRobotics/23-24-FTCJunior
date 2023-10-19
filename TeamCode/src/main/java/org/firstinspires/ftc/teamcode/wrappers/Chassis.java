@@ -36,18 +36,18 @@ public class Chassis {
     public static final boolean TWO_WHEELED = false;
     public static final boolean HAS_CHASSIS_ENCODERS = false;
 
-    public static final boolean HAS_ARM = false;
+    public static final boolean HAS_ARM = true;
     public static final boolean HAS_PIVOT = false;
-    public static final boolean HAS_ROLLER = false;
+    public static final boolean HAS_ROLLER = true;
     public static final boolean HAS_FLAP = true;
 
-    public static final double MOVE_POWER = 0.75;
+    public static final double MOVE_POWER = 1;
     public static final double ARM_POWER = 1;
     public static final double PIVOT_POWER = 1;
-    public static final double ROLLER_POWER = 0.5;
+    public static final double ROLLER_POWER = 1;
 
     public static final int ROBOT_WIDTH = 18; // inches
-    public static final int ROBOT_LENGTH = 18; // inches
+    public static final int ROBOT_LENGTH = 18; // inchjes <- written by trent lol
     public static final double MOVE_DISTANCE_PER_SECOND = 24 * MOVE_POWER; // inches
     public static final int CORE_HEX_TICKS_PER_REV = 288;
     public static final int ROLLER_RADIUS = 2; // inches
@@ -88,14 +88,17 @@ public class Chassis {
 
     public void initializeMotors() {
         fr = hardwareMap.get(DcMotorEx.class, FR_NAME);
-        fr.setDirection(DcMotorEx.Direction.REVERSE);
+//        fr.setDirection(DcMotorEx.Direction.REVERSE);
+        fr.setDirection(DcMotorEx.Direction.FORWARD); // this is correct
         fl = hardwareMap.get(DcMotorEx.class, FL_NAME);
-        fl.setDirection(DcMotorEx.Direction.FORWARD);
+        fl.setDirection(DcMotorEx.Direction.FORWARD); // this is correct
         if (!TWO_WHEELED) {
             br = hardwareMap.get(DcMotorEx.class, BR_NAME);
-            br.setDirection(DcMotorEx.Direction.REVERSE);
+//            br.setDirection(DcMotorEx.Direction.REVERSE);
+            br.setDirection(DcMotorEx.Direction.FORWARD); // this is correct
             bl = hardwareMap.get(DcMotorEx.class, BL_NAME);
-            bl.setDirection(DcMotorEx.Direction.FORWARD);
+//            bl.setDirection(DcMotorEx.Direction.FORWARD);
+            bl.setDirection(DcMotorEx.Direction.REVERSE); // this is correct
         }
 
         if (HAS_ARM) {

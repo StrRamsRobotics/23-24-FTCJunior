@@ -13,7 +13,8 @@ public class TurnAction extends AutoAction {
 
     public TurnAction(Chassis chassis, double power, AutoLine line) {
         super(chassis);
-        this.power = power * Math.signum(line.getAngle());
+//        this.power = power * Math.signum(line.getAngle());
+        this.power = power;
         this.angle = Math.abs(line.getAngle());
         this.arcLength = Math.toRadians(angle) * Chassis.ROBOT_WIDTH / 2;
         this.startTime = System.currentTimeMillis();
@@ -44,6 +45,10 @@ public class TurnAction extends AutoAction {
                 chassis.br.setPower(power);
                 chassis.bl.setPower(-power);
             }
+            chassis.logHelper.addData("Power FR", power);
+            chassis.logHelper.addData("Power FL", -power);
+            chassis.logHelper.addData("Power BR", power);
+            chassis.logHelper.addData("Power BL", -power);
         } else {
             chassis.fr.setPower(0);
             chassis.fl.setPower(0);
