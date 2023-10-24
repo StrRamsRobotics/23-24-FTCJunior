@@ -35,7 +35,11 @@ public class RightBlueAuto extends BaseAuto {
         yellowActions.add(new AprilTagAction(chassis, Game.BLUE_TEAM, route));
         if (Chassis.HAS_ARM) yellowActions.add(new ArmAction(chassis, Chassis.ARM_POWER, 120));
         if (Chassis.HAS_FLAP) yellowActions.add(new FlapAction(chassis, 1));
-        yellowActions.add(new WaitAction(chassis, 1000));
+        yellowActions.add(new WaitAction(chassis, 500));
+        if (Chassis.HAS_FLAP) yellowActions.add(new FlapAction(chassis, 0));
+        yellowActions.add(new WaitAction(chassis, 500));
+        if (Chassis.HAS_FLAP) yellowActions.add(new FlapAction(chassis, -1));
+        yellowActions.add(new WaitAction(chassis, 500));
         if (Chassis.HAS_FLAP) yellowActions.add(new FlapAction(chassis, 0));
         if (Chassis.HAS_ARM) yellowActions.add(new ArmAction(chassis, Chassis.ARM_POWER, -120));
         switch(route) {

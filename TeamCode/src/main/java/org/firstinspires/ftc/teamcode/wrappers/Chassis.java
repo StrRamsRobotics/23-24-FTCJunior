@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.wrappers;
 import com.acmerobotics.dashboard.FtcDashboard;
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
+import com.qualcomm.robotcore.hardware.CRServoImplEx;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
@@ -33,7 +34,7 @@ public class Chassis {
     public static String CAMERA_NAME = "camera";
 
     public static final boolean TANK_DRIVE = false;
-    public static final boolean TWO_WHEELED = false;
+    public static final boolean TWO_WHEELED = true;
     public static final boolean HAS_CHASSIS_ENCODERS = false;
 
     public static final boolean HAS_ARM = true;
@@ -48,13 +49,14 @@ public class Chassis {
 
     public static final int ROBOT_WIDTH = 18; // inches
     public static final int ROBOT_LENGTH = 18; // inchjes <- written by trent lol
-    public static final double MOVE_DISTANCE_PER_SECOND = 24 * MOVE_POWER; // inches
+    public static final double MOVE_DISTANCE_PER_SECOND = 30 * MOVE_POWER; // inches
     public static final int CORE_HEX_TICKS_PER_REV = 288;
     public static final int ROLLER_RADIUS = 2; // inches
 
     public DcMotorEx fr, fl, br, bl;
     public DcMotorEx arm, pivot, roller;
-    public Servo flap;
+//    public Servo flap;
+    public CRServoImplEx flap;
     public BNO055IMU imu;
     public OpenCvCamera camera;
     public HardwareMap hardwareMap;
@@ -114,8 +116,11 @@ public class Chassis {
             roller.setDirection(DcMotorEx.Direction.FORWARD);
         }
         if (HAS_FLAP) {
-            flap = hardwareMap.get(Servo.class, FLAP_NAME);
-            flap.setDirection(Servo.Direction.FORWARD);
+//            flap = hardwareMap.get(Servo.class, FLAP_NAME);
+//            flap.setDirection(Servo.Direction.FORWARD);
+            flap = hardwareMap.get(CRServoImplEx.class, FLAP_NAME);
+            flap.setDirection(CRServoImplEx.Direction.FORWARD);
+            flap.setPwmEnable();
         }
 
         if (HAS_CHASSIS_ENCODERS) {
