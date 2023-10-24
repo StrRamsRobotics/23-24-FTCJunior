@@ -42,6 +42,8 @@ public class Chassis {
     public static final boolean HAS_ROLLER = true;
     public static final boolean HAS_FLAP = true;
 
+    public static final boolean IS_FLAP_CR = false;
+
     public static final double MOVE_POWER = 1;
     public static final double ARM_POWER = 1;
     public static final double PIVOT_POWER = 1;
@@ -55,8 +57,8 @@ public class Chassis {
 
     public DcMotorEx fr, fl, br, bl;
     public DcMotorEx arm, pivot, roller;
-//    public Servo flap;
-    public CRServoImplEx flap;
+    public Servo flap;
+    public CRServoImplEx flapCR;
     public BNO055IMU imu;
     public OpenCvCamera camera;
     public HardwareMap hardwareMap;
@@ -116,11 +118,15 @@ public class Chassis {
             roller.setDirection(DcMotorEx.Direction.FORWARD);
         }
         if (HAS_FLAP) {
-//            flap = hardwareMap.get(Servo.class, FLAP_NAME);
-//            flap.setDirection(Servo.Direction.FORWARD);
-            flap = hardwareMap.get(CRServoImplEx.class, FLAP_NAME);
-            flap.setDirection(CRServoImplEx.Direction.FORWARD);
-            flap.setPwmEnable();
+            if (IS_FLAP_CR) {
+                flapCR = hardwareMap.get(CRServoImplEx.class, FLAP_NAME);
+                flapCR.setDirection(CRServoImplEx.Direction.FORWARD);
+                flapCR.setPwmEnable();
+            }
+            else {
+                flap = hardwareMap.get(Servo.class, FLAP_NAME);
+                flap.setDirection(Servo.Direction.FORWARD);
+            }
         }
 
         if (HAS_CHASSIS_ENCODERS) {

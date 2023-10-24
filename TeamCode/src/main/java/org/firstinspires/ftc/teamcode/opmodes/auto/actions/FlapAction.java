@@ -4,30 +4,26 @@ import org.firstinspires.ftc.teamcode.opmodes.auto.classes.AutoAction;
 import org.firstinspires.ftc.teamcode.wrappers.Chassis;
 
 public class FlapAction extends AutoAction {
-//    public double position;
+    public double p;
 
-    public double power;
-//    public FlapAction(Chassis chassis, double position) {
-//        super(chassis);
-//        this.position = position;
-//    }
-
-    public FlapAction(Chassis chassis, double power) {
+    public FlapAction(Chassis chassis, double p) {
         super(chassis);
-        this.power = power;
+        this.p = p;
     }
 
     public void tick() {
         chassis.logHelper.addData("Running", "FlapAction");
         chassis.logHelper.addData("Direction", chassis.flap.getDirection());
-//        chassis.logHelper.addData("Position", position);
+        chassis.logHelper.addData("P", p);
         if (!this.isInitialized) {
-            chassis.logHelper.addData("Initializing", "FlapAction");
-//            chassis.flap.setPosition(position);
-            chassis.flap.setPower(power);
+            if (Chassis.IS_FLAP_CR) {
+                chassis.flapCR.setPower(p);
+            }
+            else {
+                chassis.flap.setPosition(p);
+            }
             isInitialized = true;
         }
-        chassis.flap.setPower(power);
         active = false;
     }
 }
