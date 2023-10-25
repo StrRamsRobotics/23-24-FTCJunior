@@ -13,7 +13,12 @@ public class FlapAction extends AutoAction {
 
     public void tick() {
         chassis.logHelper.addData("Running", "FlapAction");
-        chassis.logHelper.addData("Direction", chassis.flap.getDirection());
+        if (Chassis.IS_FLAP_CR) {
+            chassis.logHelper.addData("Direction", chassis.flapCR.getDirection());
+        }
+        else {
+            chassis.logHelper.addData("Direction", chassis.flap.getDirection());
+        }
         chassis.logHelper.addData("P", p);
         if (!this.isInitialized) {
             if (Chassis.IS_FLAP_CR) {
@@ -24,6 +29,6 @@ public class FlapAction extends AutoAction {
             }
             isInitialized = true;
         }
-        active = false;
+//        active = false;
     }
 }
