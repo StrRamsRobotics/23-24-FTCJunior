@@ -55,6 +55,9 @@ public class Chassis {
     public static final int CORE_HEX_TICKS_PER_REV = 288;
     public static final int ROLLER_RADIUS = 2; // inches
 
+    public static final int ARM_STRAIGHT_DEGREES = 120;
+    public static final int ARM_TURN_DEGREES = 15;
+
     public DcMotorEx fr, fl, br, bl;
     public DcMotorEx arm, pivot, roller;
     public Servo flap;

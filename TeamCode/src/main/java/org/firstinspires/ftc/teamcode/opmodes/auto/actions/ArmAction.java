@@ -12,7 +12,7 @@ public class ArmAction extends AutoAction {
 
     public ArmAction(Chassis chassis, double power, double angle) {
         super(chassis);
-        this.angle = MathHelper.clamp(angle, 0, 120);
+        this.angle = MathHelper.clamp(angle, 0, Chassis.ARM_STRAIGHT_DEGREES + Chassis.ARM_TURN_DEGREES);
         this.power = power;
         chassis.arm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
     }

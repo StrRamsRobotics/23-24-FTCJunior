@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.opmodes.auto.sides;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
+import org.firstinspires.ftc.teamcode.opmodes.auto.actions.PivotAction;
 import org.firstinspires.ftc.teamcode.opmodes.auto.actions.VisionAction;
 import org.firstinspires.ftc.teamcode.opmodes.auto.classes.AutoAction;
 import org.firstinspires.ftc.teamcode.opmodes.auto.classes.AutoPath;
@@ -35,7 +36,8 @@ public class LeftBlueAuto extends BaseAuto {
         ArrayList<AutoAction> purpleActions = new ArrayList<>();
         ArrayList<AutoAction> yellowActions = new ArrayList<>();
         yellowActions.add(new AprilTagAction(chassis, Game.BLUE_TEAM, route));
-        if (Chassis.HAS_ARM) yellowActions.add(new ArmAction(chassis, Chassis.ARM_POWER, 120));
+        if (Chassis.HAS_ARM) yellowActions.add(new ArmAction(chassis, Chassis.ARM_POWER, Chassis.ARM_STRAIGHT_DEGREES));
+        if (Chassis.HAS_PIVOT) yellowActions.add(new PivotAction(chassis, Chassis.PIVOT_POWER, Chassis.ARM_TURN_DEGREES));
         if (Chassis.HAS_FLAP) {
             if (Chassis.IS_FLAP_CR) {
                 yellowActions.add(new FlapAction(chassis, 1));
@@ -51,7 +53,8 @@ public class LeftBlueAuto extends BaseAuto {
                 yellowActions.add(new FlapAction(chassis, 0));
             }
         }
-        if (Chassis.HAS_ARM) yellowActions.add(new ArmAction(chassis, Chassis.ARM_POWER, -120));
+        if (Chassis.HAS_ARM) yellowActions.add(new ArmAction(chassis, Chassis.ARM_POWER, 0));
+        if (Chassis.HAS_PIVOT) yellowActions.add(new PivotAction(chassis, Chassis.PIVOT_POWER, 0));
 
         switch(route) {
             case 0:
