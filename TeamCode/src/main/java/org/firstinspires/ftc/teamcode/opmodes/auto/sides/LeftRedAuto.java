@@ -52,9 +52,9 @@ public class LeftRedAuto extends BaseAuto {
                 yellowActions.add(new FlapAction(chassis, 0));
             }
         }
-        if (Chassis.HAS_ARM) yellowActions.add(new ArmAction(chassis, -Chassis.ARM_POWER, -Chassis.ARM_STRAIGHT_DEGREES));
-        if (Chassis.HAS_PIVOT) yellowActions.add(new PivotAction(chassis, -Chassis.PIVOT_POWER, -Chassis.ARM_TURN_DEGREES));
-        if (Chassis.HAS_ARM) yellowActions.add(new ArmAction(chassis, -Chassis.ARM_POWER, -Chassis.ARM_TURN_DEGREES));
+        if (Chassis.HAS_ARM) yellowActions.add(new ArmAction(chassis, -Chassis.ARM_POWER, Chassis.ARM_STRAIGHT_DEGREES));
+        if (Chassis.HAS_PIVOT) yellowActions.add(new PivotAction(chassis, -Chassis.PIVOT_POWER, Chassis.ARM_TURN_DEGREES));
+        if (Chassis.HAS_ARM) yellowActions.add(new ArmAction(chassis, -Chassis.ARM_POWER, Chassis.ARM_TURN_DEGREES));
 
         switch(route) {
             case 0:

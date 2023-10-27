@@ -97,9 +97,9 @@ public class Teleop extends BaseTeleop {
                     armActions.add(new FlapAction(chassis, 0));
                 }
             }
-            if (Chassis.HAS_ARM) armActions.add(new ArmAction(chassis, -Chassis.ARM_POWER, -Chassis.ARM_STRAIGHT_DEGREES));
-            if (Chassis.HAS_PIVOT) armActions.add(new PivotAction(chassis, -Chassis.PIVOT_POWER, -Chassis.ARM_TURN_DEGREES));
-            if (Chassis.HAS_ARM) armActions.add(new ArmAction(chassis, -Chassis.ARM_POWER, -Chassis.ARM_TURN_DEGREES));
+            if (Chassis.HAS_ARM) armActions.add(new ArmAction(chassis, -Chassis.ARM_POWER, Chassis.ARM_STRAIGHT_DEGREES));
+            if (Chassis.HAS_PIVOT) armActions.add(new PivotAction(chassis, -Chassis.PIVOT_POWER, Chassis.ARM_TURN_DEGREES));
+            if (Chassis.HAS_ARM) armActions.add(new ArmAction(chassis, -Chassis.ARM_POWER, Chassis.ARM_TURN_DEGREES));
             armPoints.add(new AutoPoint(new Point(0, 0), armActions));
             path = new AutoPath(chassis, armPoints);
         }
