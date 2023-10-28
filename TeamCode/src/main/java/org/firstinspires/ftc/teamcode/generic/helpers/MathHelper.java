@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.utils.helpers;
+package org.firstinspires.ftc.teamcode.generic.helpers;
 
 public class MathHelper {
     public static double clamp(double value, double min, double max) {

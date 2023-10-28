@@ -13,8 +13,9 @@ import org.firstinspires.ftc.teamcode.opmodes.auto.actions.FlapAction;
 import org.firstinspires.ftc.teamcode.opmodes.auto.actions.RollerAction;
 import org.firstinspires.ftc.teamcode.opmodes.auto.actions.TurnAction;
 import org.firstinspires.ftc.teamcode.opmodes.auto.actions.WaitAction;
+import org.firstinspires.ftc.teamcode.opmodes.auto.helpers.AutoPathHelper;
 import org.firstinspires.ftc.teamcode.opmodes.base.BaseAuto;
-import org.firstinspires.ftc.teamcode.utils.classes.Point;
+import org.firstinspires.ftc.teamcode.generic.classes.Point;
 import org.firstinspires.ftc.teamcode.wrappers.Chassis;
 import org.firstinspires.ftc.teamcode.wrappers.Game;
 
@@ -34,36 +35,15 @@ public class RightBlueAuto extends BaseAuto {
         ArrayList<AutoAction> purpleActions = new ArrayList<>();
         ArrayList<AutoAction> yellowActions = new ArrayList<>();
         yellowActions.add(new AprilTagAction(chassis, Game.BLUE_TEAM, route));
-        if (Chassis.HAS_ARM) yellowActions.add(new ArmAction(chassis, Chassis.ARM_POWER, Chassis.ARM_TURN_DEGREES));
-        if (Chassis.HAS_PIVOT) yellowActions.add(new PivotAction(chassis, Chassis.PIVOT_POWER, Chassis.ARM_TURN_DEGREES));
-        if (Chassis.HAS_ARM) yellowActions.add(new ArmAction(chassis, Chassis.ARM_POWER, Chassis.ARM_STRAIGHT_DEGREES));
-        if (Chassis.HAS_FLAP) {
-            if (Chassis.IS_FLAP_CR) {
-                yellowActions.add(new FlapAction(chassis, 1));
-                yellowActions.add(new WaitAction(chassis, 500));
-                yellowActions.add(new FlapAction(chassis, 0));
-                yellowActions.add(new WaitAction(chassis, 1000));
-                yellowActions.add(new FlapAction(chassis, -1));
-                yellowActions.add(new WaitAction(chassis, 500));
-                yellowActions.add(new FlapAction(chassis, 0));
-            } else {
-                yellowActions.add(new FlapAction(chassis, 1));
-                yellowActions.add(new WaitAction(chassis, 1000));
-                yellowActions.add(new FlapAction(chassis, 0));
-            }
-        }
-        if (Chassis.HAS_ARM) yellowActions.add(new ArmAction(chassis, -Chassis.ARM_POWER, Chassis.ARM_STRAIGHT_DEGREES));
-        if (Chassis.HAS_PIVOT) yellowActions.add(new PivotAction(chassis, -Chassis.PIVOT_POWER, Chassis.ARM_TURN_DEGREES));
-        if (Chassis.HAS_ARM) yellowActions.add(new ArmAction(chassis, -Chassis.ARM_POWER, Chassis.ARM_TURN_DEGREES));
+        AutoPathHelper.addArmUpMovement(chassis, yellowActions);
+        AutoPathHelper.addFlapOpenMovement(chassis, yellowActions);
+        yellowActions.add(new WaitAction(chassis, Chassis.FLAP_WAIT_TIME));
+        AutoPathHelper.addArmDownMovement(chassis, yellowActions);
 
         switch(route) {
             case 0:
                 purpleActions.add(new TurnAction(chassis, 1, 45));
-                if (Chassis.HAS_ROLLER) {
-                    purpleActions.add(new RollerAction(chassis, -Chassis.ROLLER_POWER));
-                    purpleActions.add(new WaitAction(chassis, 1000));
-                    purpleActions.add(new RollerAction(chassis, 0));
-                }
+                AutoPathHelper.addRollerBackwardMovement(chassis, purpleActions);
                 points.add(new AutoPoint(new Point(2 * Game.TILE_SIZE, 4.5 * Game.TILE_SIZE), purpleActions, true));
                 points.add(new AutoPoint(new Point(2.5 * Game.TILE_SIZE, 4.5 * Game.TILE_SIZE), purpleActions, true));
                 points.add(new AutoPoint(new Point(2.5 * Game.TILE_SIZE, 2 * Game.TILE_SIZE), purpleActions, true));
@@ -71,11 +51,7 @@ public class RightBlueAuto extends BaseAuto {
                 break;
             case 2:
                 purpleActions.add(new TurnAction(chassis, 1, -45));
-                if (Chassis.HAS_ROLLER) {
-                    purpleActions.add(new RollerAction(chassis, -Chassis.ROLLER_POWER));
-                    purpleActions.add(new WaitAction(chassis, 1000));
-                    purpleActions.add(new RollerAction(chassis, 0));
-                }
+                AutoPathHelper.addRollerBackwardMovement(chassis, purpleActions);
                 points.add(new AutoPoint(new Point(2 * Game.TILE_SIZE, 4.5 * Game.TILE_SIZE), purpleActions, true));
                 points.add(new AutoPoint(new Point(2.5 * Game.TILE_SIZE, 4.5 * Game.TILE_SIZE), purpleActions, true));
                 points.add(new AutoPoint(new Point(2.5 * Game.TILE_SIZE, 2 * Game.TILE_SIZE), purpleActions, true));
@@ -83,11 +59,7 @@ public class RightBlueAuto extends BaseAuto {
                 break;
             case 1:
             default:
-                if (Chassis.HAS_ROLLER) {
-                    purpleActions.add(new RollerAction(chassis, -Chassis.ROLLER_POWER));
-                    purpleActions.add(new WaitAction(chassis, 1000));
-                    purpleActions.add(new RollerAction(chassis, 0));
-                }
+                AutoPathHelper.addRollerBackwardMovement(chassis, purpleActions);
                 points.add(new AutoPoint(new Point(2 * Game.TILE_SIZE, 4.5 * Game.TILE_SIZE), purpleActions, true));
                 points.add(new AutoPoint(new Point(2.5 * Game.TILE_SIZE, 4.5 * Game.TILE_SIZE), purpleActions, true));
                 points.add(new AutoPoint(new Point(2.5 * Game.TILE_SIZE, 2 * Game.TILE_SIZE), purpleActions, true));

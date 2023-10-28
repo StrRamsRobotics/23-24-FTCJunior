@@ -3,7 +3,7 @@ package org.firstinspires.ftc.teamcode.opmodes.auto.actions;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.firstinspires.ftc.teamcode.opmodes.auto.classes.AutoAction;
-import org.firstinspires.ftc.teamcode.utils.helpers.MathHelper;
+import org.firstinspires.ftc.teamcode.generic.helpers.MathHelper;
 import org.firstinspires.ftc.teamcode.wrappers.Chassis;
 
 public class ArmAction extends AutoAction {

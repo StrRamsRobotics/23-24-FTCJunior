@@ -1,7 +1,7 @@
 package org.firstinspires.ftc.teamcode.opmodes.auto.classes;
 
-import org.firstinspires.ftc.teamcode.utils.classes.Point;
-import org.firstinspires.ftc.teamcode.utils.helpers.MathHelper;
+import org.firstinspires.ftc.teamcode.generic.classes.Point;
+import org.firstinspires.ftc.teamcode.generic.helpers.MathHelper;
 
 import java.util.ArrayList;
 

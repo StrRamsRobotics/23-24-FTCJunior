@@ -2,26 +2,25 @@ package org.firstinspires.ftc.teamcode.opmodes.teleop;
 
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorEx;
 
 import org.firstinspires.ftc.teamcode.opmodes.auto.actions.ArmAction;
 import org.firstinspires.ftc.teamcode.opmodes.auto.actions.FlapAction;
 import org.firstinspires.ftc.teamcode.opmodes.auto.actions.PivotAction;
-import org.firstinspires.ftc.teamcode.opmodes.auto.actions.RollerAction;
 import org.firstinspires.ftc.teamcode.opmodes.auto.actions.WaitAction;
 import org.firstinspires.ftc.teamcode.opmodes.auto.classes.AutoAction;
 import org.firstinspires.ftc.teamcode.opmodes.auto.classes.AutoPath;
 import org.firstinspires.ftc.teamcode.opmodes.auto.classes.AutoPoint;
+import org.firstinspires.ftc.teamcode.opmodes.auto.helpers.AutoPathHelper;
 import org.firstinspires.ftc.teamcode.opmodes.base.BaseTeleop;
-import org.firstinspires.ftc.teamcode.utils.classes.Point;
-import org.firstinspires.ftc.teamcode.utils.helpers.MathHelper;
+import org.firstinspires.ftc.teamcode.generic.classes.Point;
+import org.firstinspires.ftc.teamcode.generic.helpers.MathHelper;
 import org.firstinspires.ftc.teamcode.wrappers.Chassis;
 
 import java.util.ArrayList;
 
 @TeleOp(name = "TeleOp")
 public class Teleop extends BaseTeleop {
-    public static final double JOYSTICK_DEADZONE = 0.025;
+    public static final double JOYSTICK_DEADZONE = 0;
 
     public AutoPath path;
     public boolean isArmUp = false;
@@ -77,27 +76,10 @@ public class Teleop extends BaseTeleop {
         if (b && path == null) {
             ArrayList<AutoPoint> armPoints = new ArrayList<>();
             ArrayList<AutoAction> armActions = new ArrayList<>();
-            if (Chassis.HAS_ARM) armActions.add(new ArmAction(chassis, Chassis.ARM_POWER, Chassis.ARM_TURN_DEGREES));
-            if (Chassis.HAS_PIVOT) armActions.add(new PivotAction(chassis, Chassis.PIVOT_POWER, Chassis.ARM_TURN_DEGREES));
-            if (Chassis.HAS_ARM) armActions.add(new ArmAction(chassis, Chassis.ARM_POWER, Chassis.ARM_STRAIGHT_DEGREES));
-            if (Chassis.HAS_FLAP) {
-                if (Chassis.IS_FLAP_CR) {
-                    armActions.add(new FlapAction(chassis, 1));
-                    armActions.add(new WaitAction(chassis, 500));
-                    armActions.add(new FlapAction(chassis, 0));
-                    armActions.add(new WaitAction(chassis, 1000));
-                    armActions.add(new FlapAction(chassis, -1));
-                    armActions.add(new WaitAction(chassis, 500));
-                    armActions.add(new FlapAction(chassis, 0));
-                } else {
-                    armActions.add(new FlapAction(chassis, 1));
-                    armActions.add(new WaitAction(chassis, 1000));
-                    armActions.add(new FlapAction(chassis, 0));
-                }
-            }
-            if (Chassis.HAS_ARM) armActions.add(new ArmAction(chassis, -Chassis.ARM_POWER, Chassis.ARM_STRAIGHT_DEGREES));
-            if (Chassis.HAS_PIVOT) armActions.add(new PivotAction(chassis, -Chassis.PIVOT_POWER, Chassis.ARM_TURN_DEGREES));
-            if (Chassis.HAS_ARM) armActions.add(new ArmAction(chassis, -Chassis.ARM_POWER, Chassis.ARM_TURN_DEGREES));
+            AutoPathHelper.addArmUpMovement(chassis, armActions);
+            AutoPathHelper.addFlapOpenMovement(chassis, armActions);
+            armActions.add(new WaitAction(chassis, 1000));
+            AutoPathHelper.addArmDownMovement(chassis, armActions);
             armPoints.add(new AutoPoint(new Point(0, 0), armActions));
             path = new AutoPath(chassis, armPoints);
         }

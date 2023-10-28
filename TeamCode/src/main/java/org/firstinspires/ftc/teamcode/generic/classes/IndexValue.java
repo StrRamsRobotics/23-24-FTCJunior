@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.utils.classes;
+package org.firstinspires.ftc.teamcode.generic.classes;
 
 public class IndexValue {
     public int index = 0;

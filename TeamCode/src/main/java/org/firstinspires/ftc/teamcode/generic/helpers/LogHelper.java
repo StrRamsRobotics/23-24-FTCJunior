@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.utils.helpers;
+package org.firstinspires.ftc.teamcode.generic.helpers;
 
 import org.firstinspires.ftc.teamcode.wrappers.Chassis;
 

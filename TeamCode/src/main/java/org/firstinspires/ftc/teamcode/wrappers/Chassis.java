@@ -5,7 +5,6 @@ import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
 import com.qualcomm.robotcore.hardware.CRServoImplEx;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
@@ -15,9 +14,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
-import org.firstinspires.ftc.teamcode.opmodes.auto.pipelines.AprilTagDetectionPipeline;
-import org.firstinspires.ftc.teamcode.opmodes.auto.pipelines.VisionPipeline;
-import org.firstinspires.ftc.teamcode.utils.helpers.LogHelper;
+import org.firstinspires.ftc.teamcode.generic.helpers.LogHelper;
 import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
 
@@ -57,6 +54,9 @@ public class Chassis {
 
     public static final int ARM_STRAIGHT_DEGREES = 120;
     public static final int ARM_TURN_DEGREES = 15;
+    public static final int FLAP_OPEN_TIME = 500;
+    public static final int FLAP_WAIT_TIME = 1000;
+    public static final int ROLLER_WAIT_TIME = 1000;
 
     public DcMotorEx fr, fl, br, bl;
     public DcMotorEx arm, pivot, roller;

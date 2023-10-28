@@ -1,6 +1,6 @@
 package org.firstinspires.ftc.teamcode.opmodes.auto.pipelines;
 
-import org.firstinspires.ftc.teamcode.utils.classes.IndexValue;
+import org.firstinspires.ftc.teamcode.generic.classes.IndexValue;
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfPoint;
