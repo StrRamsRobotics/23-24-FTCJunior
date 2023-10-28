@@ -23,12 +23,15 @@ public class AutoPath {
     public ArrayList<AutoPoint> autoPoints;
     public ArrayList<AutoLine> lines;
     public boolean active = true;
+    public boolean pauseRobot = false;
 
     public Position position = new Position(DistanceUnit.INCH, 0, 0, 0, 0);
 
-    public AutoPath(Chassis chassis, ArrayList<AutoPoint> autoPoints) {
+    public AutoPath(Chassis chassis, ArrayList<AutoPoint> autoPoints, boolean pauseRobot) {
         this.chassis = chassis;
         this.autoPoints = autoPoints;
+        this.pauseRobot = pauseRobot;
+
         this.lines = new ArrayList<>();
         for (AutoPoint autoPoint : autoPoints) {
             if (autoPoints.indexOf(autoPoint) != autoPoints.size() - 1) {
@@ -37,8 +40,10 @@ public class AutoPath {
                     autoPoint.heading = line.getHeading();
                 }
                 lines.add(line);
+                if (this.pauseRobot) {
+                    autoPoint.addAutoAction(0, new MoveAction(chassis, 0, autoPoint.isReverse));
+                }
                 autoPoint
-                        .addAutoAction(0, new MoveAction(chassis, 0, autoPoint.isReverse))
                         .addAutoAction(new TurnAction(chassis, Chassis.MOVE_POWER, line))
                         .addAutoAction(new MoveAction(chassis, Chassis.MOVE_POWER, autoPoint.isReverse));
             }
@@ -104,19 +109,22 @@ public class AutoPath {
                         currentLine = lines.get(autoPoints.indexOf(activePoint));
                     }
                     else {
-                        active = false;
-                        chassis.fr.setPower(0);
-                        chassis.fl.setPower(0);
-                        if (!Chassis.TWO_WHEELED) {
-                            chassis.br.setPower(0);
-                            chassis.bl.setPower(0);
-                        }
+                        stopPath();
                     }
                 }
             }
         }
         else {
-            active = false;
+            stopPath();
+        }
+
+        prevTime = currentTime;
+        chassis.logHelper.update();
+    }
+
+    public void stopPath() {
+        active = false;
+        if (this.pauseRobot) {
             chassis.fr.setPower(0);
             chassis.fl.setPower(0);
             if (!Chassis.TWO_WHEELED) {
@@ -124,9 +132,6 @@ public class AutoPath {
                 chassis.bl.setPower(0);
             }
         }
-
-        prevTime = currentTime;
-        chassis.logHelper.update();
     }
 
     public void checkAccuracy() {

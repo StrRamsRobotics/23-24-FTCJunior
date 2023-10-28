@@ -72,16 +72,25 @@ public class Teleop extends BaseTeleop {
         if (Chassis.HAS_ROLLER) {
             chassis.roller.setPower(ly);
         }
-        // lift arm
-        if (b && path == null) {
+        if (path == null) {
             ArrayList<AutoPoint> armPoints = new ArrayList<>();
             ArrayList<AutoAction> armActions = new ArrayList<>();
-            AutoPathHelper.addArmUpMovement(chassis, armActions);
-            AutoPathHelper.addFlapOpenMovement(chassis, armActions);
-            armActions.add(new WaitAction(chassis, 1000));
-            AutoPathHelper.addArmDownMovement(chassis, armActions);
+            // lift arm
+            if (a) {
+                AutoPathHelper.addArmUpMovement(chassis, armActions);
+            }
+            // lower arm
+            if (b) {
+                AutoPathHelper.addArmDownMovement(chassis, armActions);
+            }
+            // drop pixel
+            if (x) {
+                AutoPathHelper.addFlapOpenMovement(chassis, armActions);
+                armActions.add(new WaitAction(chassis, 1000));
+                AutoPathHelper.addFlapCloseMovement(chassis, armActions);
+            }
             armPoints.add(new AutoPoint(new Point(0, 0), armActions));
-            path = new AutoPath(chassis, armPoints);
+            path = new AutoPath(chassis, armPoints, false);
         }
     }
 

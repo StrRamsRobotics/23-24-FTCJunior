@@ -60,7 +60,7 @@ public class RightRedAuto extends BaseAuto {
                 break;
         }
         points.add(new AutoPoint(new Point(5.5 * Game.TILE_SIZE, Game.TILE_SIZE), new ArrayList<>(), true));
-        path = new AutoPath(chassis, points);
+        path = new AutoPath(chassis, points, true);
     }
 
     @Override
