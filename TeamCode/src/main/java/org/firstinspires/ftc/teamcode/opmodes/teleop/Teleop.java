@@ -71,9 +71,7 @@ public class Teleop extends BaseTeleop {
         double lxp = Math.pow(lx, 2), lyp = Math.pow(ly, 2), rxp = Math.pow(rx, 2), ryp = Math.pow(ry, 2);
         boolean a = gamepad2.a, b = gamepad2.b, x = gamepad2.x, y = gamepad2.y;
         if (Chassis.HAS_ROLLER) {
-            if (a) chassis.roller.setPower(Chassis.ROLLER_POWER);
-            else if (b) chassis.roller.setPower(-Chassis.ROLLER_POWER);
-            else chassis.roller.setPower(0);
+            chassis.roller.setPower(ly);
         }
         // lift arm
         if (b && path == null) {
