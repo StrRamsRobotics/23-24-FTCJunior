@@ -39,7 +39,6 @@ public class AprilTagAction extends AutoAction {
 
     public int team = 0;
     public int route = 0;
-    public int counter = 0;
 
     public AprilTagAction(Chassis chassis, int team, int route) {
         super(chassis);
@@ -67,8 +66,6 @@ public class AprilTagAction extends AutoAction {
             this.isInitialized = true;
         }
         ArrayList<AprilTagDetection> detections = aprilTagDetectionPipeline.getDetectionsUpdate();
-        counter++;
-        chassis.logHelper.addData("Counter", counter);
         if(detections != null) {
             if(detections.size() == 0) {
                 chassis.logHelper.addData("AprilTag Action", "No AprilTag Detected");
