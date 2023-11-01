@@ -12,9 +12,10 @@ public class PivotAction extends AutoAction {
     public PivotAction(Chassis chassis, double power, double angle) {
         super(chassis);
         this.angle = angle;
-        this.power = Math.abs(power);
-        if (power < 0) chassis.pivot.setDirection(DcMotor.Direction.REVERSE);
-        else chassis.pivot.setDirection(DcMotor.Direction.FORWARD);
+//        this.power = Math.abs(power);
+//        if (power < 0) chassis.pivot.setDirection(DcMotor.Direction.REVERSE);
+//        else chassis.pivot.setDirection(DcMotor.Direction.FORWARD);
+        this.power = power;
         chassis.pivot.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         chassis.pivot.setTargetPosition((int) (this.angle * Chassis.CORE_HEX_TICKS_PER_REV / 360.0));
     }
@@ -28,7 +29,8 @@ public class PivotAction extends AutoAction {
         }
         chassis.logHelper.addData("Angle", this.angle);
         chassis.logHelper.addData("Target Position", chassis.pivot.getTargetPosition());
-        if (chassis.pivot.isBusy()) {
+//        if (chassis.pivot.isBusy()) {
+        if (chassis.pivot.getTargetPosition() - chassis.pivot.getCurrentPosition() > 5) {
         } else {
             chassis.pivot.setPower(0);
             chassis.pivot.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);

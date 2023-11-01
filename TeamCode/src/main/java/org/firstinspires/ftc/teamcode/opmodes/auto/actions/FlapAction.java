@@ -29,6 +29,6 @@ public class FlapAction extends AutoAction {
             }
             isInitialized = true;
         }
-//        active = false;
+        active = false;
     }
 }

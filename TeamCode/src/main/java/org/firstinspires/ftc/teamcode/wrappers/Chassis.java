@@ -35,9 +35,9 @@ public class Chassis {
     public static final boolean HAS_CHASSIS_ENCODERS = false;
 
     public static final boolean HAS_ARM = true;
-    public static final boolean HAS_PIVOT = false;
-    public static final boolean HAS_ROLLER = true;
-    public static final boolean HAS_FLAP = true;
+    public static final boolean HAS_PIVOT = true;
+    public static final boolean HAS_ROLLER = false;
+    public static final boolean HAS_FLAP = false;
 
     public static final boolean IS_FLAP_CR = false;
 
@@ -53,7 +53,7 @@ public class Chassis {
     public static final int ROLLER_RADIUS = 2; // inches
 
     public static final int ARM_STRAIGHT_DEGREES = 120;
-    public static final int ARM_TURN_DEGREES = 15;
+    public static final int ARM_TURN_DEGREES = 30;
     public static final int FLAP_OPEN_TIME = 500;
     public static final int FLAP_WAIT_TIME = 1000;
     public static final int ROLLER_WAIT_TIME = 1000;
