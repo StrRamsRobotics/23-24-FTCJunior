@@ -73,7 +73,7 @@ public class AutoPath {
 
     public void tick() {
         long currentTime = System.currentTimeMillis();
-        double stepDistance = (currentTime - prevTime) * Chassis.MOVE_DISTANCE_PER_SECOND / 1000.0;
+        double stepDistance = (currentTime - prevTime) / 1000.0 * Chassis.MOVE_DISTANCE_PER_SECOND;
 
         if (activePoint != null && currentPoint != null) {
             chassis.logHelper.addData("Number of points", autoPoints.size());;

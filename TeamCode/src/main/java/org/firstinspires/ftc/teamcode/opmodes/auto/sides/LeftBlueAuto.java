@@ -36,7 +36,7 @@ public class LeftBlueAuto extends BaseAuto {
         points.add(new AutoPoint(new Point(0, 2.5 * Game.TILE_SIZE), new ArrayList<>(), 90, true));
         ArrayList<AutoAction> purpleActions = new ArrayList<>();
         ArrayList<AutoAction> yellowActions = new ArrayList<>();
-//        yellowActions.add(new AprilTagAction(chassis, Game.BLUE_TEAM, route));
+        yellowActions.add(new AprilTagAction(chassis, Game.BLUE_TEAM, route));
         AutoPathHelper.addArmUpMovement(chassis, yellowActions);
         AutoPathHelper.addFlapOpenMovement(chassis, yellowActions);
         yellowActions.add(new WaitAction(chassis, Chassis.FLAP_WAIT_TIME));

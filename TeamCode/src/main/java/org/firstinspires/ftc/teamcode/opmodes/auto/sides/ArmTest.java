@@ -3,7 +3,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 import org.firstinspires.ftc.teamcode.opmodes.base.BaseAuto;
 
-@Autonomous(name="BaseAuto")
+@Autonomous(name="ArmTest")
 public class ArmTest extends BaseAuto {
     @Override
     public void runSetup() {
