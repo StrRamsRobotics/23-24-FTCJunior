@@ -20,7 +20,7 @@ import java.util.ArrayList;
 
 @TeleOp(name = "TeleOp")
 public class Teleop extends BaseTeleop {
-    public static final double JOYSTICK_DEADZONE = 0;
+    public static final double JOYSTICK_DEADZONE = 0.1;
 
     public AutoPath path;
     public boolean isArmUp = false;
@@ -51,11 +51,11 @@ public class Teleop extends BaseTeleop {
             }
         } else {
             // Arcade drive
-            chassis.fl.setPower(MathHelper.deadzone(ly - rx, JOYSTICK_DEADZONE));
-            chassis.fr.setPower(MathHelper.deadzone(ly + rx, JOYSTICK_DEADZONE));
+            chassis.fl.setPower(MathHelper.deadzone(ly + rx, JOYSTICK_DEADZONE));
+            chassis.fr.setPower(MathHelper.deadzone(ly - rx, JOYSTICK_DEADZONE));
             if (!Chassis.TWO_WHEELED) {
-                chassis.bl.setPower(MathHelper.deadzone(ly - rx, JOYSTICK_DEADZONE));
-                chassis.br.setPower(MathHelper.deadzone(ly + rx, JOYSTICK_DEADZONE));
+                chassis.bl.setPower(MathHelper.deadzone(ly + rx, JOYSTICK_DEADZONE));
+                chassis.br.setPower(MathHelper.deadzone(ly - rx, JOYSTICK_DEADZONE));
             }
         }
     }
@@ -65,16 +65,16 @@ public class Teleop extends BaseTeleop {
         double lxp = Math.pow(lx, 2), lyp = Math.pow(ly, 2), rxp = Math.pow(rx, 2), ryp = Math.pow(ry, 2);
         boolean a = gamepad2.a, b = gamepad2.b, x = gamepad2.x, y = gamepad2.y;
         if (Chassis.HAS_PIVOT) {
-            chassis.pivot.setPower(lx);
+            chassis.pivot.setPower(MathHelper.deadzone(rx, JOYSTICK_DEADZONE));
         }
         if (Chassis.HAS_ROLLER) {
-            chassis.roller.setPower(ly);
+            chassis.roller.setPower(MathHelper.deadzone(ly, JOYSTICK_DEADZONE));
         }
         if (Chassis.HAS_ARM) {
-            chassis.arm.setPower(ry);
+            chassis.arm.setPower(MathHelper.deadzone(ry, JOYSTICK_DEADZONE));
         }
         if (Chassis.HAS_FLAP) {
-            if (rx > 0.9) {
+            if (lx > 0.9) {
                 chassis.flap.setPosition(1);
             } else {
                 chassis.flap.setPosition(0);
