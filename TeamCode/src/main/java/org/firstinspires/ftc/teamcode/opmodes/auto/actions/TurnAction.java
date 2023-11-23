@@ -34,7 +34,8 @@ public class TurnAction extends AutoAction {
         }
         chassis.logHelper.addData("Running", "TurnAction");
         long currentTime = System.currentTimeMillis();
-        double distance = (currentTime - startTime) / 1000.0 * Chassis.MOVE_DISTANCE_PER_SECOND;
+//        double distance = (currentTime - startTime) / 1000.0 * Chassis.MOVE_DISTANCE_PER_SECOND;
+        double distance = (currentTime - startTime) / 1000.0 * Chassis.TURN_DISTANCE_PER_SECOND;
         chassis.logHelper.addData("Angle", angle);
         chassis.logHelper.addData("Distance", distance);
         chassis.logHelper.addData("ArcLength", arcLength);
