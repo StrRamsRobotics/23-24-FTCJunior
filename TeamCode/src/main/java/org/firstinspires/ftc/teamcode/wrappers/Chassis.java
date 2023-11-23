@@ -30,7 +30,7 @@ public class Chassis {
     public static String FLAP_NAME = "flap";
     public static String CAMERA_NAME = "camera";
 
-    public static final boolean TANK_DRIVE = true;
+    public static final boolean TANK_DRIVE = false;
     public static final boolean TWO_WHEELED = true;
     public static final boolean HAS_CHASSIS_ENCODERS = false;
 
@@ -41,15 +41,15 @@ public class Chassis {
 
     public static final boolean IS_FLAP_CR = false;
 
-    public static final double MOVE_POWER = 1;
+    public static final double MOVE_POWER = 0.1;
     public static final double ARM_POWER = 1;
     public static final double PIVOT_POWER = 1;
     public static final double ROLLER_POWER = 1;
 
     public static final int ROBOT_WIDTH = 18; // inches
     public static final int ROBOT_LENGTH = 18; // inchjes <- written by trent lol
-    public static final double MOVE_DISTANCE_PER_SECOND = 60 * MOVE_POWER; // inches
-    public static final double TURN_DISTANCE_PER_SECOND = 48 * MOVE_POWER; // inches
+    public static final double MOVE_DISTANCE_PER_SECOND = 48 * MOVE_POWER; // inches
+    public static final double TURN_DISTANCE_PER_SECOND = 60 * MOVE_POWER; // inches
     public static final double HEX_ANGLE_PER_SECOND = 400 * ARM_POWER; // odegrees
     public static final int CORE_HEX_TICKS_PER_REV = 288;
     public static final int ROLLER_RADIUS = 2; // inches

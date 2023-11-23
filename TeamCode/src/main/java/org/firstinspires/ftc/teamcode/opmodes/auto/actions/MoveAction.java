@@ -24,6 +24,7 @@ public class MoveAction extends AutoAction {
 
     public void tick() {
         chassis.logHelper.addData("Running", "MoveAction");
+        chassis.logHelper.addData("Power", power);
         if (!isInitialized) {
             chassis.fr.setPower(power);
             chassis.fl.setPower(power);

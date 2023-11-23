@@ -27,7 +27,13 @@ public class Teleop extends BaseTeleop {
 
     @Override
     public void runSetup() {
-        chassis.arm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        if (Chassis.HAS_FLAP) {
+            chassis.flap.setPosition(0);
+        }
+        if (Chassis.HAS_ARM) {
+            chassis.arm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+//            chassis.arm.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        }
     }
 
     @Override
