@@ -30,7 +30,7 @@ public class Chassis {
     public static String FLAP_NAME = "flap";
     public static String CAMERA_NAME = "camera";
 
-    public static final boolean TANK_DRIVE = false;
+//    public static final boolean TANK_DRIVE = false; // useless now because theres two opmodes
     public static final boolean TWO_WHEELED = true;
     public static final boolean HAS_CHASSIS_ENCODERS = false;
 
