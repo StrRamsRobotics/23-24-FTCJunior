@@ -6,6 +6,7 @@ import org.firstinspires.ftc.teamcode.wrappers.Chassis;
 
 public class MoveAction extends AutoAction {
     public double power;
+    public boolean isReverse = false;
 
     public MoveAction (Chassis chassis, double power, boolean reverse) {
         super(chassis);
@@ -15,6 +16,7 @@ public class MoveAction extends AutoAction {
         else {
             this.power = power;
         }
+        this.isReverse = reverse;
     }
 
     public MoveAction (Chassis chassis, double power) {
@@ -24,7 +26,12 @@ public class MoveAction extends AutoAction {
 
     public void tick() {
         chassis.logHelper.addData("Running", "MoveAction");
-        chassis.logHelper.addData("Power", power);
+        chassis.logHelper.addData("Power FR", power);
+        chassis.logHelper.addData("Power FL", power);
+        chassis.logHelper.addData("Power BR", power);
+        chassis.logHelper.addData("Power BL", power);
+        chassis.logHelper.addData("Power BL", power);
+        chassis.logHelper.addData("IsReverse", isReverse);
         if (!isInitialized) {
             chassis.fr.setPower(power);
             chassis.fl.setPower(power);

@@ -8,23 +8,26 @@ public class TurnAction extends AutoAction {
     public double power;
     public AutoLine line;
     public double angle;
-    public double arcLength;
+    public double turnedAngle;
+//    public double arcLength;
     public long startTime;
 
     public TurnAction(Chassis chassis, double power, AutoLine line) {
         super(chassis);
 //        this.power = power * Math.signum(line.getAngle());
-        this.power = power;
+        this.power = Math.signum(line.getAngle()) * power;
         this.angle = Math.abs(line.getAngle());
-        this.arcLength = Math.toRadians(angle) * Chassis.ROBOT_WIDTH / 2;
+        this.turnedAngle = 0;
+//        this.arcLength = Math.toRadians(angle) * Chassis.ROBOT_WIDTH / 2;
         this.startTime = System.currentTimeMillis();
     }
 
     public TurnAction(Chassis chassis, double power, double angle) {
         super(chassis);
-        this.power = power;
-        this.angle = angle;
-        this.arcLength = Math.toRadians(angle) * Chassis.ROBOT_WIDTH / 2;
+        this.power = Math.signum(angle) * power;
+        this.angle = Math.abs(angle);
+        this.turnedAngle = 0;
+//        this.arcLength = Math.toRadians(angle) * Chassis.ROBOT_WIDTH / 2;
     }
 
     public void tick() {
@@ -35,11 +38,13 @@ public class TurnAction extends AutoAction {
         chassis.logHelper.addData("Running", "TurnAction");
         long currentTime = System.currentTimeMillis();
 //        double distance = (currentTime - startTime) / 1000.0 * Chassis.MOVE_DISTANCE_PER_SECOND;
-        double distance = (currentTime - startTime) / 1000.0 * Chassis.TURN_DISTANCE_PER_SECOND;
+//        double distance = (currentTime - startTime) / 1000.0 * Chassis.TURN_DISTANCE_PER_SECOND;
         chassis.logHelper.addData("Angle", angle);
-        chassis.logHelper.addData("Distance", distance);
-        chassis.logHelper.addData("ArcLength", arcLength);
-        if (distance < arcLength) {
+        chassis.logHelper.addData("Turned Angle", turnedAngle);
+//        chassis.logHelper.addData("Distance", distance);
+//        chassis.logHelper.addData("ArcLength", arcLength);
+//        if (distance < arcLength) {
+        if (turnedAngle < angle) {
             chassis.fr.setPower(power);
             chassis.fl.setPower(-power);
             if (!Chassis.TWO_WHEELED) {
@@ -50,6 +55,7 @@ public class TurnAction extends AutoAction {
             chassis.logHelper.addData("Power FL", -power);
             chassis.logHelper.addData("Power BR", power);
             chassis.logHelper.addData("Power BL", -power);
+            turnedAngle += (currentTime - startTime) / 1000.0 * Chassis.TURN_ANGLE_PER_SECOND;
         } else {
             chassis.fr.setPower(0);
             chassis.fl.setPower(0);

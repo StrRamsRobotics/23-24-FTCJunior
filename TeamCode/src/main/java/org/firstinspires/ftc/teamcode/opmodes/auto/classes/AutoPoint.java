@@ -62,8 +62,7 @@ public class AutoPoint extends Point {
         for (AutoAction autoAction : autoActions) {
             if (autoAction instanceof TurnAction) {
                 double angle = ((TurnAction) autoAction).angle;
-                this.heading += angle;
-                this.heading = MathHelper.toHeading(this.heading);
+                this.heading = MathHelper.toHeading(this.heading + angle);
             }
         }
         this.active = true;
