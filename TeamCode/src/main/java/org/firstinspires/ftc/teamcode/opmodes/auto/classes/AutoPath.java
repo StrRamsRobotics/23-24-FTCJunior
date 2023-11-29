@@ -17,15 +17,16 @@ public class AutoPath {
     public AutoPoint activePoint;
     public AutoPoint nextPoint;
     public double activeDistanceToNext;
-
     public long prevTime;
-
     public ArrayList<AutoPoint> autoPoints;
     public ArrayList<AutoLine> lines;
     public boolean active = true;
     public boolean pauseRobot = false;
 
     public Position position = new Position(DistanceUnit.INCH, 0, 0, 0, 0);
+    public boolean justSwitched = false;
+    public double switchTime = 0;
+    public double waitTimeAfterSwitch = 1000;
 
     public AutoPath(Chassis chassis, ArrayList<AutoPoint> autoPoints, boolean pauseRobot) {
         this.chassis = chassis;
@@ -76,40 +77,47 @@ public class AutoPath {
         double stepDistance = (currentTime - prevTime) / 1000.0 * Chassis.MOVE_DISTANCE_PER_SECOND;
 
         if (activePoint != null && currentPoint != null) {
-            chassis.logHelper.addData("Number of points", autoPoints.size());;
-            chassis.logHelper.addData("Active point index", autoPoints.indexOf(activePoint));
-            chassis.logHelper.addData("Active point x", activePoint.x);
-            chassis.logHelper.addData("Active point y", activePoint.y);
-            chassis.logHelper.addData("Active point heading", activePoint.heading);
-            chassis.logHelper.addData("Line heading", currentLine.getHeading());
-            chassis.logHelper.addData("Active point distance to current", activePoint.distanceTo(currentPoint));
-            chassis.logHelper.addData("Active point distance to next", activeDistanceToNext);
-            activePoint.tick();
-            chassis.logHelper.addData("Active point action index", activePoint.autoActions.indexOf(activePoint.currentAutoAction));
-            if (activePoint.currentAutoAction != null) {
-                chassis.logHelper.addData("Active point action active", activePoint.currentAutoAction.active);
-            }
-            chassis.logHelper.addData("Active point active", activePoint.active);
-            if (!activePoint.active) {
-                currentPoint = currentLine.getNextPoint(currentPoint, stepDistance);
-                double currentDistanceToNext = currentPoint.distanceTo(activePoint);
-                chassis.logHelper.addData("Slope", currentLine.slope);
-                chassis.logHelper.addData("Step distance", stepDistance);
-                chassis.logHelper.addData("Current point x", currentPoint.x);
-                chassis.logHelper.addData("Current point y", currentPoint.y);
-                chassis.logHelper.addData("Current point heading", currentPoint.heading);
-                checkAccuracy();
-                if (currentDistanceToNext > activeDistanceToNext) {
-                    chassis.logHelper.addData("Next index", autoPoints.indexOf(nextPoint) + 1);
-                    if (autoPoints.indexOf(nextPoint) + 1 < autoPoints.size()) {
-                        activePoint = nextPoint;
-                        nextPoint = autoPoints.get(autoPoints.indexOf(activePoint) + 1);
-                        activeDistanceToNext = activePoint.distanceTo(nextPoint);
-                        currentPoint = activePoint;
-                        currentLine = lines.get(autoPoints.indexOf(activePoint));
-                    }
-                    else {
-                        stopPath();
+            if (justSwitched && System.currentTimeMillis() - switchTime > waitTimeAfterSwitch) {
+                justSwitched = false;
+
+                chassis.logHelper.addData("Number of points", autoPoints.size());;
+                chassis.logHelper.addData("Active point index", autoPoints.indexOf(activePoint));
+                chassis.logHelper.addData("Active point x", activePoint.x);
+                chassis.logHelper.addData("Active point y", activePoint.y);
+                chassis.logHelper.addData("Active point heading", activePoint.heading);
+                chassis.logHelper.addData("Line heading", currentLine.getHeading());
+                chassis.logHelper.addData("Active point distance to current", activePoint.distanceTo(currentPoint));
+                chassis.logHelper.addData("Active point distance to next", activeDistanceToNext);
+                activePoint.tick();
+                chassis.logHelper.addData("Active point action index", activePoint.autoActions.indexOf(activePoint.currentAutoAction));
+                if (activePoint.currentAutoAction != null) {
+                    chassis.logHelper.addData("Active point action active", activePoint.currentAutoAction.active);
+                }
+                chassis.logHelper.addData("Active point active", activePoint.active);
+                if (!activePoint.active) {
+                    currentPoint = currentLine.getNextPoint(currentPoint, stepDistance);
+                    double currentDistanceToNext = currentPoint.distanceTo(activePoint);
+                    chassis.logHelper.addData("Slope", currentLine.slope);
+                    chassis.logHelper.addData("Step distance", stepDistance);
+                    chassis.logHelper.addData("Current point x", currentPoint.x);
+                    chassis.logHelper.addData("Current point y", currentPoint.y);
+                    chassis.logHelper.addData("Current point heading", currentPoint.heading);
+                    checkAccuracy();
+                    if (currentDistanceToNext > activeDistanceToNext) {
+                        chassis.logHelper.addData("Next index", autoPoints.indexOf(nextPoint) + 1);
+                        if (autoPoints.indexOf(nextPoint) + 1 < autoPoints.size()) {
+                            activePoint = nextPoint;
+                            nextPoint = autoPoints.get(autoPoints.indexOf(activePoint) + 1);
+                            activeDistanceToNext = activePoint.distanceTo(nextPoint);
+                            currentPoint = activePoint;
+                            currentLine = lines.get(autoPoints.indexOf(activePoint));
+
+                            justSwitched = true;
+                            switchTime = System.currentTimeMillis();
+                        }
+                        else {
+                            stopPath();
+                        }
                     }
                 }
             }
