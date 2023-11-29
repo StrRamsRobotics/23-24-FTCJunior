@@ -5,6 +5,7 @@ import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
 import com.qualcomm.robotcore.hardware.CRServoImplEx;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
@@ -41,7 +42,7 @@ public class Chassis {
 
     public static final boolean IS_FLAP_CR = false;
 
-    public static final double MOVE_POWER = 0.5;
+    public static final double MOVE_POWER = 1;
     public static final double ARM_POWER = 1;
     public static final double PIVOT_POWER = 1;
     public static final double ROLLER_POWER = 1;
@@ -51,7 +52,7 @@ public class Chassis {
     public static final double MOVE_DISTANCE_PER_SECOND = 60 * MOVE_POWER; // inches
 //    public static final double TURN_DISTANCE_PER_SECOND = 60 * MOVE_POWER; // inches
 
-    public static final double TURN_ANGLE_PER_SECOND = 720 * MOVE_POWER; // inches
+    public static final double TURN_ANGLE_PER_SECOND = 2 * MOVE_POWER; // inches
     public static final double HEX_ANGLE_PER_SECOND = 400 * ARM_POWER; // degrees
     public static final int CORE_HEX_TICKS_PER_REV = 288;
     public static final int ROLLER_RADIUS = 2; // inches
@@ -102,7 +103,7 @@ public class Chassis {
 //        fr.setDirection(DcMotorEx.Direction.REVERSE);
         fr.setDirection(DcMotorEx.Direction.FORWARD); // this is correct
         fl = hardwareMap.get(DcMotorEx.class, FL_NAME);
-        fl.setDirection(DcMotorEx.Direction.FORWARD); // this is correct
+        fl.setDirection(DcMotorEx.Direction.REVERSE); // this is correct
         if (!TWO_WHEELED) {
             br = hardwareMap.get(DcMotorEx.class, BR_NAME);
 //            br.setDirection(DcMotorEx.Direction.REVERSE);

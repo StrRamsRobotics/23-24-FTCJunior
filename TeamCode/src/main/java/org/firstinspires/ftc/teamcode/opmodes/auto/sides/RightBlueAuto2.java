@@ -27,7 +27,7 @@ public class RightBlueAuto2 extends BaseAuto {
     @Override
     public void createPoints() {
         // based off of front of robot
-        points.add(new AutoPoint(new Point(0, 2.5 * Game.TILE_SIZE), new ArrayList<>(), true));
+        points.add(new AutoPoint(new Point(0, 2.5 * Game.TILE_SIZE), new ArrayList<>(), false));
         ArrayList<AutoAction> purpleActions = new ArrayList<>();
         ArrayList<AutoAction> yellowActions = new ArrayList<>();
         yellowActions.add(new AprilTagAction(chassis, Game.BLUE_TEAM, route));
@@ -43,8 +43,8 @@ public class RightBlueAuto2 extends BaseAuto {
                 points.add(new AutoPoint(new Point(1.75 * Game.TILE_SIZE, 4 * Game.TILE_SIZE), purpleActions, false));
                 points.add(new AutoPoint(new Point(1 * Game.TILE_SIZE, 4.25 * Game.TILE_SIZE), purpleActions, true));
                 points.add(new AutoPoint(new Point(2.5 * Game.TILE_SIZE, 4.5 * Game.TILE_SIZE), purpleActions, false));
-                points.add(new AutoPoint(new Point(2.5 * Game.TILE_SIZE, 2 * Game.TILE_SIZE), yellowActions, false));
-                points.add(new AutoPoint(new Point(1.25 * Game.TILE_SIZE, 1 * Game.TILE_SIZE), yellowActions, false));
+                points.add(new AutoPoint(new Point(2.5 * Game.TILE_SIZE, 2 * Game.TILE_SIZE), purpleActions, false));
+                points.add(new AutoPoint(new Point(1.25 * Game.TILE_SIZE, 1 * Game.TILE_SIZE), purpleActions, false));
                 break;
             case 2:
                 purpleActions.add(new TurnAction(chassis, 1, -45));
@@ -52,8 +52,8 @@ public class RightBlueAuto2 extends BaseAuto {
                 points.add(new AutoPoint(new Point(1.75 * Game.TILE_SIZE, 5 * Game.TILE_SIZE), purpleActions, false));
                 points.add(new AutoPoint(new Point(1.25 * Game.TILE_SIZE, 4.75 * Game.TILE_SIZE), purpleActions, true));
                 points.add(new AutoPoint(new Point(2.5 * Game.TILE_SIZE, 4.5 * Game.TILE_SIZE), purpleActions, false));
-                points.add(new AutoPoint(new Point(2.5 * Game.TILE_SIZE, 2 * Game.TILE_SIZE), yellowActions, false));
-                points.add(new AutoPoint(new Point(1.75 * Game.TILE_SIZE, 1 * Game.TILE_SIZE), yellowActions, false));
+                points.add(new AutoPoint(new Point(2.5 * Game.TILE_SIZE, 2 * Game.TILE_SIZE), purpleActions, false));
+                points.add(new AutoPoint(new Point(1.75 * Game.TILE_SIZE, 1 * Game.TILE_SIZE), purpleActions, false));
                 break;
             case 1:
             default:
@@ -61,8 +61,8 @@ public class RightBlueAuto2 extends BaseAuto {
                 points.add(new AutoPoint(new Point(2 * Game.TILE_SIZE, 4.5 * Game.TILE_SIZE), purpleActions, false));
                 points.add(new AutoPoint(new Point(1.25 * Game.TILE_SIZE, 4.5 * Game.TILE_SIZE), purpleActions, true));
                 points.add(new AutoPoint(new Point(2.5 * Game.TILE_SIZE, 5 * Game.TILE_SIZE), purpleActions, false));
-                points.add(new AutoPoint(new Point(2.5 * Game.TILE_SIZE, 2 * Game.TILE_SIZE), yellowActions, false));
-                points.add(new AutoPoint(new Point(1.5 * Game.TILE_SIZE, 1 * Game.TILE_SIZE), yellowActions, false));
+                points.add(new AutoPoint(new Point(2.5 * Game.TILE_SIZE, 2 * Game.TILE_SIZE), purpleActions, false));
+                points.add(new AutoPoint(new Point(1.5 * Game.TILE_SIZE, 1 * Game.TILE_SIZE), purpleActions, false));
                 break;
         }
         points.add(new AutoPoint(new Point(0.5 * Game.TILE_SIZE, Game.TILE_SIZE), new ArrayList<>(), false));
