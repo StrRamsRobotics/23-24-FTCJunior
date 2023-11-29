@@ -19,11 +19,11 @@ public class MathHelper {
 
     public static double toHeading(double angle) {
         angle = angle % 360;
-        if (angle < 0) {
-            angle += 360;
+        if (angle < -180) {
+            return 360 + angle;
         }
-        if (angle > 180) {
-            return angle - 180;
+        else if (angle > 180) {
+            return angle - 360;
         }
         else {
             return angle;
