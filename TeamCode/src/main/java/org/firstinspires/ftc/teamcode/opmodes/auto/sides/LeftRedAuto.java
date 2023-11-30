@@ -43,7 +43,7 @@ public class LeftRedAuto extends BaseAuto {
         switch(route) {
             case 0:
 //                purpleActions.add(new TurnAction(chassis, 1, 45));
-                AutoPathHelper.addRollerBackwardMovement(chassis, purpleActions);
+//                AutoPathHelper.addRollerBackwardMovement(chassis, purpleActions);
                 points.add(new AutoPoint(new Point(4 * Game.TILE_SIZE, 4.5 * Game.TILE_SIZE), purpleActions, true));
                 points.add(new AutoPoint(new Point(3.5 * Game.TILE_SIZE, 4.5 * Game.TILE_SIZE), purpleActions, true));
                 points.add(new AutoPoint(new Point(3.5 * Game.TILE_SIZE, 2 * Game.TILE_SIZE), purpleActions, true));
@@ -51,7 +51,7 @@ public class LeftRedAuto extends BaseAuto {
                 break;
             case 2:
 //                purpleActions.add(new TurnAction(chassis, 1, -45));
-                AutoPathHelper.addRollerBackwardMovement(chassis, purpleActions);
+//                AutoPathHelper.addRollerBackwardMovement(chassis, purpleActions);
                 points.add(new AutoPoint(new Point(4 * Game.TILE_SIZE, 4.5 * Game.TILE_SIZE), purpleActions, true));
                 points.add(new AutoPoint(new Point(3.5 * Game.TILE_SIZE, 4.5 * Game.TILE_SIZE), purpleActions, true));
                 points.add(new AutoPoint(new Point(3.5 * Game.TILE_SIZE, 2 * Game.TILE_SIZE), purpleActions, true));
@@ -59,7 +59,7 @@ public class LeftRedAuto extends BaseAuto {
                 break;
             case 1:
             default:
-                AutoPathHelper.addRollerBackwardMovement(chassis, purpleActions);
+//                AutoPathHelper.addRollerBackwardMovement(chassis, purpleActions);
                 points.add(new AutoPoint(new Point(4 * Game.TILE_SIZE, 4.5 * Game.TILE_SIZE), purpleActions, true));
                 points.add(new AutoPoint(new Point(3.5 * Game.TILE_SIZE, 4.5 * Game.TILE_SIZE), purpleActions, true));
                 points.add(new AutoPoint(new Point(3.5 * Game.TILE_SIZE, 2 * Game.TILE_SIZE), purpleActions, true));

@@ -38,16 +38,16 @@ public class RightRedAuto2 extends BaseAuto {
 
         switch(route) {
             case 0:
-                purpleActions.add(new TurnAction(chassis, 1, -45));
-                AutoPathHelper.addRollerBackwardMovement(chassis, purpleActions);
+//                purpleActions.add(new TurnAction(chassis, 1, -45));
+//                AutoPathHelper.addRollerBackwardMovement(chassis, purpleActions);
                 points.add(new AutoPoint(new Point(4.25 * Game.TILE_SIZE, 3 * Game.TILE_SIZE), purpleActions, false));
                 points.add(new AutoPoint(new Point(4.75 * Game.TILE_SIZE, 2.75 * Game.TILE_SIZE), purpleActions, true));
                 points.add(new AutoPoint(new Point(4.25 * Game.TILE_SIZE, 1 * Game.TILE_SIZE), yellowActions, false));
 //                points.add(new AutoPoint(new Point(5.5 * Game.TILE_SIZE, 1 * Game.TILE_SIZE), yellowActions, true));
                 break;
             case 2:
-                purpleActions.add(new TurnAction(chassis, 1, 45));
-                AutoPathHelper.addRollerBackwardMovement(chassis, purpleActions);
+//                purpleActions.add(new TurnAction(chassis, 1, 45));
+//                AutoPathHelper.addRollerBackwardMovement(chassis, purpleActions);
                 points.add(new AutoPoint(new Point(4.25 * Game.TILE_SIZE, 2 * Game.TILE_SIZE), purpleActions, false));
                 points.add(new AutoPoint(new Point(4.75 * Game.TILE_SIZE, 2.25 * Game.TILE_SIZE), purpleActions, true));
                 points.add(new AutoPoint(new Point(4.75 * Game.TILE_SIZE, 1 * Game.TILE_SIZE), yellowActions, false));
@@ -55,14 +55,14 @@ public class RightRedAuto2 extends BaseAuto {
                 break;
             case 1:
             default:
-                AutoPathHelper.addRollerBackwardMovement(chassis, purpleActions);
+//                AutoPathHelper.addRollerBackwardMovement(chassis, purpleActions);
                 points.add(new AutoPoint(new Point(4 * Game.TILE_SIZE, 2.5 * Game.TILE_SIZE), purpleActions, false));
                 points.add(new AutoPoint(new Point(4.5 * Game.TILE_SIZE, 2.5 * Game.TILE_SIZE), purpleActions, true));
                 points.add(new AutoPoint(new Point(4.5 * Game.TILE_SIZE, 1 * Game.TILE_SIZE), yellowActions, false));
 //                points.add(new AutoPoint(new Point(5.5 * Game.TILE_SIZE, 1 * Game.TILE_SIZE), yellowActions, true));
                 break;
         }
-        points.add(new AutoPoint(new Point(5.5 * Game.TILE_SIZE, Game.TILE_SIZE), new ArrayList<>(), false));
+        points.add(new AutoPoint(new Point(6 * Game.TILE_SIZE, Game.TILE_SIZE), new ArrayList<>(), false));
         path = new AutoPath(chassis, points, true);
     }
 
