@@ -43,7 +43,7 @@ public class Chassis {
     public static final boolean IS_FLAP_CR = false;
 
     public static final double MOVE_POWER = 0.5;
-    public static final double ARM_POWER = 0.6
+    public static final double ARM_POWER = 0.6;
     public static final double PIVOT_POWER = 1;
     public static final double ROLLER_POWER = 1;
 
