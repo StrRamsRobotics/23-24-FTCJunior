@@ -22,7 +22,7 @@ public class AutoLine {
         double heading1 = 0, heading2 = 0;
         if (point1.isReverse) heading1 = MathHelper.toHeading(point1.heading - 180);
         else heading1 = point1.heading;
-        return MathHelper.toHeading((point2.isReverse ? -getHeading() : getHeading()) - heading1);
+        return MathHelper.toHeading((point2.isReverse ? -getHeading() : getHeading()) - heading1 - 180);
     }
 
     public double getHeading() {

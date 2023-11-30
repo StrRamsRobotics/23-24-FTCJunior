@@ -12,15 +12,15 @@ import java.util.ArrayList;
 
 public class AutoPathHelper {
     public static void addArmUpMovement(Chassis chassis, ArrayList<AutoAction> armActions) {
-        if (Chassis.HAS_ARM) armActions.add(new ArmAction(chassis, Chassis.ARM_POWER, Chassis.ARM_TURN_DEGREES));
-        if (Chassis.HAS_PIVOT) armActions.add(new PivotAction(chassis, Chassis.PIVOT_POWER, Chassis.ARM_TURN_DEGREES));
-        if (Chassis.HAS_ARM) armActions.add(new ArmAction(chassis, Chassis.ARM_POWER, Chassis.ARM_STRAIGHT_DEGREES));
+//        if (Chassis.HAS_ARM) armActions.add(new ArmAction(chassis, Chassis.ARM_POWER, Chassis.ARM_TURN_DEGREES));
+//        if (Chassis.HAS_PIVOT) armActions.add(new PivotAction(chassis, Chassis.PIVOT_POWER, Chassis.ARM_TURN_DEGREES));
+        if (Chassis.HAS_ARM) armActions.add(new ArmAction(chassis, -Chassis.ARM_POWER, Chassis.ARM_STRAIGHT_DEGREES));
     }
 
     public static void addArmDownMovement(Chassis chassis, ArrayList<AutoAction> armActions) {
-        if (Chassis.HAS_ARM) armActions.add(new ArmAction(chassis, -Chassis.ARM_POWER, Chassis.ARM_TURN_DEGREES));
-        if (Chassis.HAS_PIVOT) armActions.add(new PivotAction(chassis, -Chassis.PIVOT_POWER, Chassis.ARM_TURN_DEGREES));
-        if (Chassis.HAS_ARM) armActions.add(new ArmAction(chassis, -Chassis.ARM_POWER, Chassis.ARM_STRAIGHT_DEGREES));
+//        if (Chassis.HAS_ARM) armActions.add(new ArmAction(chassis, -Chassis.ARM_POWER, Chassis.ARM_TURN_DEGREES));
+//        if (Chassis.HAS_PIVOT) armActions.add(new PivotAction(chassis, -Chassis.PIVOT_POWER, Chassis.ARM_TURN_DEGREES));
+        if (Chassis.HAS_ARM) armActions.add(new ArmAction(chassis, Chassis.ARM_POWER, Chassis.ARM_STRAIGHT_DEGREES));
     }
 
     public static void addFlapOpenMovement(Chassis chassis, ArrayList<AutoAction> flapActions) {

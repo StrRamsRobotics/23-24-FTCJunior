@@ -35,15 +35,15 @@ public class Chassis {
     public static final boolean TWO_WHEELED = true;
     public static final boolean HAS_CHASSIS_ENCODERS = false;
 
-    public static final boolean HAS_ARM = false;
+    public static final boolean HAS_ARM = true;
     public static final boolean HAS_PIVOT = false;
     public static final boolean HAS_ROLLER = false;
     public static final boolean HAS_FLAP = false;
 
     public static final boolean IS_FLAP_CR = false;
 
-    public static final double MOVE_POWER = 1;
-    public static final double ARM_POWER = 1;
+    public static final double MOVE_POWER = 0.5;
+    public static final double ARM_POWER = 0.75;
     public static final double PIVOT_POWER = 1;
     public static final double ROLLER_POWER = 1;
 
@@ -53,7 +53,7 @@ public class Chassis {
 //    public static final double TURN_DISTANCE_PER_SECOND = 60 * MOVE_POWER; // inches
 
     public static final double TURN_ANGLE_PER_SECOND = 2 * MOVE_POWER; // inches
-    public static final double HEX_ANGLE_PER_SECOND = 400 * ARM_POWER; // degrees
+    public static final double HEX_ANGLE_PER_SECOND = 150 * ARM_POWER; // degrees
     public static final int CORE_HEX_TICKS_PER_REV = 288;
     public static final int ROLLER_RADIUS = 2; // inches
 

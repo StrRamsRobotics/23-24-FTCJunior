@@ -24,9 +24,10 @@ public class AutoPath {
     public boolean pauseRobot = false;
 
     public Position position = new Position(DistanceUnit.INCH, 0, 0, 0, 0);
+    public boolean running = true;
     public boolean justSwitched = false;
-    public double switchTime = 0;
     public double waitTimeAfterSwitch = 1000;
+    public double switchTime = 0;
 
     public AutoPath(Chassis chassis, ArrayList<AutoPoint> autoPoints, boolean pauseRobot) {
         this.chassis = chassis;
@@ -77,8 +78,9 @@ public class AutoPath {
         double stepDistance = (currentTime - prevTime) / 1000.0 * Chassis.MOVE_DISTANCE_PER_SECOND;
 
         if (activePoint != null && currentPoint != null) {
-            if (justSwitched && System.currentTimeMillis() - switchTime > waitTimeAfterSwitch) {
+            if (running || (justSwitched && System.currentTimeMillis() - switchTime > waitTimeAfterSwitch)) {
                 justSwitched = false;
+                running = true;
 
                 chassis.logHelper.addData("Number of points", autoPoints.size());;
                 chassis.logHelper.addData("Active point index", autoPoints.indexOf(activePoint));
@@ -113,12 +115,21 @@ public class AutoPath {
                             currentLine = lines.get(autoPoints.indexOf(activePoint));
 
                             justSwitched = true;
+                            running = false;
                             switchTime = System.currentTimeMillis();
                         }
                         else {
                             stopPath();
                         }
                     }
+                }
+            }
+            else {
+                chassis.fr.setPower(0);
+                chassis.fl.setPower(0);
+                if (!Chassis.TWO_WHEELED) {
+                    chassis.br.setPower(0);
+                    chassis.bl.setPower(0);
                 }
             }
         }
