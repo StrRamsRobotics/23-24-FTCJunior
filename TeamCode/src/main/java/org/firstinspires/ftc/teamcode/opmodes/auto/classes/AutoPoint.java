@@ -9,29 +9,21 @@ import java.util.ArrayList;
 public class AutoPoint extends Point {
     public ArrayList<AutoAction> autoActions = new ArrayList<>();
     public AutoAction currentAutoAction;
-    public double heading = Double.MAX_VALUE;
     public boolean isReverse = false;
     public boolean active = true;
 
-    public AutoPoint (Point point, ArrayList<AutoAction> autoActions, double heading, boolean isReverse) {
-        super(point);
-        this.autoActions = autoActions;
-        if (autoActions.size() > 0) this.currentAutoAction = autoActions.get(0);
-        this.heading = heading;
-        for (AutoAction autoAction : autoActions) {
-            if (autoAction instanceof TurnAction) {
-                double angle = ((TurnAction) autoAction).angle;
-                this.heading += angle;
-            }
-        }
-        this.isReverse = isReverse;
-    }
+//    public AutoPoint (Point point, ArrayList<AutoAction> autoActions, double heading, boolean isReverse) {
+//        super(point);
+//        setAutoActions(autoActions);
+//        this.heading = heading;
+//        this.isReverse = isReverse;
+//    }
 
-    public AutoPoint (Point point, ArrayList<AutoAction> autoActions, double heading) {
-        super(point);
-        setAutoActions(autoActions);
-        this.heading = heading;
-    }
+//    public AutoPoint (Point point, ArrayList<AutoAction> autoActions, double heading) {
+//        super(point);
+//        setAutoActions(autoActions);
+//        this.heading = heading;
+//    }
 
     public AutoPoint (Point point, ArrayList<AutoAction> autoActions, boolean isReverse) {
         super(point);
@@ -59,12 +51,12 @@ public class AutoPoint extends Point {
     public void setAutoActions(ArrayList<AutoAction> autoActions) {
         this.autoActions = autoActions;
         if (autoActions.size() > 0) this.currentAutoAction = autoActions.get(0);
-        for (AutoAction autoAction : autoActions) {
-            if (autoAction instanceof TurnAction) {
-                double angle = ((TurnAction) autoAction).angle;
-                this.heading = MathHelper.toHeading(this.heading + angle);
-            }
-        }
+//        for (AutoAction autoAction : autoActions) {
+//            if (autoAction instanceof TurnAction) {
+//                double angle = ((TurnAction) autoAction).angle;
+//                this.heading = MathHelper.toHeading(this.heading + angle);
+//            }
+//        }
         this.active = true;
     }
 

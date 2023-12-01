@@ -33,7 +33,7 @@ public class LeftBlueAuto extends BaseAuto {
     @Override
     public void createPoints() {
         // based off of front of robot
-        points.add(new AutoPoint(new Point(0, 2.5 * Game.TILE_SIZE), new ArrayList<>(), 90, true));
+//        points.add(new AutoPoint(new Point(0, 2.5 * Game.TILE_SIZE), new ArrayList<>(), 90, true));
         ArrayList<AutoAction> purpleActions = new ArrayList<>();
         ArrayList<AutoAction> yellowActions = new ArrayList<>();
         yellowActions.add(new AprilTagAction(chassis, Game.BLUE_TEAM, route));
@@ -62,7 +62,7 @@ public class LeftBlueAuto extends BaseAuto {
                 break;
         }
         points.add(new AutoPoint(new Point(0.5 * Game.TILE_SIZE, Game.TILE_SIZE), new ArrayList<>(), true));
-        path = new AutoPath(chassis, points, true);
+        path = new AutoPath(chassis, points);
     }
 
     @Override

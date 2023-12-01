@@ -18,15 +18,16 @@ public class AutoLine {
         this.yIntercept = point1.y - (slope * point1.x);
     }
 
-    public double getAngle() {
-        double heading1 = 0, heading2 = 0;
-        if (point1.isReverse) heading1 = MathHelper.toHeading(point1.heading - 180);
-        else heading1 = point1.heading;
-        return MathHelper.toHeading((point2.isReverse ? -getHeading() : getHeading()) - heading1 - 180);
-    }
+//    public double getAngle() {
+//        double heading1 = point1.heading;
+//        if (point1.isReverse) heading1 = MathHelper.toHeading(point1.heading - 180);
+//        double heading2 = point2.heading;
+//        return MathHelper.toHeading((point2.isReverse ? -getHeading() : getHeading()) - heading1);
+//    }
 
     public double getHeading() {
-        return Math.toDegrees(-Math.atan2(point2.y - point1.y, point2.x - point1.x) + Math.PI / 2);
+        double heading = Math.toDegrees(-Math.atan2(point2.y - point1.y, point2.x - point1.x) + Math.PI / 2);
+        return point1.isReverse ? MathHelper.toHeading(heading - 180) : MathHelper.toHeading(heading);
     }
 
     public AutoPoint getNextPoint(AutoPoint point, double distance) {
