@@ -28,6 +28,7 @@ public class AutoPath {
     public boolean running = true;
     public boolean justSwitched = false;
     public double switchTime = 0;
+    public ArrayList<Double> angles = new ArrayList<>();
 //    public Position position = new Position(DistanceUnit.INCH, 0, 0, 0, 0);
 
 //    public AutoPath(Chassis chassis, ArrayList<AutoPoint> autoPoints, double currentHeading, double endHeading) {
@@ -62,7 +63,7 @@ public class AutoPath {
                 autoPoint
                         .addAutoAction(new TurnAction(chassis, Chassis.MOVE_POWER, MathHelper.toHeading(line.getHeading() - currentHeading)))
                         .addAutoAction(new MoveAction(chassis, Chassis.MOVE_POWER, autoPoint.isReverse));
-
+                angles.add(MathHelper.toHeading(line.getHeading() - currentHeading));
                 currentHeading = line.getHeading();
             }
 //            autoPoints.get(autoPoints.size() - 1)
@@ -92,7 +93,7 @@ public class AutoPath {
         double stepDistance = (currentTime - prevTime) / 1000.0 * Chassis.MOVE_DISTANCE_PER_SECOND;
 
         if (activePoint != null && currentPoint != null) {
-            if (running || (justSwitched && System.currentTimeMillis() - switchTime > WAIT_TIME_AFTER_SWITCH)) {
+//            if (running || (justSwitched && System.currentTimeMillis() - switchTime > WAIT_TIME_AFTER_SWITCH)) {
                 justSwitched = false;
                 running = true;
 
@@ -110,6 +111,7 @@ public class AutoPath {
                     chassis.logHelper.addData("Active point action active", activePoint.currentAutoAction.active);
                 }
                 chassis.logHelper.addData("Active point active", activePoint.active);
+                chassis.logHelper.addData("Angle at point", angles.get(autoPoints.indexOf(activePoint)));
                 if (!activePoint.active) {
                     currentPoint = currentLine.getNextPoint(currentPoint, stepDistance);
                     double currentDistanceToNext = currentPoint.distanceTo(activePoint);
@@ -131,27 +133,27 @@ public class AutoPath {
                             justSwitched = true;
                             running = false;
                             switchTime = System.currentTimeMillis();
+
                         }
                         else {
                             stopPath();
                         }
                     }
                 }
-            }
-            else {
-                chassis.logHelper.addData("Cooling off motors...", "in progress");
-                chassis.fr.setPower(0);
-                chassis.fl.setPower(0);
-                if (!Chassis.TWO_WHEELED) {
-                    chassis.br.setPower(0);
-                    chassis.bl.setPower(0);
-                }
-            }
+//            }
+//            else {
+//                chassis.logHelper.addData("Cooling off motors...", "in progress");
+//                chassis.fr.setPower(0);
+//                chassis.fl.setPower(0);
+//                if (!Chassis.TWO_WHEELED) {
+//                    chassis.br.setPower(0);
+//                    chassis.bl.setPower(0);
+//                }
+//            }
         }
         else {
             stopPath();
         }
-
         prevTime = currentTime;
         chassis.logHelper.update();
     }
