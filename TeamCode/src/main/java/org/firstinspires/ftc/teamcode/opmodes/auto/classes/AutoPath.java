@@ -38,20 +38,20 @@ public class AutoPath {
 //        this.endHeading = endHeading;
 
         this.lines = new ArrayList<>();
-        for (AutoPoint autoPoint : autoPoints) {
-            if (autoPoints.indexOf(autoPoint) != autoPoints.size() - 1) {
-//                AutoLine line = getConnectingLine(autoPoint);
-//                if (autoPoint.heading == Double.MAX_VALUE) { // not the first
-//                    if (autoPoint.isReverse) {
-//                        autoPoint.heading = MathHelper.toHeading(line.getHeading() - 180);
-//                    }
-//                    else {
-//                        autoPoint.heading = line.getHeading();
-//                    }
-//                }
-//                lines.add(line);
-            }
-        }
+//        for (AutoPoint autoPoint : autoPoints) {
+//            if (autoPoints.indexOf(autoPoint) != autoPoints.size() - 1) {
+////                AutoLine line = getConnectingLine(autoPoint);
+////                if (autoPoint.heading == Double.MAX_VALUE) { // not the first
+////                    if (autoPoint.isReverse) {
+////                        autoPoint.heading = MathHelper.toHeading(line.getHeading() - 180);
+////                    }
+////                    else {
+////                        autoPoint.heading = line.getHeading();
+////                    }
+////                }
+////                lines.add(line);
+//            }
+//        }
         if (autoPoints.size() > 0) {
             currentPoint = autoPoints.get(0);
             activePoint = currentPoint;
@@ -139,6 +139,7 @@ public class AutoPath {
                 }
             }
             else {
+                chassis.logHelper.addData("Cooling off motors...", "in progress");
                 chassis.fr.setPower(0);
                 chassis.fl.setPower(0);
                 if (!Chassis.TWO_WHEELED) {
