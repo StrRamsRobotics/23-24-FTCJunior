@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.opmodes.auto.sides;
+package org.firstinspires.ftc.teamcode.opmodes.auto.sides.push;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
@@ -17,53 +17,54 @@ import org.firstinspires.ftc.teamcode.wrappers.Game;
 
 import java.util.ArrayList;
 
-@Autonomous(name="rightRedAuto2")
-public class RightRedAuto2 extends BaseAuto {
+@Autonomous(name="leftBlueAuto2")
+public class LeftBlueAuto2 extends BaseAuto {
+
     @Override
     public void runSetup() {
-        visionAction = new VisionAction(chassis, false);
+        visionAction = new VisionAction(chassis, true);
         visionAction.tick(); // to init camera stream before 30 seconds
     }
+
     @Override
     public void createPoints() {
         // based off of front of robot
-        points.add(new AutoPoint(new Point(6, 2.5 * Game.TILE_SIZE), new ArrayList<>(), -90, false));
+        points.add(new AutoPoint(new Point(0, 2.5 * Game.TILE_SIZE), new ArrayList<>(), false));
         ArrayList<AutoAction> purpleActions = new ArrayList<>();
         ArrayList<AutoAction> yellowActions = new ArrayList<>();
-        yellowActions.add(new AprilTagAction(chassis, Game.RED_TEAM, route));
+        yellowActions.add(new AprilTagAction(chassis, Game.BLUE_TEAM, route));
         AutoPathHelper.addArmUpMovement(chassis, yellowActions);
-        AutoPathHelper.addFlapOpenMovement(chassis, yellowActions);
-        yellowActions.add(new WaitAction(chassis, Chassis.FLAP_WAIT_TIME));
+//        AutoPathHelper.addFlapOpenMovement(chassis, yellowActions);
+//        yellowActions.add(new WaitAction(chassis, Chassis.FLAP_WAIT_TIME));
         AutoPathHelper.addArmDownMovement(chassis, yellowActions);
 
         switch(route) {
             case 0:
-//                purpleActions.add(new TurnAction(chassis, 1, -45));
 //                AutoPathHelper.addRollerBackwardMovement(chassis, purpleActions);
-                points.add(new AutoPoint(new Point(4.25 * Game.TILE_SIZE, 3 * Game.TILE_SIZE), purpleActions, false));
-                points.add(new AutoPoint(new Point(4.75 * Game.TILE_SIZE, 2.75 * Game.TILE_SIZE), purpleActions, true));
-                points.add(new AutoPoint(new Point(4.25 * Game.TILE_SIZE, 1 * Game.TILE_SIZE), yellowActions, false));
-//                points.add(new AutoPoint(new Point(5.5 * Game.TILE_SIZE, 1 * Game.TILE_SIZE), yellowActions, true));
+                points.add(new AutoPoint(new Point(1.75 * Game.TILE_SIZE, 2 * Game.TILE_SIZE), purpleActions, false));
+                points.add(new AutoPoint(new Point(1.25 * Game.TILE_SIZE, 2.25 * Game.TILE_SIZE), purpleActions, true));
+                points.add(new AutoPoint(new Point(1.25 * Game.TILE_SIZE, 1.25 * Game.TILE_SIZE), yellowActions, false));
+//                points.add(new AutoPoint(new Point(0.5 * Game.TILE_SIZE, 1 * Game.TILE_SIZE), yellowActions, false));
                 break;
             case 2:
-//                purpleActions.add(new TurnAction(chassis, 1, 45));
+//                purpleActions.add(new TurnAction(chassis, 1, -45)); // try removing this
 //                AutoPathHelper.addRollerBackwardMovement(chassis, purpleActions);
-                points.add(new AutoPoint(new Point(4.25 * Game.TILE_SIZE, 2 * Game.TILE_SIZE), purpleActions, false));
-                points.add(new AutoPoint(new Point(4.75 * Game.TILE_SIZE, 2.25 * Game.TILE_SIZE), purpleActions, true));
-                points.add(new AutoPoint(new Point(4.75 * Game.TILE_SIZE, 1 * Game.TILE_SIZE), yellowActions, false));
-//                points.add(new AutoPoint(new Point(5.5 * Game.TILE_SIZE, 1 * Game.TILE_SIZE), yellowActions, true));
+                points.add(new AutoPoint(new Point(1.75 * Game.TILE_SIZE, 3 * Game.TILE_SIZE), purpleActions, false));
+                points.add(new AutoPoint(new Point(1.25 * Game.TILE_SIZE, 2.75 * Game.TILE_SIZE), purpleActions, true));
+                points.add(new AutoPoint(new Point(1.75 * Game.TILE_SIZE, 1.25 * Game.TILE_SIZE), yellowActions, false));
+//                points.add(new AutoPoint(new Point(0.5 * Game.TILE_SIZE, 1 * Game.TILE_SIZE), yellowActions, false));
                 break;
             case 1:
             default:
 //                AutoPathHelper.addRollerBackwardMovement(chassis, purpleActions);
-                points.add(new AutoPoint(new Point(4 * Game.TILE_SIZE, 2.5 * Game.TILE_SIZE), purpleActions, false));
-                points.add(new AutoPoint(new Point(4.5 * Game.TILE_SIZE, 2.5 * Game.TILE_SIZE), purpleActions, true));
-                points.add(new AutoPoint(new Point(4.5 * Game.TILE_SIZE, 1 * Game.TILE_SIZE), yellowActions, false));
-//                points.add(new AutoPoint(new Point(5.5 * Game.TILE_SIZE, 1 * Game.TILE_SIZE), yellowActions, true));
+                points.add(new AutoPoint(new Point(2 * Game.TILE_SIZE, 2.5 * Game.TILE_SIZE), purpleActions, false));
+                points.add(new AutoPoint(new Point(1.5 * Game.TILE_SIZE, 2.5 * Game.TILE_SIZE), purpleActions, true));
+                points.add(new AutoPoint(new Point(1.5 * Game.TILE_SIZE, 1.25 * Game.TILE_SIZE), yellowActions, false));
+//                points.add(new AutoPoint(new Point(0.5 * Game.TILE_SIZE, 1 * Game.TILE_SIZE), yellowActions, false));
                 break;
         }
-        points.add(new AutoPoint(new Point(6 * Game.TILE_SIZE, Game.TILE_SIZE), new ArrayList<>(), false));
-        path = new AutoPath(chassis, points, true);
+        points.add(new AutoPoint(new Point(0, Game.TILE_SIZE), new ArrayList<>(), false));
+        path = new AutoPath(chassis, points, 90);
     }
 
     @Override

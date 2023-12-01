@@ -12,15 +12,15 @@ public class TurnAction extends AutoAction {
 //    public double arcLength;
     public long startTime;
 
-    public TurnAction(Chassis chassis, double power, AutoLine line) {
-        super(chassis);
-//        this.power = power * Math.signum(line.getAngle());
-        this.power = Math.signum(line.getAngle()) * power;
-        this.angle = Math.abs(line.getAngle());
-        this.turnedAngle = 0;
-//        this.arcLength = Math.toRadians(angle) * Chassis.ROBOT_WIDTH / 2;
-        this.startTime = System.currentTimeMillis();
-    }
+//    public TurnAction(Chassis chassis, double power, AutoLine line) {
+//        super(chassis);
+////        this.power = power * Math.signum(line.getAngle());
+//        this.power = Math.signum(line.getAngle()) * power;
+//        this.angle = Math.abs(line.getAngle());
+//        this.turnedAngle = 0;
+////        this.arcLength = Math.toRadians(angle) * Chassis.ROBOT_WIDTH / 2;
+//        this.startTime = System.currentTimeMillis();
+//    }
 
     public TurnAction(Chassis chassis, double power, double angle) {
         super(chassis);
