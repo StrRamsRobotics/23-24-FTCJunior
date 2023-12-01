@@ -45,16 +45,18 @@ public class TurnAction extends AutoAction {
 //        chassis.logHelper.addData("ArcLength", arcLength);
 //        if (distance < arcLength) {
         if (turnedAngle < angle) {
-            chassis.fr.setPower(power);
-            chassis.fl.setPower(-power);
+            // positive angle should turn right
+            // negative angle should turn left
+            chassis.fr.setPower(-power);
+            chassis.fl.setPower(power);
             if (!Chassis.TWO_WHEELED) {
-                chassis.br.setPower(power);
-                chassis.bl.setPower(-power);
+                chassis.br.setPower(-power);
+                chassis.bl.setPower(power);
             }
-            chassis.logHelper.addData("Power FR", power);
-            chassis.logHelper.addData("Power FL", -power);
-            chassis.logHelper.addData("Power BR", power);
-            chassis.logHelper.addData("Power BL", -power);
+            chassis.logHelper.addData("Power FR", -power);
+            chassis.logHelper.addData("Power FL", power);
+            chassis.logHelper.addData("Power BR", -power);
+            chassis.logHelper.addData("Power BL", power);
             turnedAngle += (currentTime - startTime) / 1000.0 * Chassis.TURN_ANGLE_PER_SECOND;
         } else {
             chassis.fr.setPower(0);
