@@ -84,29 +84,29 @@ public class AprilTagAction extends AutoAction {
                     chassis.logHelper.addData("AprilTag X", detection.pose.x);
                     chassis.logHelper.addData("AprilTag Y", detection.pose.y);
                     chassis.logHelper.addData("AprilTag Z", detection.pose.z);
-//                    if (
-//                            detection.id == LEFT_BLUE_ID && route == 0 && team == Game.BLUE_TEAM ||
-//                            detection.id == CENTER_BLUE_ID && route == 1 && team == Game.BLUE_TEAM ||
-//                            detection.id == RIGHT_BLUE_ID && route == 2 && team == Game.BLUE_TEAM ||
-//                            detection.id == LEFT_RED_ID && route == 0 && team == Game.RED_TEAM ||
-//                            detection.id == CENTER_RED_ID && route == 1 && team == Game.RED_TEAM ||
-//                            detection.id == RIGHT_RED_ID && route == 2 && team == Game.RED_TEAM
-//                    ) {
+                    if (
+                            detection.id == LEFT_BLUE_ID && route == 0 && team == Game.BLUE_TEAM ||
+                            detection.id == CENTER_BLUE_ID && route == 1 && team == Game.BLUE_TEAM ||
+                            detection.id == RIGHT_BLUE_ID && route == 2 && team == Game.BLUE_TEAM ||
+                            detection.id == LEFT_RED_ID && route == 0 && team == Game.RED_TEAM ||
+                            detection.id == CENTER_RED_ID && route == 1 && team == Game.RED_TEAM ||
+                            detection.id == RIGHT_RED_ID && route == 2 && team == Game.RED_TEAM
+                    ) {
                         if (detection.pose.x >= DETECTION_X) {
-                            chassis.logHelper.addData("AprilTag Action", "Turn Left");
-                            chassis.fr.setPower(Chassis.MOVE_POWER / 3);
-                            chassis.fl.setPower(0);
+                            chassis.logHelper.addData("AprilTag Action", "Turn Right");
+                            chassis.fr.setPower(-Chassis.SLOW_MOVE_POWER);
+                            chassis.fl.setPower(Chassis.SLOW_MOVE_POWER);
                             if (!Chassis.TWO_WHEELED) {
-                                chassis.br.setPower(Chassis.MOVE_POWER / 3);
-                                chassis.bl.setPower(0);
+                                chassis.br.setPower(-Chassis.SLOW_MOVE_POWER);
+                                chassis.bl.setPower(Chassis.SLOW_MOVE_POWER);
                             }
                         } else if (detection.pose.x <= -DETECTION_X) {
-                            chassis.logHelper.addData("AprilTag Action", "Turn Right");
-                            chassis.fl.setPower(Chassis.MOVE_POWER / 3);
-                            chassis.fr.setPower(0);
+                            chassis.logHelper.addData("AprilTag Action", "Turn Left");
+                            chassis.fr.setPower(Chassis.SLOW_MOVE_POWER);
+                            chassis.fl.setPower(-Chassis.SLOW_MOVE_POWER);
                             if (!Chassis.TWO_WHEELED) {
-                                chassis.bl.setPower(Chassis.MOVE_POWER / 3);
-                                chassis.br.setPower(0);
+                                chassis.fr.setPower(Chassis.SLOW_MOVE_POWER);
+                                chassis.fl.setPower(-Chassis.SLOW_MOVE_POWER);
                             }
                         } else {
                             chassis.logHelper.addData("AprilTag Action", "AprilTag Centered");
@@ -120,7 +120,7 @@ public class AprilTagAction extends AutoAction {
                             });
                             active = false;
                         }
-//                    }
+                    }
                 }
             }
         }
