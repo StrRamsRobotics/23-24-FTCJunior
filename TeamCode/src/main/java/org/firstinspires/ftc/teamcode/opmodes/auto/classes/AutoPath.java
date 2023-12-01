@@ -23,18 +23,19 @@ public class AutoPath {
     public ArrayList<AutoPoint> autoPoints;
     public ArrayList<AutoLine> lines;
     public double currentHeading = 0;
-    public double endHeading = 0;
+//    public double endHeading = 0;
     public boolean active = true;
     public boolean running = true;
     public boolean justSwitched = false;
     public double switchTime = 0;
 //    public Position position = new Position(DistanceUnit.INCH, 0, 0, 0, 0);
 
-    public AutoPath(Chassis chassis, ArrayList<AutoPoint> autoPoints, double currentHeading, double endHeading) {
+//    public AutoPath(Chassis chassis, ArrayList<AutoPoint> autoPoints, double currentHeading, double endHeading) {
+    public AutoPath(Chassis chassis, ArrayList<AutoPoint> autoPoints, double currentHeading) {
         this.chassis = chassis;
         this.autoPoints = autoPoints;
         this.currentHeading = currentHeading;
-        this.endHeading = endHeading;
+//        this.endHeading = endHeading;
 
         this.lines = new ArrayList<>();
         for (AutoPoint autoPoint : autoPoints) {
@@ -64,8 +65,8 @@ public class AutoPath {
 
                 currentHeading = line.getHeading();
             }
-            autoPoints.get(autoPoints.size() - 1)
-                    .addAutoAction(new TurnAction(chassis, Chassis.MOVE_POWER, MathHelper.toHeading(endHeading - currentHeading)));
+//            autoPoints.get(autoPoints.size() - 1)
+//                    .addAutoAction(new TurnAction(chassis, Chassis.MOVE_POWER, MathHelper.toHeading(endHeading - currentHeading)));
 //            position = new Position(DistanceUnit.INCH, currentPoint.x, currentPoint.y, 0, 0);
         }
         if (autoPoints.size() > 1) {
