@@ -26,7 +26,7 @@ public class RightBlueAuto3 extends BaseAuto {
     @Override
     public void createPoints() {
         // based off of front of robot
-        points.add(new AutoPoint(new Point(0, 4.5 * Game.TILE_SIZE), new ArrayList<>(), false));
+        points.add(new AutoPoint(new Point(0.5, 4.5 * Game.TILE_SIZE), new ArrayList<>(), false));
         ArrayList<AutoAction> purpleActions = new ArrayList<>();
         ArrayList<AutoAction> yellowActions = new ArrayList<>();
         yellowActions.add(new AprilTagAction(chassis, Game.BLUE_TEAM, route));
