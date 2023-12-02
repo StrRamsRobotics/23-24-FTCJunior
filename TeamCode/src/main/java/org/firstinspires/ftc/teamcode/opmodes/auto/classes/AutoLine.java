@@ -26,7 +26,7 @@ public class AutoLine {
 //    }
 
     public double getHeading() {
-        double heading = Math.toDegrees(-(Math.atan2(point2.y - point1.y, point2.x - point1.x) - Math.PI / 2));
+        double heading = Math.toDegrees(-(Math.atan2(point1.y - point2.y, point2.x - point1.x) - Math.PI / 2));
         return point1.isReverse ? MathHelper.toHeading(heading - 180) : MathHelper.toHeading(heading);
     }
 
