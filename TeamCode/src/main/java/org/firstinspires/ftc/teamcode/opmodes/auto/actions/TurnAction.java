@@ -57,7 +57,7 @@ public class TurnAction extends AutoAction {
             chassis.logHelper.addData("Power FL", power);
             chassis.logHelper.addData("Power BR", -power);
             chassis.logHelper.addData("Power BL", power);
-            turnedAngle += (currentTime - startTime) / 1000.0 * Chassis.TURN_ANGLE_PER_SECOND;
+            turnedAngle = (currentTime - startTime) / 1000.0 * Chassis.TURN_ANGLE_PER_SECOND;
         } else {
             chassis.fr.setPower(0);
             chassis.fl.setPower(0);
