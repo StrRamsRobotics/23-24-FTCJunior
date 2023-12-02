@@ -46,6 +46,12 @@ public class ArcadeDriveTeleOp extends BaseTeleop {
             if (a) {
                 chassis.hang.setPower(1);
             }
+            else if (x) {
+                chassis.hang.setPower(-1);
+            }
+            else {
+                chassis.hang.setPower(0);
+            }
         }
     }
 
