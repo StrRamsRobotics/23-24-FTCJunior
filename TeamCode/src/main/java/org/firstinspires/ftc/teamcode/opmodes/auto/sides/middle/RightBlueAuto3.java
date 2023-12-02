@@ -38,27 +38,27 @@ public class RightBlueAuto3 extends BaseAuto {
         switch(route) {
             case 0:
                 points.add(new AutoPoint(new Point(1.25 * Game.TILE_SIZE, 4.25 * Game.TILE_SIZE), purpleActions, true));
-                points.add(new AutoPoint(new Point(0.75 * Game.TILE_SIZE, 4.5 * Game.TILE_SIZE), purpleActions, false));
-                points.add(new AutoPoint(new Point(2.5 * Game.TILE_SIZE, 4.5 * Game.TILE_SIZE), purpleActions, false));
-                points.add(new AutoPoint(new Point(2.5 * Game.TILE_SIZE, 2 * Game.TILE_SIZE), purpleActions, false));
-                points.add(new AutoPoint(new Point(1.25 * Game.TILE_SIZE, 0.75 * Game.TILE_SIZE), purpleActions, false));
+                points.add(new AutoPoint(new Point(0.75 * Game.TILE_SIZE, 4.5 * Game.TILE_SIZE), new ArrayList<>(), false));
+                points.add(new AutoPoint(new Point(2.5 * Game.TILE_SIZE, 4.5 * Game.TILE_SIZE), new ArrayList<>(), false));
+                points.add(new AutoPoint(new Point(2.5 * Game.TILE_SIZE, 2 * Game.TILE_SIZE), new ArrayList<>(), false));
+                points.add(new AutoPoint(new Point(1.25 * Game.TILE_SIZE, 0.75 * Game.TILE_SIZE), new ArrayList<>(), false));
                 points.add(new AutoPoint(new Point(1.25 * Game.TILE_SIZE, 0.7 * Game.TILE_SIZE), yellowActions, false));
                 break;
             case 2:
                 points.add(new AutoPoint(new Point(1.25 * Game.TILE_SIZE, 4.75 * Game.TILE_SIZE), purpleActions, true));
-                points.add(new AutoPoint(new Point(0.75 * Game.TILE_SIZE, 4.5 * Game.TILE_SIZE), purpleActions, false));
-                points.add(new AutoPoint(new Point(2.5 * Game.TILE_SIZE, 4.5 * Game.TILE_SIZE), purpleActions, false));
-                points.add(new AutoPoint(new Point(2.5 * Game.TILE_SIZE, 2 * Game.TILE_SIZE), purpleActions, false));
-                points.add(new AutoPoint(new Point(1.75 * Game.TILE_SIZE, 0.75 * Game.TILE_SIZE), purpleActions, false));
+                points.add(new AutoPoint(new Point(0.75 * Game.TILE_SIZE, 4.5 * Game.TILE_SIZE), new ArrayList<>(), false));
+                points.add(new AutoPoint(new Point(2.5 * Game.TILE_SIZE, 4.5 * Game.TILE_SIZE), new ArrayList<>(), false));
+                points.add(new AutoPoint(new Point(2.5 * Game.TILE_SIZE, 2 * Game.TILE_SIZE), new ArrayList<>(), false));
+                points.add(new AutoPoint(new Point(1.75 * Game.TILE_SIZE, 0.75 * Game.TILE_SIZE), new ArrayList<>(), false));
                 points.add(new AutoPoint(new Point(1.75 * Game.TILE_SIZE, 0.7 * Game.TILE_SIZE), yellowActions, false));
                 break;
             case 1:
             default:
                 points.add(new AutoPoint(new Point(1.5 * Game.TILE_SIZE, 4.5 * Game.TILE_SIZE), purpleActions, true));
-                points.add(new AutoPoint(new Point(1.25 * Game.TILE_SIZE, 4.5 * Game.TILE_SIZE), purpleActions, false));
-                points.add(new AutoPoint(new Point(2.5 * Game.TILE_SIZE, 5 * Game.TILE_SIZE), purpleActions, false));
-                points.add(new AutoPoint(new Point(2.5 * Game.TILE_SIZE, 2 * Game.TILE_SIZE), purpleActions, false));
-                points.add(new AutoPoint(new Point(1.5 * Game.TILE_SIZE, 0.75 * Game.TILE_SIZE), purpleActions, false));
+                points.add(new AutoPoint(new Point(1.25 * Game.TILE_SIZE, 4.5 * Game.TILE_SIZE), new ArrayList<>(), false));
+                points.add(new AutoPoint(new Point(2.5 * Game.TILE_SIZE, 5 * Game.TILE_SIZE), new ArrayList<>(), false));
+                points.add(new AutoPoint(new Point(2.5 * Game.TILE_SIZE, 2 * Game.TILE_SIZE), new ArrayList<>(), false));
+                points.add(new AutoPoint(new Point(1.5 * Game.TILE_SIZE, 0.75 * Game.TILE_SIZE), new ArrayList<>(), false));
                 points.add(new AutoPoint(new Point(1.5 * Game.TILE_SIZE, 0.7 * Game.TILE_SIZE), yellowActions, false));
                 break;
         }
