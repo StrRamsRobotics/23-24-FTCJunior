@@ -31,6 +31,8 @@ public class Chassis {
     public static String FLAP_NAME = "flap";
     public static String CAMERA_NAME = "camera";
 
+    public static String HANG_NAME = "hang";
+
 //    public static final boolean TANK_DRIVE = false; // useless now because theres two opmodes
     public static final boolean TWO_WHEELED = true;
     public static final boolean HAS_CHASSIS_ENCODERS = false;
@@ -42,6 +44,7 @@ public class Chassis {
 
     public static final boolean IS_FLAP_CR = false;
 
+    public static final boolean HAS_HANG = true;
     public static final double MOVE_POWER = 0.75;
     public static final double SLOW_MOVE_POWER = 0.25;
     public static final double ARM_POWER = 0.6;
@@ -64,7 +67,7 @@ public class Chassis {
     public static final int FLAP_WAIT_TIME = 1000;
     public static final int ROLLER_WAIT_TIME = 1000;
 
-    public DcMotorEx fr, fl, br, bl;
+    public DcMotorEx fr, fl, br, bl, hang;
     public DcMotorEx arm, pivot, roller;
     public Servo flap;
     public CRServoImplEx flapCR;
@@ -154,6 +157,13 @@ public class Chassis {
                 br.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
                 bl.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
             }
+        }
+
+        if (HAS_HANG) {
+            hang = hardwareMap.get(DcMotorEx.class, HANG_NAME);
+            hang.setDirection(DcMotorEx.Direction.FORWARD);
+            hang.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
+            hang.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
         }
     }
 

@@ -41,6 +41,12 @@ public class ArcadeDriveTeleOp extends BaseTeleop {
             chassis.bl.setPower(MathHelper.deadzone(ly + rx, JOYSTICK_DEADZONE));
             chassis.br.setPower(MathHelper.deadzone(ly - rx, JOYSTICK_DEADZONE));
         }
+        // Hang
+        if (Chassis.HAS_HANG) {
+            if (a) {
+                chassis.hang.setPower(1);
+            }
+        }
     }
 
     public void controlGP2() {
