@@ -10,8 +10,6 @@ import org.firstinspires.ftc.teamcode.wrappers.Chassis;
 import java.util.ArrayList;
 
 public class AutoPath {
-    public static final double WAIT_TIME_AFTER_SWITCH = 1000;
-
     public Chassis chassis;
 
     public AutoPoint currentPoint;
@@ -22,37 +20,17 @@ public class AutoPath {
     public long prevTime;
     public ArrayList<AutoPoint> autoPoints;
     public ArrayList<AutoLine> lines;
+    public ArrayList<Double> angles;
     public double currentHeading = 0;
-//    public double endHeading = 0;
     public boolean active = true;
-    public boolean running = true;
-    public boolean justSwitched = false;
-    public double switchTime = 0;
-    public ArrayList<Double> angles = new ArrayList<>();
-//    public Position position = new Position(DistanceUnit.INCH, 0, 0, 0, 0);
 
-//    public AutoPath(Chassis chassis, ArrayList<AutoPoint> autoPoints, double currentHeading, double endHeading) {
     public AutoPath(Chassis chassis, ArrayList<AutoPoint> autoPoints, double currentHeading) {
         this.chassis = chassis;
         this.autoPoints = autoPoints;
         this.currentHeading = currentHeading;
-//        this.endHeading = endHeading;
 
         this.lines = new ArrayList<>();
-//        for (AutoPoint autoPoint : autoPoints) {
-//            if (autoPoints.indexOf(autoPoint) != autoPoints.size() - 1) {
-////                AutoLine line = getConnectingLine(autoPoint);
-////                if (autoPoint.heading == Double.MAX_VALUE) { // not the first
-////                    if (autoPoint.isReverse) {
-////                        autoPoint.heading = MathHelper.toHeading(line.getHeading() - 180);
-////                    }
-////                    else {
-////                        autoPoint.heading = line.getHeading();
-////                    }
-////                }
-////                lines.add(line);
-//            }
-//        }
+        this.angles = new ArrayList<>();
         if (autoPoints.size() > 0) {
             currentPoint = autoPoints.get(0);
             activePoint = currentPoint;
@@ -66,9 +44,6 @@ public class AutoPath {
                 angles.add(MathHelper.toHeading(line.getHeading() - currentHeading));
                 currentHeading = line.getHeading();
             }
-//            autoPoints.get(autoPoints.size() - 1)
-//                    .addAutoAction(new TurnAction(chassis, Chassis.MOVE_POWER, MathHelper.toHeading(endHeading - currentHeading)));
-//            position = new Position(DistanceUnit.INCH, currentPoint.x, currentPoint.y, 0, 0);
         }
         if (autoPoints.size() > 1) {
             nextPoint = autoPoints.get(1);
@@ -93,63 +68,42 @@ public class AutoPath {
         double stepDistance = (currentTime - prevTime) / 1000.0 * Chassis.MOVE_DISTANCE_PER_SECOND;
 
         if (activePoint != null && currentPoint != null) {
-//            if (running || (justSwitched && System.currentTimeMillis() - switchTime > WAIT_TIME_AFTER_SWITCH)) {
-                justSwitched = false;
-                running = true;
-
-                chassis.logHelper.addData("Number of points", autoPoints.size());;
-                chassis.logHelper.addData("Active point index", autoPoints.indexOf(activePoint));
-                chassis.logHelper.addData("Active point x", activePoint.x);
-                chassis.logHelper.addData("Active point y", activePoint.y);
-//                chassis.logHelper.addData("Active point heading", activePoint.heading);
-                chassis.logHelper.addData("Line heading", currentLine.getHeading());
-                chassis.logHelper.addData("Active point distance to current", activePoint.distanceTo(currentPoint));
-                chassis.logHelper.addData("Active point distance to next", activeDistanceToNext);
-                activePoint.tick();
-                chassis.logHelper.addData("Active point action index", activePoint.autoActions.indexOf(activePoint.currentAutoAction));
-                if (activePoint.currentAutoAction != null) {
-                    chassis.logHelper.addData("Active point action active", activePoint.currentAutoAction.active);
-                }
-                chassis.logHelper.addData("Active point active", activePoint.active);
-                chassis.logHelper.addData("Angle at point", angles.get(autoPoints.indexOf(activePoint)));
-                if (!activePoint.active) {
-                    currentPoint = currentLine.getNextPoint(currentPoint, stepDistance);
-                    double currentDistanceToNext = currentPoint.distanceTo(activePoint);
-                    chassis.logHelper.addData("Slope", currentLine.slope);
-                    chassis.logHelper.addData("Step distance", stepDistance);
-                    chassis.logHelper.addData("Current point x", currentPoint.x);
-                    chassis.logHelper.addData("Current point y", currentPoint.y);
-//                    chassis.logHelper.addData("Current point heading", currentPoint.heading);
-//                    checkAccuracy();
-                    if (currentDistanceToNext > activeDistanceToNext) {
-                        chassis.logHelper.addData("Next index", autoPoints.indexOf(nextPoint) + 1);
-                        if (autoPoints.indexOf(nextPoint) + 1 < autoPoints.size()) {
-                            activePoint = nextPoint;
-                            nextPoint = autoPoints.get(autoPoints.indexOf(activePoint) + 1);
-                            activeDistanceToNext = activePoint.distanceTo(nextPoint);
-                            currentPoint = activePoint;
-                            currentLine = lines.get(autoPoints.indexOf(activePoint));
-
-                            justSwitched = true;
-                            running = false;
-                            switchTime = System.currentTimeMillis();
-
-                        }
-                        else {
-                            stopPath();
-                        }
+            chassis.logHelper.addData("Number of points", autoPoints.size());;
+            chassis.logHelper.addData("Active point index", autoPoints.indexOf(activePoint));
+            chassis.logHelper.addData("Active point x", activePoint.x);
+            chassis.logHelper.addData("Active point y", activePoint.y);
+            chassis.logHelper.addData("Line heading", currentLine.getHeading());
+            chassis.logHelper.addData("Active point distance to current", activePoint.distanceTo(currentPoint));
+            chassis.logHelper.addData("Active point distance to next", activeDistanceToNext);
+            activePoint.tick();
+            chassis.logHelper.addData("Active point action index", activePoint.autoActions.indexOf(activePoint.currentAutoAction));
+            if (activePoint.currentAutoAction != null) {
+                chassis.logHelper.addData("Active point action active", activePoint.currentAutoAction.active);
+            }
+            chassis.logHelper.addData("Active point active", activePoint.active);
+            chassis.logHelper.addData("Angle at point", angles.get(autoPoints.indexOf(activePoint)));
+            logAngles();
+            if (!activePoint.active) {
+                currentPoint = currentLine.getNextPoint(currentPoint, stepDistance);
+                double currentDistanceToNext = currentPoint.distanceTo(activePoint);
+                chassis.logHelper.addData("Slope", currentLine.slope);
+                chassis.logHelper.addData("Step distance", stepDistance);
+                chassis.logHelper.addData("Current point x", currentPoint.x);
+                chassis.logHelper.addData("Current point y", currentPoint.y);
+                if (currentDistanceToNext > activeDistanceToNext) {
+                    chassis.logHelper.addData("Next index", autoPoints.indexOf(nextPoint) + 1);
+                    if (autoPoints.indexOf(nextPoint) + 1 < autoPoints.size()) {
+                        activePoint = nextPoint;
+                        nextPoint = autoPoints.get(autoPoints.indexOf(activePoint) + 1);
+                        activeDistanceToNext = activePoint.distanceTo(nextPoint);
+                        currentPoint = activePoint;
+                        currentLine = lines.get(autoPoints.indexOf(activePoint));
+                    }
+                    else {
+                        stopPath();
                     }
                 }
-//            }
-//            else {
-//                chassis.logHelper.addData("Cooling off motors...", "in progress");
-//                chassis.fr.setPower(0);
-//                chassis.fl.setPower(0);
-//                if (!Chassis.TWO_WHEELED) {
-//                    chassis.br.setPower(0);
-//                    chassis.bl.setPower(0);
-//                }
-//            }
+            }
         }
         else {
             stopPath();
@@ -158,16 +112,28 @@ public class AutoPath {
         chassis.logHelper.update();
     }
 
+    public void logAngles() {
+        String anglesString = "";
+        for (int i = 0; i < angles.size(); i++) {
+            anglesString += angles.get(i) + ", ";
+        }
+        chassis.logHelper.addData("Angles", anglesString);
+
+        String lineAnglesString = "";
+        for (int i = 0; i < lines.size(); i++) {
+            lineAnglesString += lines.get(i).getHeading() + ", ";
+        }
+        chassis.logHelper.addData("Line angles", lineAnglesString);
+    }
+
     public void stopPath() {
         active = false;
-//        if (this.pauseRobot) {
-            chassis.fr.setPower(0);
-            chassis.fl.setPower(0);
-            if (!Chassis.TWO_WHEELED) {
-                chassis.br.setPower(0);
-                chassis.bl.setPower(0);
-            }
-//        }
+        chassis.fr.setPower(0);
+        chassis.fl.setPower(0);
+        if (!Chassis.TWO_WHEELED) {
+            chassis.br.setPower(0);
+            chassis.bl.setPower(0);
+        }
     }
 
 //    public void checkAccuracy() {
