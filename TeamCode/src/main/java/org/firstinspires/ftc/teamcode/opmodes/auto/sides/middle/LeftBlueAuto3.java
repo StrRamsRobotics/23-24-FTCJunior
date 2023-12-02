@@ -56,7 +56,7 @@ public class LeftBlueAuto3 extends BaseAuto {
                 points.add(new AutoPoint(new Point(1.5 * Game.TILE_SIZE, 0.7 * Game.TILE_SIZE), yellowActions, false));
                 break;
         }
-        points.add(new AutoPoint(new Point(0, Game.TILE_SIZE), new ArrayList<>(), false));
+        points.add(new AutoPoint(new Point(0.5, Game.TILE_SIZE), new ArrayList<>(), false));
         path = new AutoPath(chassis, points, 90);
     }
 
