@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.opmodes.auto.sides.pull;
+package org.firstinspires.ftc.teamcode.opmodes.auto.sides.front.pull;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 

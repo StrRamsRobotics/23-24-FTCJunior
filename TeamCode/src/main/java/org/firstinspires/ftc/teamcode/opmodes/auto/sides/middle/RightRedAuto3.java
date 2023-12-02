@@ -1,10 +1,9 @@
-package org.firstinspires.ftc.teamcode.opmodes.auto.sides.push;
+package org.firstinspires.ftc.teamcode.opmodes.auto.sides.middle;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 import org.firstinspires.ftc.teamcode.generic.classes.Point;
 import org.firstinspires.ftc.teamcode.opmodes.auto.actions.AprilTagAction;
-import org.firstinspires.ftc.teamcode.opmodes.auto.actions.TurnAction;
 import org.firstinspires.ftc.teamcode.opmodes.auto.actions.VisionAction;
 import org.firstinspires.ftc.teamcode.opmodes.auto.actions.WaitAction;
 import org.firstinspires.ftc.teamcode.opmodes.auto.classes.AutoAction;
@@ -17,8 +16,8 @@ import org.firstinspires.ftc.teamcode.wrappers.Game;
 
 import java.util.ArrayList;
 
-@Autonomous(name="rightRedAuto2")
-public class RightRedAuto2 extends BaseAuto {
+@Autonomous(name="rightRedAuto3")
+public class RightRedAuto3 extends BaseAuto {
     @Override
     public void runSetup() {
         visionAction = new VisionAction(chassis, false);

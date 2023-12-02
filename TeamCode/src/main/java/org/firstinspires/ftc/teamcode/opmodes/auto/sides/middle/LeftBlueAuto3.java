@@ -1,24 +1,21 @@
-package org.firstinspires.ftc.teamcode.opmodes.auto.sides.push;
+package org.firstinspires.ftc.teamcode.opmodes.auto.sides.middle;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 import org.firstinspires.ftc.teamcode.generic.classes.Point;
 import org.firstinspires.ftc.teamcode.opmodes.auto.actions.AprilTagAction;
-import org.firstinspires.ftc.teamcode.opmodes.auto.actions.TurnAction;
 import org.firstinspires.ftc.teamcode.opmodes.auto.actions.VisionAction;
-import org.firstinspires.ftc.teamcode.opmodes.auto.actions.WaitAction;
 import org.firstinspires.ftc.teamcode.opmodes.auto.classes.AutoAction;
 import org.firstinspires.ftc.teamcode.opmodes.auto.classes.AutoPath;
 import org.firstinspires.ftc.teamcode.opmodes.auto.classes.AutoPoint;
 import org.firstinspires.ftc.teamcode.opmodes.auto.helpers.AutoPathHelper;
 import org.firstinspires.ftc.teamcode.opmodes.base.BaseAuto;
-import org.firstinspires.ftc.teamcode.wrappers.Chassis;
 import org.firstinspires.ftc.teamcode.wrappers.Game;
 
 import java.util.ArrayList;
 
-@Autonomous(name="leftBlueAuto2")
-public class LeftBlueAuto2 extends BaseAuto {
+@Autonomous(name="leftBlueAuto3")
+public class LeftBlueAuto3 extends BaseAuto {
 
     @Override
     public void runSetup() {
