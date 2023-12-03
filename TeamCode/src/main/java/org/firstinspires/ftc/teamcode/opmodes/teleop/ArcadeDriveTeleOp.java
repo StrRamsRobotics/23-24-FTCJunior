@@ -8,7 +8,7 @@ import org.firstinspires.ftc.teamcode.wrappers.Chassis;
 
 @TeleOp(name = "ArcadeDriveTeleOp")
 public class ArcadeDriveTeleOp extends BaseTeleop {
-    public static final double JOYSTICK_DEADZONE = 0.1;
+    public static final double JOYSTICK_DEADZONE = 0.3;
 
 //    public AutoPath path;
 //    public boolean isArmUp = false;
@@ -34,33 +34,37 @@ public class ArcadeDriveTeleOp extends BaseTeleop {
     public void controlGP1() {
         double lx = gamepad1.left_stick_x, ly = gamepad1.left_stick_y, rx = gamepad1.right_stick_x, ry = gamepad1.right_stick_y;
         boolean a = gamepad1.a, b = gamepad1.b, x = gamepad1.x, y = gamepad1.y;
+        boolean up = gamepad1.dpad_up, down = gamepad1.dpad_down, left = gamepad1.dpad_left, right = gamepad1.dpad_right;
 
         // Arcade drive
-        chassis.fl.setPower(MathHelper.deadzone(ly + rx, JOYSTICK_DEADZONE));
-        chassis.fr.setPower(MathHelper.deadzone(ly - rx, JOYSTICK_DEADZONE));
+        chassis.fl.setPower(MathHelper.deadzone(- (ly + rx), JOYSTICK_DEADZONE));
+        chassis.fr.setPower(MathHelper.deadzone(- (ly - rx), JOYSTICK_DEADZONE));
         if (!Chassis.TWO_WHEELED) {
-            chassis.bl.setPower(MathHelper.deadzone(ly + rx, JOYSTICK_DEADZONE));
-            chassis.br.setPower(MathHelper.deadzone(ly - rx, JOYSTICK_DEADZONE));
+            chassis.bl.setPower(MathHelper.deadzone(-(ly + rx), JOYSTICK_DEADZONE));
+            chassis.br.setPower(MathHelper.deadzone(-(ly - rx), JOYSTICK_DEADZONE));
         }
         // Hang
         if (Chassis.HAS_HANG) {
             if (a) {
-                chassis.hang.setPower(1);
+                chassis.hang.setPower(0.1);
             } else if (x) {
-                chassis.hang.setPower(-1);
+                chassis.hang.setPower(-0.1);
             } else {
                 chassis.hang.setPower(0);
             }
         }
         if (Chassis.HAS_LAUNCHER) {
             if (y) {
-                chassis.launcher.setPosition(0);
-            } else {
                 chassis.launcher.setPosition(1);
+            } else {
+                chassis.launcher.setPosition(0);
             }
         }
         if (Chassis.HAS_ARM) {
-            if (b) {
+            if (up) {
+                chassis.arm.setPower(-1);
+            }
+            else if (down) {
                 chassis.arm.setPower(1);
             } else {
                 chassis.arm.setPower(0);

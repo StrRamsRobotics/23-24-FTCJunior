@@ -8,7 +8,7 @@ import org.firstinspires.ftc.teamcode.wrappers.Chassis;
 
 @TeleOp(name = "TankDriveTeleOp")
 public class TankDriveTeleOp extends BaseTeleop {
-    public static final double JOYSTICK_DEADZONE = 0.1;
+    public static final double JOYSTICK_DEADZONE = 0.3;
 
 //    public AutoPath path;
 //    public boolean isArmUp = false;
@@ -34,6 +34,8 @@ public class TankDriveTeleOp extends BaseTeleop {
     public void controlGP1() {
         double lx = gamepad1.left_stick_x, ly = gamepad1.left_stick_y, rx = gamepad1.right_stick_x, ry = gamepad1.right_stick_y;
         boolean a = gamepad1.a, b = gamepad1.b, x = gamepad1.x, y = gamepad1.y;
+        boolean up = gamepad1.dpad_up, down = gamepad1.dpad_down, left = gamepad1.dpad_left, right = gamepad1.dpad_right;
+
         // Tank drive
         chassis.fl.setPower(MathHelper.deadzone(-ly, JOYSTICK_DEADZONE));
         chassis.fr.setPower(MathHelper.deadzone(-ry, JOYSTICK_DEADZONE));
@@ -56,6 +58,16 @@ public class TankDriveTeleOp extends BaseTeleop {
                 chassis.launcher.setPosition(1);
             } else {
                 chassis.launcher.setPosition(0);
+            }
+        }
+        if (Chassis.HAS_ARM) {
+            if (up) {
+                chassis.arm.setPower(-1);
+            }
+            else if (down) {
+                chassis.arm.setPower(-1);
+            } else {
+                chassis.arm.setPower(0);
             }
         }
     }

@@ -27,6 +27,12 @@ public class ArmAction extends AutoAction {
         if (!this.isInitialized) {
             this.startTime = System.currentTimeMillis();
             this.isInitialized = true;
+            chassis.fr.setPower(0);
+            chassis.fl.setPower(0);
+            if (!Chassis.TWO_WHEELED) {
+                chassis.br.setPower(0);
+                chassis.bl.setPower(0);
+            }
         }
         long currentTime = System.currentTimeMillis();
         double a = (currentTime - startTime) / 1000.0 * Chassis.HEX_ANGLE_PER_SECOND;

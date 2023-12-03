@@ -34,11 +34,11 @@ public class LeftRedAuto3 extends BaseAuto {
         points.add(new AutoPoint(new Point(5.5 * Game.TILE_SIZE, 4.5 * Game.TILE_SIZE), initActions, false));
         ArrayList<AutoAction> purpleActions = new ArrayList<>();
         ArrayList<AutoAction> yellowActions = new ArrayList<>();
-        yellowActions.add(new AprilTagAction(chassis, Game.RED_TEAM, route));
-        AutoPathHelper.addArmUpMovement(chassis, yellowActions);
-        AutoPathHelper.addFlapOpenMovement(chassis, yellowActions);
-        yellowActions.add(new WaitAction(chassis, Chassis.FLAP_WAIT_TIME));
-        AutoPathHelper.addArmDownMovement(chassis, yellowActions);
+//        yellowActions.add(new AprilTagAction(chassis, Game.RED_TEAM, route));
+//        AutoPathHelper.addArmUpMovement(chassis, yellowActions);
+//        AutoPathHelper.addFlapOpenMovement(chassis, yellowActions);
+//        yellowActions.add(new WaitAction(chassis, Chassis.FLAP_WAIT_TIME));
+//        AutoPathHelper.addArmDownMovement(chassis, yellowActions);
 
         switch(route) {
             case 0:

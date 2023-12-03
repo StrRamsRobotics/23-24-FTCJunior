@@ -63,12 +63,6 @@ public class AprilTagAction extends AutoAction {
 
                 }
             });
-            chassis.fr.setPower(0);
-            chassis.fl.setPower(0);
-            if (!Chassis.TWO_WHEELED) {
-                chassis.br.setPower(0);
-                chassis.bl.setPower(0);
-            }
             this.isInitialized = true;
         }
         ArrayList<AprilTagDetection> detections = aprilTagDetectionPipeline.getDetectionsUpdate();
