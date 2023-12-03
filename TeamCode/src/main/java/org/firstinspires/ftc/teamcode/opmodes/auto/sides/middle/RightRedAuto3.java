@@ -51,8 +51,8 @@ public class RightRedAuto3 extends BaseAuto {
             case 2:
                 points.add(new AutoPoint(new Point(4.5 * Game.TILE_SIZE, 2.25 * Game.TILE_SIZE), purpleActions, true));
                 points.add(new AutoPoint(new Point(5.25 * Game.TILE_SIZE, 2.5 * Game.TILE_SIZE), new ArrayList<>(), false));
-                points.add(new AutoPoint(new Point(4.25 * Game.TILE_SIZE, 1.25 * Game.TILE_SIZE), new ArrayList<>(), false));
-                points.add(new AutoPoint(new Point(4.25 * Game.TILE_SIZE, 1.2 * Game.TILE_SIZE), yellowActions, false));
+                points.add(new AutoPoint(new Point(4.75 * Game.TILE_SIZE, 1.25 * Game.TILE_SIZE), new ArrayList<>(), false));
+                points.add(new AutoPoint(new Point(4.75 * Game.TILE_SIZE, 1.2 * Game.TILE_SIZE), yellowActions, false));
                 break;
             case 1:
             default:
