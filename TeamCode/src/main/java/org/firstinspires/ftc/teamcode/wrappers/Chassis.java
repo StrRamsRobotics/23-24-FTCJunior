@@ -30,7 +30,7 @@ public class Chassis {
     public static String ROLLER_NAME = "roller";
     public static String FLAP_NAME = "flap";
     public static String CAMERA_NAME = "camera";
-
+    public static String LAUNCHER_NAME = "launcher";
     public static String HANG_NAME = "hang";
 
 //    public static final boolean TANK_DRIVE = false; // useless now because theres two opmodes
@@ -41,6 +41,7 @@ public class Chassis {
     public static final boolean HAS_PIVOT = false;
     public static final boolean HAS_ROLLER = false;
     public static final boolean HAS_FLAP = false;
+    public static final boolean HAS_LAUNCHER = true;
 
     public static final boolean IS_FLAP_CR = false;
 
@@ -69,7 +70,7 @@ public class Chassis {
 
     public DcMotorEx fr, fl, br, bl, hang;
     public DcMotorEx arm, pivot, roller;
-    public Servo flap;
+    public Servo flap, launcher;
     public CRServoImplEx flapCR;
     public BNO055IMU imu;
     public OpenCvCamera camera;
@@ -164,6 +165,10 @@ public class Chassis {
             hang.setDirection(DcMotorEx.Direction.FORWARD);
             hang.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
             hang.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+        }
+        if (HAS_LAUNCHER) {
+            launcher = hardwareMap.get(Servo.class, LAUNCHER_NAME);
+            launcher.setDirection(Servo.Direction.FORWARD);
         }
     }
 

@@ -34,6 +34,7 @@ public class ArcadeDriveTeleOp extends BaseTeleop {
     public void controlGP1() {
         double lx = gamepad1.left_stick_x, ly = gamepad1.left_stick_y, rx = gamepad1.right_stick_x, ry = gamepad1.right_stick_y;
         boolean a = gamepad1.a, b = gamepad1.b, x = gamepad1.x, y = gamepad1.y;
+
         // Arcade drive
         chassis.fl.setPower(MathHelper.deadzone(ly + rx, JOYSTICK_DEADZONE));
         chassis.fr.setPower(MathHelper.deadzone(ly - rx, JOYSTICK_DEADZONE));
@@ -45,12 +46,17 @@ public class ArcadeDriveTeleOp extends BaseTeleop {
         if (Chassis.HAS_HANG) {
             if (a) {
                 chassis.hang.setPower(1);
-            }
-            else if (x) {
+            } else if (x) {
                 chassis.hang.setPower(-1);
-            }
-            else {
+            } else {
                 chassis.hang.setPower(0);
+            }
+        }
+        if (Chassis.HAS_LAUNCHER) {
+            if (y) {
+                chassis.launcher.setPosition(1);
+            } else {
+                chassis.launcher.setPosition(0);
             }
         }
     }
