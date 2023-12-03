@@ -47,11 +47,12 @@ public class TurnAction extends AutoAction {
         if (turnedAngle < angle) {
             // positive angle should turn right
             // negative angle should turn left
-            chassis.fr.setPower(-power);
-            chassis.fl.setPower(power);
+            chassis.fr.setPower(power);
+            chassis.fl.setPower(-power);
             if (!Chassis.TWO_WHEELED) {
-                chassis.br.setPower(-power);
-                chassis.bl.setPower(power);
+                chassis.br.setPower(power);
+                chassis.bl.setPower(-
+                        power);
             }
             chassis.logHelper.addData("Power FR", -power);
             chassis.logHelper.addData("Power FL", power);

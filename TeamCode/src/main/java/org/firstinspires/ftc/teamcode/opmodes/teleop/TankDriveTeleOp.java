@@ -42,6 +42,22 @@ public class TankDriveTeleOp extends BaseTeleop {
             chassis.bl.setPower(MathHelper.deadzone(ly, JOYSTICK_DEADZONE));
             chassis.br.setPower(MathHelper.deadzone(ry, JOYSTICK_DEADZONE));
         }
+        if (Chassis.HAS_HANG) {
+            if (a) {
+                chassis.hang.setPower(0.1);
+            } else if (x) {
+                chassis.hang.setPower(-0.1);
+            } else {
+                chassis.hang.setPower(0);
+            }
+        }
+        if (Chassis.HAS_LAUNCHER) {
+            if (y) {
+                chassis.launcher.setPosition(1);
+            } else {
+                chassis.launcher.setPosition(0);
+            }
+        }
     }
 
     public void controlGP2() {
