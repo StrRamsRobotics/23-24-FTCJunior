@@ -44,7 +44,7 @@ public class LeftBlueAuto3 extends BaseAuto {
 
         switch(route) {
             case 0:
-                points.add(new AutoPoint(new Point(1.25 * Game.TILE_SIZE, 2 * Game.TILE_SIZE), purpleActions, true));
+                points.add(new AutoPoint(new Point(1.5 * Game.TILE_SIZE, 2 * Game.TILE_SIZE), purpleActions, true));
                 points.add(new AutoPoint(new Point(0.75 * Game.TILE_SIZE, 2.5 * Game.TILE_SIZE), new ArrayList<>(), false));
                 points.add(new AutoPoint(new Point(1.25 * Game.TILE_SIZE, 1.25 * Game.TILE_SIZE), new ArrayList<>(), false));
                 points.add(new AutoPoint(new Point(1.25 * Game.TILE_SIZE, 1.2 * Game.TILE_SIZE), yellowActions, false));
@@ -58,7 +58,7 @@ public class LeftBlueAuto3 extends BaseAuto {
                 break;
             case 1:
             default:
-                points.add(new AutoPoint(new Point(1.5 * Game.TILE_SIZE, 2.5 * Game.TILE_SIZE), purpleActions, true));
+                points.add(new AutoPoint(new Point(1.75 * Game.TILE_SIZE, 2.5 * Game.TILE_SIZE), purpleActions, true));
                 points.add(new AutoPoint(new Point(1.25 * Game.TILE_SIZE, 2.5 * Game.TILE_SIZE), new ArrayList<>(), false));
                 points.add(new AutoPoint(new Point(1.5 * Game.TILE_SIZE, 1.25 * Game.TILE_SIZE), new ArrayList<>(), false));
                 points.add(new AutoPoint(new Point(1.5 * Game.TILE_SIZE, 1.2 * Game.TILE_SIZE), yellowActions, false));
