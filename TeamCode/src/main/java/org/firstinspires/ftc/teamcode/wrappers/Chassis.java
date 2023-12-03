@@ -170,7 +170,7 @@ public class Chassis {
         }
         if (HAS_LAUNCHER) {
             launcher = hardwareMap.get(Servo.class, LAUNCHER_NAME);
-            launcher.setDirection(Servo.Direction.FORWARD);
+            launcher.setDirection(Servo.Direction.REVERSE);
         }
     }
 
