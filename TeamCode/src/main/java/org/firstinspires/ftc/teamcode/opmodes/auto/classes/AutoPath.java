@@ -5,6 +5,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.Position;
 import org.firstinspires.ftc.teamcode.opmodes.auto.actions.MoveAction;
 import org.firstinspires.ftc.teamcode.opmodes.auto.actions.TurnAction;
 import org.firstinspires.ftc.teamcode.generic.helpers.MathHelper;
+import org.firstinspires.ftc.teamcode.opmodes.auto.actions.WaitAction;
 import org.firstinspires.ftc.teamcode.wrappers.Chassis;
 
 import java.util.ArrayList;
@@ -40,7 +41,8 @@ public class AutoPath {
                 lines.add(line);
                 autoPoint
                         .addAutoAction(new TurnAction(chassis, Chassis.MOVE_POWER, MathHelper.toHeading(line.getHeading() - currentHeading)))
-                        .addAutoAction(new MoveAction(chassis, Chassis.MOVE_POWER, autoPoint.isReverse));
+                        .addAutoAction(new MoveAction(chassis, Chassis.MOVE_POWER, autoPoint.isReverse))
+                        .addAutoAction(new WaitAction(chassis, 1000));
                 angles.add(MathHelper.toHeading(line.getHeading() - currentHeading));
                 currentHeading = line.getHeading();
             }
