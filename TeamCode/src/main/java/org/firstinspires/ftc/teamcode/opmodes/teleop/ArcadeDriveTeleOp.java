@@ -54,9 +54,9 @@ public class ArcadeDriveTeleOp extends BaseTeleop {
         }
         if (Chassis.HAS_LAUNCHER) {
             if (y) {
-                chassis.launcher.setPosition(1);
-            } else {
                 chassis.launcher.setPosition(0);
+            } else {
+                chassis.launcher.setPosition(1);
             }
         }
         if (Chassis.HAS_ARM) {
