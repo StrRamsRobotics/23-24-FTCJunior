@@ -52,36 +52,11 @@ public class Chassis {
     public static final double ARM_POWER = 0.75;
     public static final double PIVOT_POWER = 1;
     public static final double ROLLER_POWER = 1;
+    public static final double LAUNCHER_MOTOR_POWER = 0.1;
 
     public static final int ROBOT_WIDTH = 18; // inches
     public static final int ROBOT_LENGTH = 18; // inchjes <- written by trent lol
-    public static final double MOVE_DISTANCE_PER_SECOND = 48
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            * MOVE_POWER; // inches
+    public static final double MOVE_DISTANCE_PER_SECOND = 48 * MOVE_POWER; // inches
 //    public static final double TURN_DISTANCE_PER_SECOND = 60 * MOVE_POWER; // inches
 
     public static final double TURN_ANGLE_PER_SECOND = 180 * MOVE_POWER; // degrees

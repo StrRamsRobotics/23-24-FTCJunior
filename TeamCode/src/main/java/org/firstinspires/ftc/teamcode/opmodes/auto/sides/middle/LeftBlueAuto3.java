@@ -4,12 +4,15 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 import org.firstinspires.ftc.teamcode.generic.classes.Point;
 import org.firstinspires.ftc.teamcode.opmodes.auto.actions.AprilTagAction;
+import org.firstinspires.ftc.teamcode.opmodes.auto.actions.LauncherMotorAction;
 import org.firstinspires.ftc.teamcode.opmodes.auto.actions.VisionAction;
+import org.firstinspires.ftc.teamcode.opmodes.auto.actions.WaitAction;
 import org.firstinspires.ftc.teamcode.opmodes.auto.classes.AutoAction;
 import org.firstinspires.ftc.teamcode.opmodes.auto.classes.AutoPath;
 import org.firstinspires.ftc.teamcode.opmodes.auto.classes.AutoPoint;
 import org.firstinspires.ftc.teamcode.opmodes.auto.helpers.AutoPathHelper;
 import org.firstinspires.ftc.teamcode.opmodes.base.BaseAuto;
+import org.firstinspires.ftc.teamcode.wrappers.Chassis;
 import org.firstinspires.ftc.teamcode.wrappers.Game;
 
 import java.util.ArrayList;
@@ -26,7 +29,11 @@ public class LeftBlueAuto3 extends BaseAuto {
     @Override
     public void createPoints() {
         // based off of front of robot
-        points.add(new AutoPoint(new Point(0.5 * Game.TILE_SIZE, 2.5 * Game.TILE_SIZE), new ArrayList<>(), false));
+        ArrayList<AutoAction> initActions = new ArrayList<>();
+        initActions.add(new LauncherMotorAction(chassis, -Chassis.LAUNCHER_MOTOR_POWER));
+        initActions.add(new WaitAction(chassis, 1000));
+        initActions.add(new LauncherMotorAction(chassis, 0));
+        points.add(new AutoPoint(new Point(0.5 * Game.TILE_SIZE, 2.5 * Game.TILE_SIZE), initActions, false));
         ArrayList<AutoAction> purpleActions = new ArrayList<>();
         ArrayList<AutoAction> yellowActions = new ArrayList<>();
         yellowActions.add(new AprilTagAction(chassis, Game.BLUE_TEAM, route));
