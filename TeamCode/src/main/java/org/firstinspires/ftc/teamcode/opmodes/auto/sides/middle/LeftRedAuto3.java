@@ -60,7 +60,7 @@ public class LeftRedAuto3 extends BaseAuto {
             case 1:
             default:
                 points.add(new AutoPoint(new Point(4.5 * Game.TILE_SIZE, 4.5 * Game.TILE_SIZE), purpleActions, true));
-                points.add(new AutoPoint(new Point(4.75 * Game.TILE_SIZE, 4.5 * Game.TILE_SIZE), new ArrayList<>(), false));
+                points.add(new AutoPoint(new Point(5.25 * Game.TILE_SIZE, 4.5 * Game.TILE_SIZE), new ArrayList<>(), false));
                 points.add(new AutoPoint(new Point(3.5 * Game.TILE_SIZE, 5 * Game.TILE_SIZE), new ArrayList<>(), false));
                 points.add(new AutoPoint(new Point(3.5 * Game.TILE_SIZE, 2 * Game.TILE_SIZE), new ArrayList<>(), false));
                 points.add(new AutoPoint(new Point(4.5 * Game.TILE_SIZE, 1.25 * Game.TILE_SIZE), new ArrayList<>(), false));
