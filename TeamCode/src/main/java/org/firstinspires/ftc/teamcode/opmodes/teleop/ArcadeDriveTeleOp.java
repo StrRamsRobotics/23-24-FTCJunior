@@ -59,6 +59,13 @@ public class ArcadeDriveTeleOp extends BaseTeleop {
                 chassis.launcher.setPosition(0);
             }
         }
+        if (Chassis.HAS_ARM) {
+            if (b) {
+                chassis.arm.setPower(1);
+            } else {
+                chassis.arm.setPower(0);
+            }
+        }
     }
 
     public void controlGP2() {
