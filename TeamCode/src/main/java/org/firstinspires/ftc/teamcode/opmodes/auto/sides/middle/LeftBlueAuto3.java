@@ -45,7 +45,7 @@ public class LeftBlueAuto3 extends BaseAuto {
         switch(route) {
             case 0:
                 points.add(new AutoPoint(new Point(1.5 * Game.TILE_SIZE, 2 * Game.TILE_SIZE), purpleActions, true));
-                points.add(new AutoPoint(new Point(0.75 * Game.TILE_SIZE, 2.5 * Game.TILE_SIZE), new ArrayList<>(), false));
+                points.add(new AutoPoint(new Point(0.5 * Game.TILE_SIZE, 2.5 * Game.TILE_SIZE), new ArrayList<>(), false));
                 points.add(new AutoPoint(new Point(1.25 * Game.TILE_SIZE, 1.25 * Game.TILE_SIZE), new ArrayList<>(), false));
                 points.add(new AutoPoint(new Point(1.25 * Game.TILE_SIZE, 1.2 * Game.TILE_SIZE), yellowActions, false));
                 break;
@@ -59,16 +59,16 @@ public class LeftBlueAuto3 extends BaseAuto {
             case 1:
             default:
                 points.add(new AutoPoint(new Point(1.75 * Game.TILE_SIZE, 2.5 * Game.TILE_SIZE), purpleActions, true));
-                points.add(new AutoPoint(new Point(1.25 * Game.TILE_SIZE, 2.5 * Game.TILE_SIZE), new ArrayList<>(), false));
-                points.add(new AutoPoint(new Point(1.5 * Game.TILE_SIZE, 1.25 * Game.TILE_SIZE), new ArrayList<>(), false));
-                points.add(new AutoPoint(new Point(1.5 * Game.TILE_SIZE, 1.2 * Game.TILE_SIZE), yellowActions, false));
-                break;
+                points.add(new AutoPoint(new Point(1 * Game.TILE_SIZE, 2.5 * Game.TILE_SIZE), new ArrayList<>(), false));
+                    points.add(new AutoPoint(new Point(1.5 * Game.TILE_SIZE, 0.8 * Game.TILE_SIZE), new ArrayList<>(), false));
+                    points.add(new AutoPoint(new Point(1.5 * Game.TILE_SIZE, 0.75 * Game.TILE_SIZE), yellowActions, false));
+                    break;
+            }
+            points.add(new AutoPoint(new Point(0.5, Game.TILE_SIZE), new ArrayList<>(), false));
+            path = new AutoPath(chassis, points, 90);
         }
-        points.add(new AutoPoint(new Point(0.5, Game.TILE_SIZE), new ArrayList<>(), false));
-        path = new AutoPath(chassis, points, 90);
-    }
 
-    @Override
+        @Override
     public void runLoop() {
         if (route == -1) {
             visionAction.tick();
