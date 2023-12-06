@@ -37,11 +37,11 @@ public class ArcadeDriveTeleOp extends BaseTeleop {
         boolean up = gamepad1.dpad_up, down = gamepad1.dpad_down, left = gamepad1.dpad_left, right = gamepad1.dpad_right;
 
         // Arcade drive
-        chassis.fl.setPower(MathHelper.deadzone(- (ly + rx), JOYSTICK_DEADZONE));
-        chassis.fr.setPower(MathHelper.deadzone(- (ly - rx), JOYSTICK_DEADZONE));
+        chassis.fl.setPower(MathHelper.deadzone(- (ly + rx), JOYSTICK_DEADZONE) * Chassis.TELEOP_MOVE_POWER);
+        chassis.fr.setPower(MathHelper.deadzone(- (ly - rx), JOYSTICK_DEADZONE) * Chassis.TELEOP_MOVE_POWER);
         if (!Chassis.TWO_WHEELED) {
-            chassis.bl.setPower(MathHelper.deadzone(-(ly + rx), JOYSTICK_DEADZONE));
-            chassis.br.setPower(MathHelper.deadzone(-(ly - rx), JOYSTICK_DEADZONE));
+            chassis.bl.setPower(MathHelper.deadzone(-(ly + rx), JOYSTICK_DEADZONE) * Chassis.TELEOP_MOVE_POWER);
+            chassis.br.setPower(MathHelper.deadzone(-(ly - rx), JOYSTICK_DEADZONE) * Chassis.TELEOP_MOVE_POWER);
         }
         // Hang
         if (Chassis.HAS_HANG) {
