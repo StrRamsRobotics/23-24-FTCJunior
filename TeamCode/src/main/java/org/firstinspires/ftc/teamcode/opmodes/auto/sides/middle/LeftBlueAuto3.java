@@ -27,7 +27,6 @@ public class LeftBlueAuto3 extends BaseAuto {
 
     @Override
     public void createPoints() {
-        // based off of front of robot
         ArrayList<AutoAction> initActions = new ArrayList<>();
         initActions.add(new LauncherMotorAction(chassis, -Chassis.LAUNCHER_MOTOR_POWER));
         initActions.add(new WaitAction(chassis, 1000));
