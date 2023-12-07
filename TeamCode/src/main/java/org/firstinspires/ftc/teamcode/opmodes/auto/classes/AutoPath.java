@@ -44,6 +44,7 @@ public class AutoPath {
                 lines.add(line);
                 autoPoint
                         .addAutoAction(new TurnAction(chassis, Chassis.MOVE_POWER, MathHelper.toHeading(line.getHeading() - currentHeading)))
+                        .addAutoAction(new WaitAction(chassis, 1000))
                         .addAutoAction(new MoveAction(chassis, Chassis.MOVE_POWER, autoPoint.isReverse));
                 angles.add(MathHelper.toHeading(line.getHeading() - currentHeading));
                 currentHeading = line.getHeading();
