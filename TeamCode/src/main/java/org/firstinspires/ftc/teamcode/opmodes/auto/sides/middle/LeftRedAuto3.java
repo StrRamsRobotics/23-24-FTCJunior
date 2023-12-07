@@ -45,7 +45,8 @@ public class LeftRedAuto3 extends BaseAuto {
                 points.add(new AutoPoint(new Point(6 * Game.TS - 2.5 * Game.TS, 4.5 * Game.TS), new ArrayList<>(), false));
                 points.add(new AutoPoint(new Point(6 * Game.TS - 2.5 * Game.TS, 2 * Game.TS), new ArrayList<>(), false));
                 points.add(new AutoPoint(new Point(6 * Game.TS - 1.75 * Game.TS, 0.5 * Game.TS + Chassis.HRW + 0.1), new ArrayList<>(), false));
-                points.add(new AutoPoint(new Point(6 * Game.TS - 1.75 * Game.TS, 0.5 * Game.TS + Chassis.HRW), yellowActions, false));
+                points.add(new AutoPoint(new Point(6 * Game.TS - 1.75 * Game.TS, 0.5 * Game.TS + Chassis.HRW), yellowActions, true));
+                points.add(new AutoPoint(new Point(6 * Game.TS - 1.75 * Game.TS, 0.5 * Game.TS + Chassis.HRW + 0.1), new ArrayList<>(), false));
                 break;
             case 0:
                 points.add(new AutoPoint(new Point(6 * Game.TS - 1.75 * Game.TS, 4.5 * Game.TS), purpleActions, false));
@@ -54,7 +55,8 @@ public class LeftRedAuto3 extends BaseAuto {
                 points.add(new AutoPoint(new Point(6 * Game.TS - 2.5 * Game.TS, 4.5 * Game.TS), new ArrayList<>(), false));
                 points.add(new AutoPoint(new Point(6 * Game.TS - 2.5 * Game.TS, 2 * Game.TS), new ArrayList<>(), false));
                 points.add(new AutoPoint(new Point(6 * Game.TS - 1.25 * Game.TS, 0.5 * Game.TS + Chassis.HRW + 0.1), new ArrayList<>(), false));
-                points.add(new AutoPoint(new Point(6 * Game.TS - 1.25 * Game.TS, 0.5 * Game.TS + Chassis.HRW), yellowActions, false));
+                points.add(new AutoPoint(new Point(6 * Game.TS - 1.25 * Game.TS, 0.5 * Game.TS + Chassis.HRW), yellowActions, true));
+                points.add(new AutoPoint(new Point(6 * Game.TS - 1.25 * Game.TS, 0.5 * Game.TS + Chassis.HRW + 0.1), new ArrayList<>(), false));
                 break;
             case 1:
             default:
@@ -64,7 +66,8 @@ public class LeftRedAuto3 extends BaseAuto {
                 points.add(new AutoPoint(new Point(6 * Game.TS - 2.5 * Game.TS, 5.25 * Game.TS), new ArrayList<>(), false));
                 points.add(new AutoPoint(new Point(6 * Game.TS - 2.5 * Game.TS, 2 * Game.TS), new ArrayList<>(), false));
                 points.add(new AutoPoint(new Point(6 * Game.TS - 1.5 * Game.TS, 0.5 * Game.TS + Chassis.HRW + 0.1), new ArrayList<>(), false));
-                points.add(new AutoPoint(new Point(6 * Game.TS - 1.5 * Game.TS, 0.5 * Game.TS + Chassis.HRW), yellowActions, false));
+                points.add(new AutoPoint(new Point(6 * Game.TS - 1.5 * Game.TS, 0.5 * Game.TS + Chassis.HRW), yellowActions, true));
+                points.add(new AutoPoint(new Point(6 * Game.TS - 1.5 * Game.TS, 0.5 * Game.TS + Chassis.HRW + 0.1), new ArrayList<>(), false));
                 break;
         }
         points.add(new AutoPoint(new Point(6 * Game.TS - Chassis.HRW, 0.5 * Game.TS), new ArrayList<>(), false));
