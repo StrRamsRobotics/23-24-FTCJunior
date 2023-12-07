@@ -59,7 +59,7 @@ public class RightBlueAuto3 extends BaseAuto {
             case 1:
             default:
                 points.add(new AutoPoint(new Point(2 * Game.TS - Chassis.HRW, 4.5 * Game.TS), purpleActions, true));
-                points.add(new AutoPoint(new Point(1.5 * Game.TS, 4.5 * Game.TS - Chassis.HRW), new ArrayList<>(), false));
+                points.add(new AutoPoint(new Point(1.5 * Game.TS, 4.5 * Game.TS), new ArrayList<>(), false));
                 points.add(new AutoPoint(new Point(1.5 * Game.TS, 5.5 * Game.TS), new ArrayList<>(), false));
                 points.add(new AutoPoint(new Point(2.5 * Game.TS, 5.5 * Game.TS), new ArrayList<>(), false));
                 points.add(new AutoPoint(new Point(2.5 * Game.TS, 2 * Game.TS), new ArrayList<>(), false));
