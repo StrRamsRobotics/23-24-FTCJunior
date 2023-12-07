@@ -1,7 +1,6 @@
 package org.firstinspires.ftc.teamcode.opmodes.auto.deprecated;
 
 import org.firstinspires.ftc.teamcode.opmodes.auto.pipelines.VisionPipeline;
-import org.firstinspires.ftc.teamcode.wrappers.Chassis;
 import org.firstinspires.ftc.teamcode.wrappers.Game;
 import org.firstinspires.ftc.teamcode.wrappers.deprecated.ChassisOld;
 import org.openftc.easyopencv.OpenCvCamera;
@@ -62,14 +61,14 @@ public class MainAutoOld {
     public void executePurplePath() {
         switch (vision.route) {
             case VisionPipeline.LEFT_PATH:
-                chassis.moveChassisOld(1, Game.TILE_SIZE);
+                chassis.moveChassisOld(1, Game.TS);
                 chassis.turnChassisOld(-1, 45);
                 break;
             case VisionPipeline.CENTER_PATH:
-                chassis.moveChassisOld(1, Game.TILE_SIZE);
+                chassis.moveChassisOld(1, Game.TS);
                 break;
             case VisionPipeline.RIGHT_PATH:
-                chassis.moveChassisOld(1, Game.TILE_SIZE);
+                chassis.moveChassisOld(1, Game.TS);
                 chassis.turnChassisOld(1, 45);
                 break;
         }
@@ -95,7 +94,7 @@ public class MainAutoOld {
                         chassis.turnChassisOld(1, 45);
                         break;
                 }
-                chassis.moveChassisOld(1, Game.TILE_SIZE);
+                chassis.moveChassisOld(1, Game.TS);
                 break;
             case RIGHT_BLUE:
                 switch (vision.route) {
@@ -109,7 +108,7 @@ public class MainAutoOld {
                         chassis.turnChassisOld(1, 45);
                         break;
                 }
-                chassis.moveChassisOld(3, Game.TILE_SIZE);
+                chassis.moveChassisOld(3, Game.TS);
                 break;
             case LEFT_RED:
                 switch (vision.route) {
@@ -123,7 +122,7 @@ public class MainAutoOld {
                         chassis.turnChassisOld(-1, 135);
                         break;
                 }
-                chassis.moveChassisOld(3, Game.TILE_SIZE);
+                chassis.moveChassisOld(3, Game.TS);
                 break;
             case RIGHT_RED:
                 switch (vision.route) {
@@ -137,7 +136,7 @@ public class MainAutoOld {
                         chassis.turnChassisOld(-1, 135);
                         break;
                 }
-                chassis.moveChassisOld(1, Game.TILE_SIZE);
+                chassis.moveChassisOld(1, Game.TS);
                 break;
         }
         chassis.turnArmAuto(1, 120);
@@ -158,7 +157,7 @@ public class MainAutoOld {
                 chassis.turnChassisOld(1, 90);
                 break;
         }
-        chassis.moveChassisOld(-1, Game.TILE_SIZE);
+        chassis.moveChassisOld(-1, Game.TS);
         isExecutingBackstagePath = false;
     }
 }

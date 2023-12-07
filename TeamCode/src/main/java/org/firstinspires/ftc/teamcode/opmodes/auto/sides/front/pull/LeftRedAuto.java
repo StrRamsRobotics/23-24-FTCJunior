@@ -26,7 +26,7 @@ public class LeftRedAuto extends BaseAuto {
     @Override
     public void createPoints() {
         // based off of front of robot
-        points.add(new AutoPoint(new Point(6, 4.5 * Game.TILE_SIZE), new ArrayList<>(), true));
+        points.add(new AutoPoint(new Point(6, 4.5 * Game.TS), new ArrayList<>(), true));
         ArrayList<AutoAction> purpleActions = new ArrayList<>();
         ArrayList<AutoAction> yellowActions = new ArrayList<>();
         yellowActions.add(new AprilTagAction(chassis, Game.RED_TEAM, route));
@@ -39,29 +39,29 @@ public class LeftRedAuto extends BaseAuto {
             case 0:
 //                purpleActions.add(new TurnAction(chassis, 1, 45));
 //                AutoPathHelper.addRollerBackwardMovement(chassis, purpleActions);
-                points.add(new AutoPoint(new Point(4 * Game.TILE_SIZE, 4.5 * Game.TILE_SIZE), purpleActions, true));
-                points.add(new AutoPoint(new Point(3.5 * Game.TILE_SIZE, 4.5 * Game.TILE_SIZE), purpleActions, true));
-                points.add(new AutoPoint(new Point(3.5 * Game.TILE_SIZE, 2 * Game.TILE_SIZE), purpleActions, true));
-                points.add(new AutoPoint(new Point(4.25 * Game.TILE_SIZE, 1 * Game.TILE_SIZE), yellowActions, true));
+                points.add(new AutoPoint(new Point(4 * Game.TS, 4.5 * Game.TS), purpleActions, true));
+                points.add(new AutoPoint(new Point(3.5 * Game.TS, 4.5 * Game.TS), purpleActions, true));
+                points.add(new AutoPoint(new Point(3.5 * Game.TS, 2 * Game.TS), purpleActions, true));
+                points.add(new AutoPoint(new Point(4.25 * Game.TS, 1 * Game.TS), yellowActions, true));
                 break;
             case 2:
 //                purpleActions.add(new TurnAction(chassis, 1, -45));
 //                AutoPathHelper.addRollerBackwardMovement(chassis, purpleActions);
-                points.add(new AutoPoint(new Point(4 * Game.TILE_SIZE, 4.5 * Game.TILE_SIZE), purpleActions, true));
-                points.add(new AutoPoint(new Point(3.5 * Game.TILE_SIZE, 4.5 * Game.TILE_SIZE), purpleActions, true));
-                points.add(new AutoPoint(new Point(3.5 * Game.TILE_SIZE, 2 * Game.TILE_SIZE), purpleActions, true));
-                points.add(new AutoPoint(new Point(4.75 * Game.TILE_SIZE, 1 * Game.TILE_SIZE), yellowActions, true));
+                points.add(new AutoPoint(new Point(4 * Game.TS, 4.5 * Game.TS), purpleActions, true));
+                points.add(new AutoPoint(new Point(3.5 * Game.TS, 4.5 * Game.TS), purpleActions, true));
+                points.add(new AutoPoint(new Point(3.5 * Game.TS, 2 * Game.TS), purpleActions, true));
+                points.add(new AutoPoint(new Point(4.75 * Game.TS, 1 * Game.TS), yellowActions, true));
                 break;
             case 1:
             default:
 //                AutoPathHelper.addRollerBackwardMovement(chassis, purpleActions);
-                points.add(new AutoPoint(new Point(4 * Game.TILE_SIZE, 4.5 * Game.TILE_SIZE), purpleActions, true));
-                points.add(new AutoPoint(new Point(3.5 * Game.TILE_SIZE, 4.5 * Game.TILE_SIZE), purpleActions, true));
-                points.add(new AutoPoint(new Point(3.5 * Game.TILE_SIZE, 2 * Game.TILE_SIZE), purpleActions, true));
-                points.add(new AutoPoint(new Point(4.5 * Game.TILE_SIZE, 1 * Game.TILE_SIZE), yellowActions, true));
+                points.add(new AutoPoint(new Point(4 * Game.TS, 4.5 * Game.TS), purpleActions, true));
+                points.add(new AutoPoint(new Point(3.5 * Game.TS, 4.5 * Game.TS), purpleActions, true));
+                points.add(new AutoPoint(new Point(3.5 * Game.TS, 2 * Game.TS), purpleActions, true));
+                points.add(new AutoPoint(new Point(4.5 * Game.TS, 1 * Game.TS), yellowActions, true));
                 break;
         }
-        points.add(new AutoPoint(new Point(5.5 * Game.TILE_SIZE, Game.TILE_SIZE), new ArrayList<>(), true));
+        points.add(new AutoPoint(new Point(5.5 * Game.TS, Game.TS), new ArrayList<>(), true));
         path = new AutoPath(chassis, points, 90);
     }
 
