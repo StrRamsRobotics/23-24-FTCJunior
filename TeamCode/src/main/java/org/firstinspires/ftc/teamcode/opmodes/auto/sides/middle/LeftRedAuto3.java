@@ -68,7 +68,7 @@ public class LeftRedAuto3 extends BaseAuto {
                 break;
         }
         points.add(new AutoPoint(new Point(6 * Game.TS - Chassis.HRW, 0.5 * Game.TS), new ArrayList<>(), false));
-        path = new AutoPath(chassis, points, 90);
+        path = new AutoPath(chassis, points, -90);
     }
 
     @Override
