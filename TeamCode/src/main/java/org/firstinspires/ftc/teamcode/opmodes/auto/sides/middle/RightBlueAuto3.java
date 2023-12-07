@@ -39,9 +39,9 @@ public class RightBlueAuto3 extends BaseAuto {
 
         switch(route) {
             case 0:
-                points.add(new AutoPoint(new Point(1.75 * Game.TS, 4.5 * Game.TS), purpleActions, false));
-                points.add(new AutoPoint(new Point(1.75 * Game.TS, 4 * Game.TS - Chassis.HRW), new ArrayList<>(), true));
-                points.add(new AutoPoint(new Point(1.75 * Game.TS, 4.5 * Game.TS), new ArrayList<>(), false));
+                points.add(new AutoPoint(new Point(1.5 * Game.TS, 4.5 * Game.TS), purpleActions, false));
+                points.add(new AutoPoint(new Point(1.5 * Game.TS, 4 * Game.TS - Chassis.HRW), new ArrayList<>(), true));
+                points.add(new AutoPoint(new Point(1.5 * Game.TS, 4.5 * Game.TS), new ArrayList<>(), false));
                 points.add(new AutoPoint(new Point(2.5 * Game.TS, 4.5 * Game.TS), new ArrayList<>(), false));
                 points.add(new AutoPoint(new Point(2.5 * Game.TS, 2 * Game.TS), new ArrayList<>(), false));
                 points.add(new AutoPoint(new Point(1.25 * Game.TS, 0.5 * Game.TS + Chassis.HRW + Chassis.INTERMEDIATE_BACKBOARD), new ArrayList<>(), false));
@@ -49,9 +49,9 @@ public class RightBlueAuto3 extends BaseAuto {
                 points.add(new AutoPoint(new Point(1.25 * Game.TS, 0.5 * Game.TS + Chassis.HRW + Chassis.INTERMEDIATE_BACKBOARD), new ArrayList<>(), false));
                 break;
             case 2:
-                points.add(new AutoPoint(new Point(1.75 * Game.TS, 4.5 * Game.TS), purpleActions, false));
-                points.add(new AutoPoint(new Point(1.75 * Game.TS, 5 * Game.TS - Chassis.HRW), new ArrayList<>(), true));
-                points.add(new AutoPoint(new Point(1.75 * Game.TS, 4.5 * Game.TS), new ArrayList<>(), false));
+                points.add(new AutoPoint(new Point(1.5 * Game.TS, 4.5 * Game.TS), purpleActions, false));
+                points.add(new AutoPoint(new Point(1.5 * Game.TS, 5 * Game.TS - Chassis.HRW), new ArrayList<>(), true));
+                points.add(new AutoPoint(new Point(1.5 * Game.TS, 4.5 * Game.TS), new ArrayList<>(), false));
                 points.add(new AutoPoint(new Point(2.5 * Game.TS, 4.5 * Game.TS), new ArrayList<>(), false));
                 points.add(new AutoPoint(new Point(2.5 * Game.TS, 2 * Game.TS), new ArrayList<>(), false));
                 points.add(new AutoPoint(new Point(1.75 * Game.TS, 0.5 * Game.TS + Chassis.HRW + Chassis.INTERMEDIATE_BACKBOARD), new ArrayList<>(), false));
