@@ -43,9 +43,9 @@ public class AutoPath {
                 AutoLine line = getConnectingLine(autoPoint);
                 lines.add(line);
                 autoPoint
-                        .addAutoAction(new TurnAction(chassis, Chassis.MOVE_POWER, MathHelper.toHeading(line.getHeading() - currentHeading)))
+                        .addAutoAction(new TurnAction(chassis, MathHelper.getRealPowerFromVoltage(Chassis.MOVE_POWER, chassis.voltageSensor.getVoltage()), MathHelper.toHeading(line.getHeading() - currentHeading)))
                         .addAutoAction(new WaitAction(chassis, 1000))
-                        .addAutoAction(new MoveAction(chassis, Chassis.MOVE_POWER, autoPoint.isReverse));
+                        .addAutoAction(new MoveAction(chassis, MathHelper.getRealPowerFromVoltage(Chassis.MOVE_POWER, chassis.voltageSensor.getVoltage()), autoPoint.isReverse));
                 angles.add(MathHelper.toHeading(line.getHeading() - currentHeading));
                 currentHeading = line.getHeading();
             }

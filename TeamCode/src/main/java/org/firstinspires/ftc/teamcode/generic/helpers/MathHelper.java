@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.generic.helpers;
 
+import org.firstinspires.ftc.teamcode.wrappers.Chassis;
+
 public class MathHelper {
     public static double clamp(double value, double min, double max) {
         return Math.max(min, Math.min(max, value));
@@ -36,5 +38,10 @@ public class MathHelper {
 
     public static double percentError(double value1, double value2) {
         return Math.abs(percentChange(value1, value2)) * 100;
+    }
+
+    public static double getRealPowerFromVoltage(double power, double voltage) {
+        // https://www.desmos.com/calculator/vvaxfn7cpc
+        return Chassis.VOLTAGE_SLOPE * voltage + Chassis.VOLTAGE_Y_INTERCEPT;
     }
 }

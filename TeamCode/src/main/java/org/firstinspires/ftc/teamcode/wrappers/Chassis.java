@@ -8,6 +8,7 @@ import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.hardware.VoltageSensor;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
@@ -48,9 +49,11 @@ public class Chassis {
     public static final boolean HAS_HANG = true
             ;
     public static final double MOVE_POWER = 0.5;
+    public static final double VOLTAGE_Y_INTERCEPT = 2;
+    public static final double VOLTAGE_SLOPE = -0.12;
 
     public static final double TELEOP_MOVE_POWER = 0.5;
-    public static final double SLOW_MOVE_POWER = 0.25;
+    public static final double SLOW_MOVE_POWER = 0.25; // only apriltag, deprecated
     public static final double ARM_POWER = 0.75;
     public static final double PIVOT_POWER = 1;
     public static final double ROLLER_POWER = 1;
@@ -82,6 +85,7 @@ public class Chassis {
     public BNO055IMU imu;
     public OpenCvCamera camera;
     public HardwareMap hardwareMap;
+    public VoltageSensor voltageSensor;
     public Telemetry telemetry;
     public FtcDashboard ftcDashboard = FtcDashboard.getInstance();
     public LogHelper logHelper = new LogHelper(this);
@@ -96,6 +100,7 @@ public class Chassis {
     public void initializeUtils(HardwareMap hardwareMap, Telemetry telemetry) {
         this.hardwareMap = hardwareMap;
         this.telemetry = telemetry;
+        this.voltageSensor = hardwareMap.voltageSensor.iterator().next();
     }
 
     public void initializeIMU() {
