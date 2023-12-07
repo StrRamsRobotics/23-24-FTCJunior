@@ -31,7 +31,8 @@ public class LeftRedAuto3 extends BaseAuto {
         initActions.add(new LauncherMotorAction(chassis, -Chassis.LAUNCHER_MOTOR_POWER));
         initActions.add(new WaitAction(chassis, 1000));
         initActions.add(new LauncherMotorAction(chassis, 0));
-        points.add(new AutoPoint(new Point(5.5 * Game.TILE_SIZE, 4.5 * Game.TILE_SIZE), initActions, false));
+        //points.add(new AutoPoint(new Point(5.5 * Game.TILE_SIZE, 4.5 * Game.TILE_SIZE), initActions, false));
+        points.add(new AutoPoint(new Point(6 - 0.5 * Game.TILE_SIZE, 4.5 * Game.TILE_SIZE), initActions, false));
         ArrayList<AutoAction> purpleActions = new ArrayList<>();
         ArrayList<AutoAction> yellowActions = new ArrayList<>();
 //        yellowActions.add(new AprilTagAction(chassis, Game.RED_TEAM, route));
@@ -42,6 +43,7 @@ public class LeftRedAuto3 extends BaseAuto {
 
         switch(route) {
             case 0:
+                /*
                 points.add(new AutoPoint(new Point(4.75 * Game.TILE_SIZE, 4.75 * Game.TILE_SIZE), purpleActions, true));
                 points.add(new AutoPoint(new Point(5.25 * Game.TILE_SIZE, 4.5 * Game.TILE_SIZE), new ArrayList<>(), false));
                 points.add(new AutoPoint(new Point(3.5 * Game.TILE_SIZE, 4.5 * Game.TILE_SIZE), new ArrayList<>(), false));
@@ -49,7 +51,16 @@ public class LeftRedAuto3 extends BaseAuto {
                 points.add(new AutoPoint(new Point(4.25 * Game.TILE_SIZE, 1.25 * Game.TILE_SIZE), new ArrayList<>(), false));
                 points.add(new AutoPoint(new Point(4.25 * Game.TILE_SIZE, 1.2 * Game.TILE_SIZE), yellowActions, false));
                 break;
+                 */
+                points.add(new AutoPoint(new Point(6 - 1.25 * Game.TILE_SIZE, 4.75 * Game.TILE_SIZE), purpleActions, true));
+                points.add(new AutoPoint(new Point(6 - 0.75 * Game.TILE_SIZE, 4.5 * Game.TILE_SIZE), new ArrayList<>(), false));
+                points.add(new AutoPoint(new Point(6 - 2.5 * Game.TILE_SIZE, 4.5 * Game.TILE_SIZE), new ArrayList<>(), false));
+                points.add(new AutoPoint(new Point(6 - 2.5 * Game.TILE_SIZE, 2 * Game.TILE_SIZE), new ArrayList<>(), false));
+                points.add(new AutoPoint(new Point(6 - 1.75 * Game.TILE_SIZE, 1.25 * Game.TILE_SIZE), new ArrayList<>(), false));
+                points.add(new AutoPoint(new Point(6 - 1.75 * Game.TILE_SIZE, 1.2 * Game.TILE_SIZE), yellowActions, false));
+                break;
             case 2:
+                /*
                 points.add(new AutoPoint(new Point(4.75 * Game.TILE_SIZE, 4.25 * Game.TILE_SIZE), purpleActions, true));
                 points.add(new AutoPoint(new Point(5.25 * Game.TILE_SIZE, 4.5 * Game.TILE_SIZE), new ArrayList<>(), false));
                 points.add(new AutoPoint(new Point(3.5 * Game.TILE_SIZE, 4.5 * Game.TILE_SIZE), new ArrayList<>(), false));
@@ -57,8 +68,17 @@ public class LeftRedAuto3 extends BaseAuto {
                 points.add(new AutoPoint(new Point(4.25 * Game.TILE_SIZE, 1.25 * Game.TILE_SIZE), new ArrayList<>(), false));
                 points.add(new AutoPoint(new Point(4.25 * Game.TILE_SIZE, 1.2 * Game.TILE_SIZE), yellowActions, false));
                 break;
+                 */
+                points.add(new AutoPoint(new Point(6 - 1.25 * Game.TILE_SIZE, 4.25 * Game.TILE_SIZE), purpleActions, true));
+                points.add(new AutoPoint(new Point(6 - 0.75 * Game.TILE_SIZE, 4.5 * Game.TILE_SIZE), new ArrayList<>(), false));
+                points.add(new AutoPoint(new Point(6 - 2.5 * Game.TILE_SIZE, 4.5 * Game.TILE_SIZE), new ArrayList<>(), false));
+                points.add(new AutoPoint(new Point(6 - 2.5 * Game.TILE_SIZE, 2 * Game.TILE_SIZE), new ArrayList<>(), false));
+                points.add(new AutoPoint(new Point(6 - 1.25 * Game.TILE_SIZE, 1.25 * Game.TILE_SIZE), new ArrayList<>(), false));
+                points.add(new AutoPoint(new Point(6 - 1.25 * Game.TILE_SIZE, 1.2 * Game.TILE_SIZE), yellowActions, false));
+                break;
             case 1:
             default:
+                /*
                 points.add(new AutoPoint(new Point(4.5 * Game.TILE_SIZE, 4.5 * Game.TILE_SIZE), purpleActions, true));
                 points.add(new AutoPoint(new Point(5.25 * Game.TILE_SIZE, 4.5 * Game.TILE_SIZE), new ArrayList<>(), false));
                 points.add(new AutoPoint(new Point(3.5 * Game.TILE_SIZE, 5 * Game.TILE_SIZE), new ArrayList<>(), false));
@@ -66,8 +86,17 @@ public class LeftRedAuto3 extends BaseAuto {
                 points.add(new AutoPoint(new Point(4.5 * Game.TILE_SIZE, 1.25 * Game.TILE_SIZE), new ArrayList<>(), false));
                 points.add(new AutoPoint(new Point(4.5 * Game.TILE_SIZE, 1.2 * Game.TILE_SIZE), yellowActions, false));
                 break;
+                 */
+                points.add(new AutoPoint(new Point(6 - 1.5 * Game.TILE_SIZE, 4.5 * Game.TILE_SIZE), purpleActions, true));
+                points.add(new AutoPoint(new Point(6 - 1.25 * Game.TILE_SIZE, 4.5 * Game.TILE_SIZE), new ArrayList<>(), false));
+                points.add(new AutoPoint(new Point(6 - 2.5 * Game.TILE_SIZE, 5 * Game.TILE_SIZE), new ArrayList<>(), false));
+                points.add(new AutoPoint(new Point(6 - 2.5 * Game.TILE_SIZE, 2 * Game.TILE_SIZE), new ArrayList<>(), false));
+                points.add(new AutoPoint(new Point(6 - 1.5 * Game.TILE_SIZE, 1.25 * Game.TILE_SIZE), new ArrayList<>(), false));
+                points.add(new AutoPoint(new Point(6 - 1.5 * Game.TILE_SIZE, 1.2 * Game.TILE_SIZE), yellowActions, false));
+                break;
         }
-        points.add(new AutoPoint(new Point(5.5 * Game.TILE_SIZE, Game.TILE_SIZE), new ArrayList<>(), false));
+        //points.add(new AutoPoint(new Point(5.5 * Game.TILE_SIZE, Game.TILE_SIZE), new ArrayList<>(), false));
+        points.add(new AutoPoint(new Point(6 - 0.5, Game.TILE_SIZE), new ArrayList<>(), false));
         path = new AutoPath(chassis, points, -90);
     }
 
