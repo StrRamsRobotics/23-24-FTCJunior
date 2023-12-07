@@ -40,7 +40,7 @@ public class LeftRedAuto3 extends BaseAuto {
         switch(route) {
             case 2:
                 points.add(new AutoPoint(new Point(6 * Game.TS - 1.5 * Game.TS, 4.5 * Game.TS), purpleActions, false));
-                points.add(new AutoPoint(new Point(6 * Game.TS - 1.5 * Game.TS, 4 * Game.TS - Chassis.HRW), new ArrayList<>(), true));
+                points.add(new AutoPoint(new Point(6 * Game.TS - 1.5 * Game.TS, 4 * Game.TS + Chassis.HRW), new ArrayList<>(), true));
                 points.add(new AutoPoint(new Point(6 * Game.TS - 1.5 * Game.TS, 4.5 * Game.TS), new ArrayList<>(), false));
                 points.add(new AutoPoint(new Point(6 * Game.TS - 2.5 * Game.TS, 4.5 * Game.TS), new ArrayList<>(), false));
                 points.add(new AutoPoint(new Point(6 * Game.TS - 2.5 * Game.TS, 2 * Game.TS), new ArrayList<>(), false));
