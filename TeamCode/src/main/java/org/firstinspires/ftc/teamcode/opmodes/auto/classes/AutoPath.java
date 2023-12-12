@@ -11,7 +11,6 @@ import org.firstinspires.ftc.teamcode.wrappers.Chassis;
 import java.util.ArrayList;
 
 public class AutoPath {
-    public static final double WAIT_TIME = 1000;
     public Chassis chassis;
 
     public AutoPoint currentPoint;
@@ -44,7 +43,7 @@ public class AutoPath {
                 lines.add(line);
                 autoPoint
                         .addAutoAction(new TurnAction(chassis, MathHelper.getRealPowerFromVoltage(Chassis.MOVE_POWER, chassis.voltageSensor.getVoltage()), MathHelper.toHeading(line.getHeading() - currentHeading)))
-                        .addAutoAction(new WaitAction(chassis, 1000))
+                        .addAutoAction(new WaitAction(chassis, Chassis.PATH_WAIT_TIME))
                         .addAutoAction(new MoveAction(chassis, MathHelper.getRealPowerFromVoltage(Chassis.MOVE_POWER, chassis.voltageSensor.getVoltage()), autoPoint.isReverse));
                 angles.add(MathHelper.toHeading(line.getHeading() - currentHeading));
                 currentHeading = line.getHeading();
@@ -73,7 +72,7 @@ public class AutoPath {
         double stepDistance = (currentTime - prevTime) / 1000.0 * Chassis.MOVE_DISTANCE_PER_SECOND;
 
         if (activePoint != null && currentPoint != null) {
-            if (previousTime == 0 || (System.currentTimeMillis() - previousTime > 1000)) {
+            if (previousTime == 0 || (System.currentTimeMillis() - previousTime > Chassis.PATH_WAIT_TIME)) {
                 chassis.logHelper.addData("Number of points", autoPoints.size());
                 chassis.logHelper.addData("Active point index", autoPoints.indexOf(activePoint));
                 chassis.logHelper.addData("Active point x", activePoint.x);

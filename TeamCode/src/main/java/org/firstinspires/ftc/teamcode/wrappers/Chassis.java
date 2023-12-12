@@ -49,8 +49,8 @@ public class Chassis {
     public static final boolean HAS_HANG = true
             ;
     public static final double MOVE_POWER = 0.5;
-    public static final double VOLTAGE_Y_INTERCEPT = 2;
-    public static final double VOLTAGE_SLOPE = -0.12;
+    public static final double VOLTAGE_Y_INTERCEPT = 1.125;
+    public static final double VOLTAGE_SLOPE = -0.05;
 
     public static final double TELEOP_MOVE_POWER = 0.5;
     public static final double SLOW_MOVE_POWER = 0.25; // only apriltag, deprecated
@@ -77,6 +77,7 @@ public class Chassis {
     public static final int FLAP_OPEN_TIME = 500;
     public static final int FLAP_WAIT_TIME = 1000;
     public static final int ROLLER_WAIT_TIME = 1000;
+    public static final int PATH_WAIT_TIME = 400;
 
     public DcMotorEx fr, fl, br, bl, hang;
     public DcMotorEx arm, pivot, roller;
