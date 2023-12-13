@@ -46,11 +46,14 @@ public class TankDriveTeleOp extends BaseTeleop {
         }
         if (Chassis.HAS_HANG) {
             if (a) {
-                chassis.hang.setPower(0.1);
+                chassis.hang1.setPower(0.1);
+                chassis.hang2.setPower(0.1);
             } else if (x) {
-                chassis.hang.setPower(-0.1);
+                chassis.hang1.setPower(-0.1);
+                chassis.hang2.setPower(-0.1);
             } else {
-                chassis.hang.setPower(0);
+                chassis.hang1.setPower(0);
+                chassis.hang2.setPower(0);
             }
         }
         if (Chassis.HAS_LAUNCHER) {

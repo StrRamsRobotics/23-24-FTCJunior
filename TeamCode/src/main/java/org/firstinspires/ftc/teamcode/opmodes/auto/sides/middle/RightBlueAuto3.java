@@ -25,9 +25,9 @@ public class RightBlueAuto3 extends BaseAuto {
     @Override
     public void createPoints() {
         ArrayList<AutoAction> initActions = new ArrayList<>();
-        initActions.add(new LauncherMotorAction(chassis, -Chassis.LAUNCHER_MOTOR_POWER));
-        initActions.add(new WaitAction(chassis, 1000));
-        initActions.add(new LauncherMotorAction(chassis, 0));
+//        initActions.add(new LauncherMotorAction(chassis, -Chassis.LAUNCHER_MOTOR_POWER));
+//        initActions.add(new WaitAction(chassis, 1000));
+//        initActions.add(new LauncherMotorAction(chassis, 0));
         points.add(new AutoPoint(new Point(Chassis.HRW, 4.5 * Game.TS), initActions, false));
         ArrayList<AutoAction> purpleActions = new ArrayList<>();
         ArrayList<AutoAction> yellowActions = new ArrayList<>();

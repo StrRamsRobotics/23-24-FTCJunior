@@ -42,11 +42,11 @@ public class Chassis {
     public static final boolean HAS_PIVOT = false;
     public static final boolean HAS_ROLLER = false;
     public static final boolean HAS_FLAP = false;
-    public static final boolean HAS_LAUNCHER = true;
+    public static final boolean HAS_LAUNCHER = false;
 
     public static final boolean IS_FLAP_CR = false;
 
-    public static final boolean HAS_HANG = true
+    public static final boolean HAS_HANG = false;
             ;
     public static final double MOVE_POWER = 0.5;
     public static final double VOLTAGE_Y_INTERCEPT = 1.125;
@@ -79,7 +79,7 @@ public class Chassis {
     public static final int ROLLER_WAIT_TIME = 1000;
     public static final int PATH_WAIT_TIME = 400;
 
-    public DcMotorEx fr, fl, br, bl, hang;
+    public DcMotorEx fr, fl, br, bl, hang1, hang2;
     public DcMotorEx arm, pivot, roller;
     public Servo flap, launcher;
     public CRServoImplEx flapCR;
@@ -174,10 +174,14 @@ public class Chassis {
         }
 
         if (HAS_HANG) {
-            hang = hardwareMap.get(DcMotorEx.class, HANG_NAME);
-            hang.setDirection(DcMotorEx.Direction.FORWARD);
-            hang.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
-            hang.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+            hang1 = hardwareMap.get(DcMotorEx.class, HANG_NAME + "1");
+            hang2 = hardwareMap.get(DcMotorEx.class, HANG_NAME + "2");
+            hang1.setDirection(DcMotorEx.Direction.FORWARD);
+            hang2.setDirection(DcMotorEx.Direction.FORWARD);
+            hang1.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
+            hang2.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
+            hang1.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+            hang2.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
         }
         if (HAS_LAUNCHER) {
             launcher = hardwareMap.get(Servo.class, LAUNCHER_NAME);

@@ -15,7 +15,8 @@ public class LauncherMotorAction extends AutoAction {
     }
 
     public void tick() {
-        chassis.hang.setPower(power);
+        chassis.hang1.setPower(power);
+        chassis.hang2.setPower(power);
         active = false;
     }
 }
