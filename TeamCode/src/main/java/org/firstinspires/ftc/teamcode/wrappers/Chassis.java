@@ -80,7 +80,7 @@ public class Chassis {
     public static final int PATH_WAIT_TIME = 800;
 
     public DcMotorEx fr, fl, br, bl, hang1, hang2;
-    public DcMotorEx arm, pivot, roller;
+    public DcMotorEx arm1, arm2, pivot, roller;
     public Servo flap, launcher;
     public CRServoImplEx flapCR;
     public BNO055IMU imu;
@@ -132,8 +132,10 @@ public class Chassis {
         }
 
         if (HAS_ARM) {
-            arm = hardwareMap.get(DcMotorEx.class, ARM_NAME);
-            arm.setDirection(DcMotorEx.Direction.FORWARD);
+            arm1 = hardwareMap.get(DcMotorEx.class, ARM_NAME + "1");
+            arm2 = hardwareMap.get(DcMotorEx.class, ARM_NAME + "2");
+            arm1.setDirection(DcMotorEx.Direction.FORWARD);
+            arm2.setDirection(DcMotorEx.Direction.FORWARD);
         }
         if (HAS_PIVOT) {
             pivot = hardwareMap.get(DcMotorEx.class, PIVOT_NAME);

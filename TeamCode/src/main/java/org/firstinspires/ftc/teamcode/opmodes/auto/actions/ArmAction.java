@@ -39,10 +39,12 @@ public class ArmAction extends AutoAction {
         chassis.logHelper.addData("Angle", this.angle);
         chassis.logHelper.addData("a", a);
         if (a < this.angle) {
-            this.chassis.arm.setPower(this.power);
+            this.chassis.arm1.setPower(this.power);
+            this.chassis.arm2.setPower(this.power);
         }
         else {
-            this.chassis.arm.setPower(0);
+            this.chassis.arm1.setPower(0);
+            this.chassis.arm2.setPower(0);
             active = false;
         }
 //        chassis.logHelper.addData("Running", "ArmAction");
