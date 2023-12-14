@@ -59,11 +59,11 @@ public class Chassis {
     public static final double ROLLER_POWER = 1;
     public static final double LAUNCHER_MOTOR_POWER = -0.1;
 
-    public static final int ROBOT_WIDTH = 18; // inches
-    public static final int HRW = ROBOT_WIDTH / 2; // inches
-    public static final int RWI = ROBOT_WIDTH / 2 - 2; // inches, robot width until intake / shovel front
-    public static final int ROBOT_LENGTH = 18; // inches
-    public static final int HRL = ROBOT_LENGTH / 2; // inches
+    public static final double ROBOT_WIDTH = 18; // inches
+    public static final double HRW = ROBOT_WIDTH / 2; // inches
+    public static final double RWI = ROBOT_WIDTH / 2; // inches, robot width until intake / shovel front, will need to adjust based on build
+    public static final double ROBOT_LENGTH = 18; // inches
+    public static final double HRL = ROBOT_LENGTH / 2; // inches
     public static final double INTERMEDIATE_BACKBOARD = 0.25  * Game.TS;
     public static final double MOVE_DISTANCE_PER_SECOND = 42 * MOVE_POWER; // inches
 //    public static final double TURN_DISTANCE_PER_SECOND = 60 * MOVE_POWER; // inches
