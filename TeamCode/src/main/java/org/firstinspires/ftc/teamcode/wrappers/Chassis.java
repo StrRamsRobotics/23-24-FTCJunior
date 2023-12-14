@@ -206,4 +206,10 @@ public class Chassis {
             return Math.signum(angle_value)*(Math.abs(angle_value)%360);
         }
     }
+
+    public double getAngle() {
+        Orientation orientation = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
+        double angle_value = -AngleUnit.DEGREES.fromUnit(orientation.angleUnit, orientation.firstAngle);
+        return angle_value;
+    }
 }

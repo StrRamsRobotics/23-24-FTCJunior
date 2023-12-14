@@ -78,6 +78,8 @@ public class AutoPath {
                 chassis.logHelper.addData("Active point x", activePoint.x);
                 chassis.logHelper.addData("Active point y", activePoint.y);
                 chassis.logHelper.addData("Line heading", currentLine.getHeading());
+                chassis.logHelper.addData("Chassis IMU Heading", chassis.getHeading());
+                chassis.logHelper.addData("Chassis IMU Angle", chassis.getAngle());
                 chassis.logHelper.addData("Active point distance to current", activePoint.distanceTo(currentPoint));
                 chassis.logHelper.addData("Active point distance to next", activeDistanceToNext);
                 activePoint.tick();
