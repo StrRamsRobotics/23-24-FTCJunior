@@ -18,7 +18,8 @@ public class ArmTest extends BaseAuto {
     @Override
     public void runLoop() {
         if (Chassis.HAS_ARM) {
-            chassis.arm.setPower(-1);
+            chassis.arm1.setPower(-1);
+            chassis.arm2.setPower(-1);
             chassis.logHelper.addData("arm", "up");
             chassis.logHelper.update();
         }

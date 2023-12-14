@@ -61,6 +61,7 @@ public class Chassis {
 
     public static final int ROBOT_WIDTH = 18; // inches
     public static final int HRW = ROBOT_WIDTH / 2; // inches
+    public static final int RWI = ROBOT_WIDTH / 2 - 2; // inches, robot width until intake / shovel front
     public static final int ROBOT_LENGTH = 18; // inches
     public static final int HRL = ROBOT_LENGTH / 2; // inches
     public static final double INTERMEDIATE_BACKBOARD = 0.25  * Game.TS;

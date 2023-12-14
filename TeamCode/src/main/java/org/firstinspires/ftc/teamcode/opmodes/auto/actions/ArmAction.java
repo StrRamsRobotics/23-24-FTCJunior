@@ -41,7 +41,7 @@ public class ArmAction extends AutoAction {
         if (a < this.angle) {
             this.chassis.arm1.setPower(this.power);
             this.chassis.arm2.setPower(this.power);
-        }
+        }   
         else {
             this.chassis.arm1.setPower(0);
             this.chassis.arm2.setPower(0);
