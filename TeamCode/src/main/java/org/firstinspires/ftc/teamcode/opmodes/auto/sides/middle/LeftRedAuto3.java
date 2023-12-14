@@ -43,7 +43,7 @@ public class LeftRedAuto3 extends BaseAuto {
                 points.add(new AutoPoint(new Point(6 * Game.TS - 1.5 * Game.TS, 4 * Game.TS + Chassis.RWI), new ArrayList<>(), true));
                 points.add(new AutoPoint(new Point(6 * Game.TS - 1.5 * Game.TS, 4.5 * Game.TS), new ArrayList<>(), false));
                 points.add(new AutoPoint(new Point(6 * Game.TS - 2.5 * Game.TS, 4.5 * Game.TS), new ArrayList<>(), false));
-                points.add(new AutoPoint(new Point(6 * Game.TS - 2.5 * Game.TS, 1.5 * Game.TS), new ArrayList<>(), false));
+                points.add(new AutoPoint(new Point(6 * Game.TS - 2.5 * Game.TS, 0.5 * Game.TS + Chassis.HRW + Chassis.INTERMEDIATE_BACKBOARD), new ArrayList<>(), false));
                 points.add(new AutoPoint(new Point(6 * Game.TS - 1.25 * Game.TS, 0.5 * Game.TS + Chassis.HRW + Chassis.INTERMEDIATE_BACKBOARD), new ArrayList<>(), false));
                 points.add(new AutoPoint(new Point(6 * Game.TS - 1.25 * Game.TS, 0.5 * Game.TS + Chassis.HRW), yellowActions, true));
                 points.add(new AutoPoint(new Point(6 * Game.TS - 1.25 * Game.TS, 0.5 * Game.TS + Chassis.HRW + Chassis.INTERMEDIATE_BACKBOARD), new ArrayList<>(), false));
@@ -53,7 +53,7 @@ public class LeftRedAuto3 extends BaseAuto {
                 points.add(new AutoPoint(new Point(6 * Game.TS - 1.5 * Game.TS, 5 * Game.TS - Chassis.RWI), new ArrayList<>(), true));
                 points.add(new AutoPoint(new Point(6 * Game.TS - 1.5 * Game.TS, 4.5 * Game.TS), new ArrayList<>(), false));
                 points.add(new AutoPoint(new Point(6 * Game.TS - 2.5 * Game.TS, 4.5 * Game.TS), new ArrayList<>(), false));
-                points.add(new AutoPoint(new Point(6 * Game.TS - 2.5 * Game.TS, 1.5 * Game.TS), new ArrayList<>(), false));
+                points.add(new AutoPoint(new Point(6 * Game.TS - 2.5 * Game.TS, 0.5 * Game.TS + Chassis.HRW + Chassis.INTERMEDIATE_BACKBOARD), new ArrayList<>(), false));
                 points.add(new AutoPoint(new Point(6 * Game.TS - 1.75 * Game.TS, 0.5 * Game.TS + Chassis.HRW + Chassis.INTERMEDIATE_BACKBOARD), new ArrayList<>(), false));
                 points.add(new AutoPoint(new Point(6 * Game.TS - 1.75 * Game.TS, 0.5 * Game.TS + Chassis.HRW), yellowActions, true));
                 points.add(new AutoPoint(new Point(6 * Game.TS - 1.75 * Game.TS, 0.5 * Game.TS + Chassis.HRW + Chassis.INTERMEDIATE_BACKBOARD), new ArrayList<>(), false));
@@ -64,7 +64,7 @@ public class LeftRedAuto3 extends BaseAuto {
                 points.add(new AutoPoint(new Point(6 * Game.TS - 1.5 * Game.TS, 4.5 * Game.TS), new ArrayList<>(), false));
                 points.add(new AutoPoint(new Point(6 * Game.TS - 1.5 * Game.TS, 5.25 * Game.TS), new ArrayList<>(), false));
                 points.add(new AutoPoint(new Point(6 * Game.TS - 2.5 * Game.TS, 5.25 * Game.TS), new ArrayList<>(), false));
-                points.add(new AutoPoint(new Point(6 * Game.TS - 2.5 * Game.TS, 1.5 * Game.TS), new ArrayList<>(), false));
+                points.add(new AutoPoint(new Point(6 * Game.TS - 2.5 * Game.TS, 0.5 * Game.TS + Chassis.HRW + Chassis.INTERMEDIATE_BACKBOARD), new ArrayList<>(), false));
                 points.add(new AutoPoint(new Point(6 * Game.TS - 1.5 * Game.TS, 0.5 * Game.TS + Chassis.HRW + Chassis.INTERMEDIATE_BACKBOARD), new ArrayList<>(), false));
                 points.add(new AutoPoint(new Point(6 * Game.TS - 1.5 * Game.TS, 0.5 * Game.TS + Chassis.HRW), yellowActions, true));
                 points.add(new AutoPoint(new Point(6 * Game.TS - 1.5 * Game.TS, 0.5 * Game.TS + Chassis.HRW + Chassis.INTERMEDIATE_BACKBOARD), new ArrayList<>(), false));
