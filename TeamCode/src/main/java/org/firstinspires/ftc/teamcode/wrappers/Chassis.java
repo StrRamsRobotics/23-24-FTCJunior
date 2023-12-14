@@ -136,7 +136,7 @@ public class Chassis {
             arm1 = hardwareMap.get(DcMotorEx.class, ARM_NAME + "1");
             arm2 = hardwareMap.get(DcMotorEx.class, ARM_NAME + "2");
             arm1.setDirection(DcMotorEx.Direction.FORWARD);
-            arm2.setDirection(DcMotorEx.Direction.FORWARD);
+            arm2.setDirection(DcMotorEx.Direction.REVERSE);
         }
         if (HAS_PIVOT) {
             pivot = hardwareMap.get(DcMotorEx.class, PIVOT_NAME);
