@@ -210,6 +210,9 @@ public class Chassis {
     public double getAngle() {
         Orientation orientation = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
         double angle_value = -AngleUnit.DEGREES.fromUnit(orientation.angleUnit, orientation.firstAngle);
+        if (angle_value < 0) {
+            angle_value += 360;
+        }
         return angle_value;
     }
 }
