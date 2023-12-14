@@ -65,10 +65,10 @@ public class Chassis {
     public static final double ROBOT_LENGTH = 18; // inches
     public static final double HRL = ROBOT_LENGTH / 2; // inches
     public static final double INTERMEDIATE_BACKBOARD = 0.25  * Game.TS;
-    public static final double MOVE_DISTANCE_PER_SECOND = 42 * MOVE_POWER; // inches
+    public static final double MOVE_DISTANCE_PER_SECOND = 45 * MOVE_POWER; // inches
 //    public static final double TURN_DISTANCE_PER_SECOND = 60 * MOVE_POWER; // inches
 
-    public static final double TURN_ANGLE_PER_SECOND = 176 * MOVE_POWER; // degrees
+    public static final double TURN_ANGLE_PER_SECOND = 177 * MOVE_POWER; // degrees
     public static final double HEX_ANGLE_PER_SECOND = 180 * ARM_POWER; // degrees
     public static final int CORE_HEX_TICKS_PER_REV = 288;
     public static final int ROLLER_RADIUS = 2; // inches
