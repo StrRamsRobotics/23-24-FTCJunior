@@ -32,8 +32,8 @@ public class TurnAction extends AutoAction {
         chassis.logHelper.addData("Angle", angle);
         chassis.logHelper.addData("Turned Angle", turnedAngle);
         chassis.logHelper.addData("Turned Angle IMU", turnedAngleIMU);
-//        if (turnedAngle < angle) {
-        if (turnedAngleIMU < angle) {
+        if (turnedAngle < angle) {
+//        if (turnedAngleIMU < angle) {
             // positive angle should turn right
             // negative angle should turn left
             chassis.fr.setPower(power);
@@ -47,7 +47,7 @@ public class TurnAction extends AutoAction {
             chassis.logHelper.addData("Power BR", -power);
             chassis.logHelper.addData("Power BL", power);
             turnedAngle = (currentTime - startTime) / 1000.0 * Chassis.TURN_ANGLE_PER_SECOND;
-            turnedAngleIMU = chassis.getAngle() - initialAngleIMU;
+            //turnedAngleIMU = chassis.getAngle() - initialAngleIMU;
         } else {
             chassis.fr.setPower(0);
             chassis.fl.setPower(0);

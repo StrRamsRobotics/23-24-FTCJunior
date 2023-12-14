@@ -56,6 +56,7 @@ public class TankDriveTeleOp extends BaseTeleop {
                 chassis.hang2.setPower(0);
             }
         }
+
         if (Chassis.HAS_LAUNCHER) {
             if (y) {
                 chassis.launcher.setPosition(1);
@@ -65,12 +66,15 @@ public class TankDriveTeleOp extends BaseTeleop {
         }
         if (Chassis.HAS_ARM) {
             if (up) {
-                chassis.arm.setPower(-1);
+                chassis.arm1.setPower(-1);
+                chassis.arm2.setPower(-1);
             }
             else if (down) {
-                chassis.arm.setPower(-1);
+                chassis.arm1.setPower(1);
+                chassis.arm2.setPower(1);
             } else {
-                chassis.arm.setPower(0);
+                chassis.arm1.setPower(0);
+                chassis.arm2.setPower(0);
             }
         }
     }
@@ -85,9 +89,11 @@ public class TankDriveTeleOp extends BaseTeleop {
 //        if (Chassis.HAS_ROLLER) {
 //            chassis.roller.setPower(MathHelper.deadzone(ly, JOYSTICK_DEADZONE));
 //        }
+        /*
         if (Chassis.HAS_ARM) {
             chassis.arm.setPower(MathHelper.deadzone(ry, JOYSTICK_DEADZONE));
         }
+         */
 //        if (Chassis.HAS_FLAP) {
 //            if (lx > 0.9) {
 //                chassis.flap.setPosition(1);
