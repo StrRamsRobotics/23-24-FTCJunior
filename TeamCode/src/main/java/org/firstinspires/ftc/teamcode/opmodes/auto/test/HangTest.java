@@ -17,6 +17,7 @@ public class HangTest extends BaseAuto {
     public boolean thirdSection = false;
     public boolean isThirdSectionRan = false;
     public double startTime = 0;
+    public double time = 0;
 
     @Override
     public void runSetup() {
