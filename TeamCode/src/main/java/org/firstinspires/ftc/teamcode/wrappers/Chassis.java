@@ -38,7 +38,7 @@ public class Chassis {
     public static final boolean TWO_WHEELED = true;
     public static final boolean HAS_CHASSIS_ENCODERS = false;
 
-    public static final boolean HAS_ARM = true;
+    public static final boolean HAS_ARM = false;
     public static final boolean HAS_PIVOT = false;
     public static final boolean HAS_ROLLER = false;
     public static final boolean HAS_FLAP = false;
@@ -180,11 +180,11 @@ public class Chassis {
             hang1 = hardwareMap.get(DcMotorEx.class, HANG_NAME + "1");
             hang2 = hardwareMap.get(DcMotorEx.class, HANG_NAME + "2");
             hang1.setDirection(DcMotorEx.Direction.FORWARD);
-            hang2.setDirection(DcMotorEx.Direction.FORWARD);
-            hang1.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
-            hang2.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
-            hang1.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
-            hang2.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+            hang2.setDirection(DcMotorEx.Direction.REVERSE);
+//            hang1.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
+//            hang2.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
+//            hang1.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+//            hang2.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
         }
         if (HAS_LAUNCHER) {
             launcher = hardwareMap.get(Servo.class, LAUNCHER_NAME);
