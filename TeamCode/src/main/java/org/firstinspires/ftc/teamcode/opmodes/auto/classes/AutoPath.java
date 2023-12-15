@@ -142,8 +142,8 @@ public class AutoPath {
     }
 
     public void oscillate() {
-        chassis.fr.setPower(Chassis.OSCILLATING_POWER * Math.sin(time));
-        chassis.fl.setPower(Chassis.OSCILLATING_POWER * Math.sin(time));
+        chassis.fr.setPower(Chassis.OSCILLATING_POWER * Math.cos(time));
+        chassis.fl.setPower(Chassis.OSCILLATING_POWER * Math.cos(time));
         if (!Chassis.TWO_WHEELED) {
             chassis.br.setPower(Chassis.OSCILLATING_POWER * Math.cos(time));
             chassis.bl.setPower(Chassis.OSCILLATING_POWER * Math.cos(time));
