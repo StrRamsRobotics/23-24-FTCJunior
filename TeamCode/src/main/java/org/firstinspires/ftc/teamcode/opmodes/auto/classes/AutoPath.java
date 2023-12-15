@@ -1,7 +1,5 @@
 package org.firstinspires.ftc.teamcode.opmodes.auto.classes;
 
-import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
-import org.firstinspires.ftc.robotcore.external.navigation.Position;
 import org.firstinspires.ftc.teamcode.opmodes.auto.actions.MoveAction;
 import org.firstinspires.ftc.teamcode.opmodes.auto.actions.TurnAction;
 import org.firstinspires.ftc.teamcode.generic.helpers.MathHelper;
@@ -25,6 +23,7 @@ public class AutoPath {
     public double currentHeading = 0;
     public boolean active = true;
     public double previousTime = 0;
+    public double time = 0;
 
 
     public AutoPath(Chassis chassis, ArrayList<AutoPoint> autoPoints, double currentHeading) {
@@ -71,6 +70,9 @@ public class AutoPath {
         long currentTime = System.currentTimeMillis();
         double stepDistance = (currentTime - prevTime) / 1000.0 * Chassis.MOVE_DISTANCE_PER_SECOND;
 
+        time += Chassis.OSCILLATING_TIME_STEP;
+        if (time > 2 * Math.PI) time -= 2 * Math.PI;
+
         if (activePoint != null && currentPoint != null) {
             if (previousTime == 0 || (System.currentTimeMillis() - previousTime > Chassis.PATH_WAIT_TIME)) {
                 chassis.logHelper.addData("Number of points", autoPoints.size());
@@ -107,21 +109,18 @@ public class AutoPath {
                             currentLine = lines.get(autoPoints.indexOf(activePoint));
                             previousTime = System.currentTimeMillis();
                         } else {
+                            active = false;
                             stopPath();
                         }
                     }
                 }
             }
             else {
-                chassis.fr.setPower(0);
-                chassis.fl.setPower(0);
-                if (!Chassis.TWO_WHEELED) {
-                    chassis.br.setPower(0);
-                    chassis.bl.setPower(0);
-                }
+                stopPath();
             }
         }
         else {
+            active = false;
             stopPath();
         }
         prevTime = currentTime;
@@ -143,12 +142,11 @@ public class AutoPath {
     }
 
     public void stopPath() {
-        active = false;
-        chassis.fr.setPower(0);
-        chassis.fl.setPower(0);
+        chassis.fr.setPower(0.05 * Math.sin(time));
+        chassis.fl.setPower(0.05 * Math.sin(time));
         if (!Chassis.TWO_WHEELED) {
-            chassis.br.setPower(0);
-            chassis.bl.setPower(0);
+            chassis.br.setPower(0.05 * Math.sin(time));
+            chassis.bl.setPower(0.05 * Math.sin(time));
         }
     }
 

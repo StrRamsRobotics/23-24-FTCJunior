@@ -5,7 +5,6 @@ import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
 import com.qualcomm.robotcore.hardware.CRServoImplEx;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.VoltageSensor;
@@ -78,6 +77,7 @@ public class Chassis {
     public static final int FLAP_WAIT_TIME = 1000;
     public static final int ROLLER_WAIT_TIME = 1000;
     public static final int PATH_WAIT_TIME = 800;
+    public static final double OSCILLATING_TIME_STEP = 0.01;
 
     public DcMotorEx fr, fl, br, bl, hang1, hang2;
     public DcMotorEx arm1, arm2, pivot, roller;
