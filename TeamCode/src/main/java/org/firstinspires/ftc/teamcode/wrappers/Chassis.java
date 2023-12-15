@@ -46,12 +46,11 @@ public class Chassis {
 
     public static final boolean IS_FLAP_CR = false;
 
-    public static final boolean HAS_HANG = false;
+    public static final boolean HAS_HANG = true;
             ;
     public static final double MOVE_POWER = 0.5;
     public static final double VOLTAGE_Y_INTERCEPT = 1.25;
     public static final double VOLTAGE_SLOPE = -0.06;
-
     public static final double TELEOP_MOVE_POWER = 0.5;
     public static final double SLOW_MOVE_POWER = 0.25; // only apriltag, deprecated
     public static final double ARM_POWER = 0.75;
@@ -180,7 +179,7 @@ public class Chassis {
             hang1 = hardwareMap.get(DcMotorEx.class, HANG_NAME + "1");
             hang2 = hardwareMap.get(DcMotorEx.class, HANG_NAME + "2");
             hang1.setDirection(DcMotorEx.Direction.FORWARD);
-            hang2.setDirection(DcMotorEx.Direction.REVERSE);
+            hang2.setDirection(DcMotorEx.Direction.FORWARD);
 //            hang1.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
 //            hang2.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
 //            hang1.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
