@@ -78,6 +78,7 @@ public class Chassis {
     public static final int ROLLER_WAIT_TIME = 1000;
     public static final int PATH_WAIT_TIME = 800;
     public static final double OSCILLATING_TIME_STEP = 0.0001;
+    public static final double OSCILLATING_POWER = 0.25;
 
     public DcMotorEx fr, fl, br, bl, hang1, hang2;
     public DcMotorEx arm1, arm2, pivot, roller;

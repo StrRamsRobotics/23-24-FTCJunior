@@ -116,7 +116,7 @@ public class AutoPath {
                 }
             }
             else {
-                stopPath();
+                oscillate();
             }
         }
         else {
@@ -141,12 +141,22 @@ public class AutoPath {
         chassis.logHelper.addData("Line angles", lineAnglesString);
     }
 
-    public void stopPath() {
-        chassis.fr.setPower(0.05 * Math.sin(time));
-        chassis.fl.setPower(0.05 * Math.sin(time));
+    public void oscillate() {
+        chassis.fr.setPower(Chassis.OSCILLATING_POWER * Math.sin(time));
+        chassis.fl.setPower(Chassis.OSCILLATING_POWER * Math.sin(time));
         if (!Chassis.TWO_WHEELED) {
-            chassis.br.setPower(0.05 * Math.cos(time));
-            chassis.bl.setPower(0.05 * Math.cos(time));
+            chassis.br.setPower(Chassis.OSCILLATING_POWER * Math.cos(time));
+            chassis.bl.setPower(Chassis.OSCILLATING_POWER * Math.cos(time));
+        }
+        chassis.logHelper.addData("Time", time);
+    }
+
+    public void stopPath() {
+        chassis.fr.setPower(0);
+        chassis.fl.setPower(0);
+        if (!Chassis.TWO_WHEELED) {
+            chassis.br.setPower(0);
+            chassis.bl.setPower(0);
         }
     }
 
