@@ -7,7 +7,8 @@ import org.firstinspires.ftc.teamcode.wrappers.Chassis;
 
 @Autonomous(name="HangTest")
 public class HangTest extends BaseAuto {
-    public static boolean LOOP_HAS_RUN = false;
+    public boolean loopHasRun = false;
+    public double time = 0;
 
     @Override
     public void runSetup() {
@@ -20,14 +21,17 @@ public class HangTest extends BaseAuto {
 
     @Override
     public void runLoop() {
-        if (Chassis.HAS_HANG && !LOOP_HAS_RUN) {
+        time += Chassis.OSCILLATING_TIME_STEP;
+        if (time > 2 * Math.PI) time -= 2 * Math.PI;
+
+        if (Chassis.HAS_HANG && !loopHasRun) {
             chassis.hang1.setPower(-0.8);
             chassis.hang2.setPower(-0.8);
             chassis.logHelper.addData("hang", "up");
             chassis.logHelper.update();
             sleep(1000);
-            chassis.hang1.setPower(0.05);
-            chassis.hang2.setPower(0.05);
+            chassis.hang1.setPower(0.05 * Math.cos(time));
+            chassis.hang2.setPower(0.05 * Math.cos(time));
             sleep(10000);
             chassis.logHelper.addData("hang", "hover");
             chassis.logHelper.update();
@@ -35,7 +39,7 @@ public class HangTest extends BaseAuto {
             chassis.hang2.setPower(0.8);
             chassis.logHelper.addData("hang", "down");
             chassis.logHelper.update();
-            LOOP_HAS_RUN = true;
+            loopHasRun = true;
         }
     }
 }

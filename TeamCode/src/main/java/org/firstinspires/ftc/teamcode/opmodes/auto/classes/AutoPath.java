@@ -145,8 +145,8 @@ public class AutoPath {
         chassis.fr.setPower(0.05 * Math.sin(time));
         chassis.fl.setPower(0.05 * Math.sin(time));
         if (!Chassis.TWO_WHEELED) {
-            chassis.br.setPower(0.05 * Math.sin(time));
-            chassis.bl.setPower(0.05 * Math.sin(time));
+            chassis.br.setPower(0.05 * Math.cos(time));
+            chassis.bl.setPower(0.05 * Math.cos(time));
         }
     }
 
