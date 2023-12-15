@@ -55,19 +55,19 @@ public class ArcadeDriveTeleOp extends BaseTeleop {
             chassis.bl.setPower(MathHelper.deadzone(-(ly + rx), JOYSTICK_DEADZONE) * Chassis.TELEOP_MOVE_POWER);
             chassis.br.setPower(MathHelper.deadzone(-(ly - rx), JOYSTICK_DEADZONE) * Chassis.TELEOP_MOVE_POWER);
         }
-        // Hang
-        if (Chassis.HAS_HANG) {
-            if (a) {
-                chassis.hang1.setPower(0.1);
-                chassis.hang2.setPower(0.1);
-            } else if (x) {
-                chassis.hang1.setPower(-0.1);
-                chassis.hang2.setPower(-0.1);
-            } else {
-                chassis.hang1.setPower(0);
-                chassis.hang2.setPower(0);
-            }
-        }
+//        // OLD Hang
+//        if (Chassis.HAS_HANG) {
+//            if (a) {
+//                chassis.hang1.setPower(0.1);
+//                chassis.hang2.setPower(0.1);
+//            } else if (x) {
+//                chassis.hang1.setPower(-0.1);
+//                chassis.hang2.setPower(-0.1);
+//            } else {
+//                chassis.hang1.setPower(0);
+//                chassis.hang2.setPower(0);
+//            }
+//        }
         if (Chassis.HAS_LAUNCHER) {
             if (y) {
                 chassis.launcher.setPosition(1);
