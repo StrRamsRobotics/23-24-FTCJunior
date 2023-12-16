@@ -7,7 +7,7 @@ import org.firstinspires.ftc.teamcode.wrappers.Chassis;
 
 @Autonomous(name="HangTest")
 public class HangTest extends BaseAuto {
-    public static double FIRST_SECTION_TIME = 450;
+    public static double FIRST_SECTION_TIME = 2000;
     public static double SECOND_SECTION_TIME = 5000;
     public static double THIRD_SECTION_TIME = 10000;
     public boolean firstSection = true;

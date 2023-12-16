@@ -9,7 +9,7 @@ import org.firstinspires.ftc.teamcode.wrappers.Chassis;
 @TeleOp(name = "ArcadeDriveTeleOp")
 public class ArcadeDriveTeleOp extends BaseTeleop {
     public static final double JOYSTICK_DEADZONE = 0.3;
-    public static double FIRST_SECTION_TIME = 450;
+    public static double FIRST_SECTION_TIME = 2000;
     public static double SECOND_SECTION_TIME = 5000;
     public static double THIRD_SECTION_TIME = 10000;
     public boolean firstSection = true;

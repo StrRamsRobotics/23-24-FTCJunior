@@ -43,7 +43,7 @@ public class LeftBlueAuto3 extends BaseAuto {
         switch(route) {
             case 0:
                 points.add(new AutoPoint(new Point(1.5 * Game.TS, 2.5 * Game.TS), purpleActions, false));
-                points.add(new AutoPoint(new Point(1.5 * Game.TS, 2 * Game.TS + Chassis.RWI), new ArrayList<>(), true));
+                points.add(new AutoPoint(new Point(1.5 * Game.TS, 2 * Game.TS + Chassis.RWI - Chassis.ADDITIONAL_CONE), new ArrayList<>(), true));
                 points.add(new AutoPoint(new Point(1.5 * Game.TS, 2.5 * Game.TS), new ArrayList<>(), true));
                 points.add(new AutoPoint(new Point(0.5 * Game.TS, 2.5 * Game.TS), new ArrayList<>(), false));
                 points.add(new AutoPoint(new Point(1.25 * Game.TS, 0.5 * Game.TS + Chassis.HRW + Chassis.INTERMEDIATE_BACKBOARD), new ArrayList<>(), false));
@@ -52,7 +52,7 @@ public class LeftBlueAuto3 extends BaseAuto {
                 break;
             case 2:
                 points.add(new AutoPoint(new Point(1.5 * Game.TS, 2.5 * Game.TS), purpleActions, false));
-                points.add(new AutoPoint(new Point(1.5 * Game.TS, 3 * Game.TS - Chassis.RWI), new ArrayList<>(), true));
+                points.add(new AutoPoint(new Point(1.5 * Game.TS, 3 * Game.TS - Chassis.RWI + Chassis.ADDITIONAL_CONE), new ArrayList<>(), true));
                 points.add(new AutoPoint(new Point(1.5 * Game.TS, 2.5 * Game.TS), new ArrayList<>(), true));
                 points.add(new AutoPoint(new Point(0.5 * Game.TS, 2.5 * Game.TS), new ArrayList<>(), false));
                 points.add(new AutoPoint(new Point(1.75 * Game.TS, 0.5 * Game.TS + Chassis.HRW + Chassis.INTERMEDIATE_BACKBOARD), new ArrayList<>(), false));
@@ -61,7 +61,7 @@ public class LeftBlueAuto3 extends BaseAuto {
                 break;
             case 1:
             default:
-                points.add(new AutoPoint(new Point(2 * Game.TS - Chassis.RWI, 2.5 * Game.TS), purpleActions, true));
+                points.add(new AutoPoint(new Point(2 * Game.TS - Chassis.RWI + Chassis.ADDITIONAL_CONE, 2.5 * Game.TS), purpleActions, true));
                 points.add(new AutoPoint(new Point(1.5 * Game.TS, 2.5 * Game.TS), new ArrayList<>(), false));
                 points.add(new AutoPoint(new Point(1.5 * Game.TS, 0.5 * Game.TS + Chassis.HRW + Chassis.INTERMEDIATE_BACKBOARD), new ArrayList<>(), false));
                 points.add(new AutoPoint(new Point(1.5 * Game.TS, 0.5 * Game.TS + Chassis.HRW), yellowActions, true));

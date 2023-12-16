@@ -48,9 +48,9 @@ public class Chassis {
     public static final boolean HAS_HANG = true;
             ;
     public static final double MOVE_POWER = 0.5;
-    public static final double VOLTAGE_Y_INTERCEPT = 1.25;
-    public static final double VOLTAGE_SLOPE = -0.06;
-    public static final double TELEOP_MOVE_POWER = 0.5;
+    public static final double VOLTAGE_Y_INTERCEPT = 1;
+    public static final double VOLTAGE_SLOPE = -0.04;
+    public static final double TELEOP_MOVE_POWER = 0.3;
     public static final double SLOW_MOVE_POWER = 0.25; // only apriltag, deprecated
     public static final double ARM_POWER = 0.75;
     public static final double PIVOT_POWER = 1;
@@ -62,11 +62,12 @@ public class Chassis {
     public static final double RWI = ROBOT_WIDTH / 2; // inches, robot width until intake / shovel front, will need to adjust based on build
     public static final double ROBOT_LENGTH = 18; // inches
     public static final double HRL = ROBOT_LENGTH / 2; // inches
+    public static final double ADDITIONAL_CONE = 0.1 * Game.TS;
     public static final double INTERMEDIATE_BACKBOARD = 0.25  * Game.TS;
     public static final double MOVE_DISTANCE_PER_SECOND = 45 * MOVE_POWER; // inches
 //    public static final double TURN_DISTANCE_PER_SECOND = 60 * MOVE_POWER; // inches
 
-    public static final double TURN_ANGLE_PER_SECOND = 177 * MOVE_POWER; // degrees
+    public static final double TURN_ANGLE_PER_SECOND = 280 * MOVE_POWER; // degrees 177
     public static final double HEX_ANGLE_PER_SECOND = 180 * ARM_POWER; // degrees
     public static final int CORE_HEX_TICKS_PER_REV = 288;
     public static final int ROLLER_RADIUS = 2; // inches
@@ -78,7 +79,7 @@ public class Chassis {
     public static final int ROLLER_WAIT_TIME = 1000;
     public static final int PATH_WAIT_TIME = 800;
     public static final double OSCILLATING_TIME_STEP = 0.1;
-    public static final double OSCILLATING_POWER = 0.05;
+    public static final double OSCILLATING_POWER = 0.03;
 
     public DcMotorEx fr, fl, br, bl, hang1, hang2;
     public DcMotorEx arm1, arm2, pivot, roller;
